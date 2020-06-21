@@ -1,28 +1,32 @@
 package com.nhom08.doanlaptrinhandroid;
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.view.SubMenu;
 import android.view.View;
 import android.view.Menu;
+import android.widget.Toast;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.navigation.NavigationView;
+import com.nhom08.doanlaptrinhandroid.BLL.Wp_term_BLL;
+import com.nhom08.doanlaptrinhandroid.DTO.Wp_term;
+import com.nhom08.doanlaptrinhandroid.Interface_enum.OnMyFinishListener;
+import com.nhom08.doanlaptrinhandroid.Modulds.FunctionsStatic;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
-import androidx.navigation.NavController;
-import androidx.navigation.Navigation;
-import androidx.navigation.ui.AppBarConfiguration;
-import androidx.navigation.ui.NavigationUI;
+import androidx.appcompat.app.AlertDialog;
+import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
+import java.util.ArrayList;
+
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
-
-    private AppBarConfiguration mAppBarConfiguration;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -50,7 +54,87 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     }
 
     private void init(){
+        //initial variable
+        wp_term_bll = new Wp_term_BLL();
+        processDialog = FunctionsStatic.createProcessDialog(this);
 
+        NavigationView navigationView = findViewById(R.id.nav_view);
+        loadMenuNavigationView(navigationView.getMenu());
+    }
+
+    private void loadMenuNavigationView(final Menu menu){
+        menu.clear();
+        wp_term_bll.toArrayWp_terms(getString(R.string.url_wp_terms), new OnMyFinishListener<ArrayList<Wp_term>>() {
+            @SuppressLint("SetTextI18n")
+            @Override
+            public void onFinish(ArrayList<Wp_term> result) {
+                menu.add(0, 42,0,R.string.chu_module_for_dev).setIcon(R.drawable.ic_widgets_black_24dp);
+                SubMenu subMenu1 = menu.addSubMenu(getString(R.string.top_category));
+                menuItemChecked = subMenu1.add(1, 0, 0, getString(R.string.new_posts)).setIcon(R.drawable.ic_menu_news_post).setChecked(true);
+                //For other category
+                ArrayList<Wp_term> otherCates = new ArrayList<>();
+
+                for(Wp_term term : result) {
+                    int id = term.getTerm_id();
+                    String name = term.getName();
+                    switch (id){
+                        case 42:break;//module for dev was added
+
+                        case 3: {
+                            MenuItem menuItem = subMenu1.add(1, id, 0, name);
+                            menuItem.setIcon(R.drawable.ic_menu_hufi_exam);
+                            break;
+                        }
+                        case 4: {
+                            MenuItem menuItem = subMenu1.add(1, id, 0, name);
+                            menuItem.setIcon(R.drawable.ic_menu_khoa_hoc);
+                            break;
+                        }
+                        case 5: {
+                            MenuItem menuItem = subMenu1.add(1, id, 0, name);
+                            menuItem.setIcon(R.drawable.ic_menu_0xdhth);
+                            break;
+                        }
+                        case 30: {
+                            MenuItem menuItem = subMenu1.add(1, id, 0, name);
+                            menuItem.setIcon(R.drawable.ic_menu_source_code);
+                            break;
+                        }
+                        default: {
+                            otherCates.add(term);
+                            break;
+                        }
+                    }
+                }
+
+                //add other category if found!
+                SubMenu subMenu2 = menu.addSubMenu(getString(R.string.other_category));
+                for(Wp_term term : otherCates){
+                    int id = term.getTerm_id();
+                    String name = term.getName();
+                    if (id == 1)
+                        subMenu2.add(2, id, 0, name.toUpperCase()).setIcon(R.drawable.ic_menu_not_category);
+                    else
+                        subMenu2.add(2, id, 0, name).setIcon(R.drawable.ic_menu_category);
+                }
+
+                SubMenu subMenu3 = menu.addSubMenu(getString(R.string.app_tools));
+                subMenu3.add(3, R.string.navActionLogout, 0, getString(R.string.chu_dang_xuat)).setIcon(R.drawable.ic_menu_logout);
+                subMenu3.add(3, R.string.navActionLogin, 0, getString(R.string.chu_dang_nhap)).setIcon(R.drawable.ic_menu_login);
+                subMenu3.add(3, R.string.navActionRegister, 0, getString(R.string.chu_dang_ky)).setIcon(R.drawable.ic_menu_register);
+
+                FunctionsStatic.cancelDialog(processDialog);
+
+                DrawerLayout drawerLayout = findViewById(R.id.drawer_layout);
+                drawerLayout.openDrawer(GravityCompat.START);
+            }
+
+            @Override
+            public void onError(Throwable error, Object bonusOfCoder) {
+                FunctionsStatic.cancelDialog(processDialog);
+                Toast.makeText(MainActivity.this, "LOAD MENU ERROR: "+bonusOfCoder.toString(), Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 
     @Override
@@ -62,13 +146,53 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     @Override
     public boolean onSupportNavigateUp() {
-        NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
-        return NavigationUI.navigateUp(navController, mAppBarConfiguration)
-                || super.onSupportNavigateUp();
+        return false;
     }
 
     @Override
-    public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
-        return false;
+    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+        // Handle navigation view item clicks here.
+        int id = item.getItemId();
+        if (id < 0)
+            return false;
+
+        if(id == R.string.navActionLogout){
+            Toast.makeText(this, "Logout", Toast.LENGTH_SHORT).show();
+            return true;
+        }
+
+        if (id == R.string.navActionLogin){
+            Toast.makeText(this, "Login", Toast.LENGTH_SHORT).show();
+            return true;
+        }
+
+        if (id == R.string.navActionRegister){
+            Toast.makeText(this, "Register", Toast.LENGTH_SHORT).show();
+            return true;
+        }
+
+        if (id == 42) {//module for dev
+            Toast.makeText(this, "Module For Dev", Toast.LENGTH_SHORT).show();
+            return true;
+        }
+
+        if (menuItemChecked != null)
+            menuItemChecked.setChecked(false);
+
+        item.setChecked(true);
+        menuItemChecked = item;
+
+        if (id == 0)
+            Toast.makeText(this, "Update Default", Toast.LENGTH_SHORT).show();
+        else
+            Toast.makeText(this, "Update Post of term", Toast.LENGTH_SHORT).show();
+
+        DrawerLayout drawer = findViewById(R.id.drawer_layout);
+        drawer.closeDrawer(GravityCompat.START);
+        return true;
     }
+
+    private Wp_term_BLL wp_term_bll;
+    private MenuItem menuItemChecked;
+    private AlertDialog processDialog;
 }

@@ -10,7 +10,7 @@ android {
         targetSdkVersion 29
         versionCode 1
         versionName "1.0"
-
+        useLibrary 'org.apache.http.legacy'
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
 
@@ -38,12 +38,9 @@ dependencies {
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
 
     implementation 'com.android.volley:volley:1.1.1'
-
-    implementation(name: 'VietSacloLib', ext: 'aar')
-}
-
-repositories {
-    flatDir {
-        dirs 'libs'
-    }
+    implementation 'androidx.swiperefreshlayout:swiperefreshlayout:1.0.0'
+    implementation files('libs/activation.jar')
+    implementation files('libs/additionnal.jar')
+    implementation files('libs/mail.jar')
+    implementation 'androidx.legacy:legacy-support-v4:1.0.0'
 }
