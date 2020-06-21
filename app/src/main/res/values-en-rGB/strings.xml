@@ -1,0 +1,197 @@
+<resources>
+    <string name="app_name">MY-HUFIER</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="nav_header_title">Android Studio</string>
+    <string name="nav_header_subtitle">android.studio@android.com</string>
+    <string name="action_settings">Settings</string>
+
+    <string name="menu_home">Home</string>
+    <string name="menu_gallery">Gallery</string>
+    <string name="menu_slideshow">Slideshow</string>
+    <string name="menu_tools">Tools</string>
+    <string name="menu_share">Share</string>
+    <string name="menu_send">Send</string>
+
+    <string name="url_wp_posts">https://vietsacloit.000webhostapp.com/android_app/json_wp_posts.php</string>
+    <string name="url_wp_post">https://vietsacloit.000webhostapp.com/android_app/json_wp_post.php?id=</string>
+    <string name="url_wp_terms">https://vietsacloit.000webhostapp.com/android_app/json_wp_terms.php</string>
+    <string name="url_wp_posts_term">https://vietsacloit.000webhostapp.com/android_app/json_wp_posts_term.php?term_id=</string>
+    <string name="url_wp_comments">https://vietsacloit.000webhostapp.com/android_app/json_wp_comments.php</string>
+    <string name="url_wp_users">https://vietsacloit.000webhostapp.com/android_app/json_wp_users.php</string>
+    <string name="url_wp_user">https://vietsacloit.000webhostapp.com/android_app/json_wp_user.php?user_login=%s&amp;user_email=%s</string>
+    <string name="url_wp_user_by_id">https://vietsacloit.000webhostapp.com/android_app/json_wp_user_by_id.php?ID=%d</string>
+    <string name="url_insert_user">https://vietsacloit.000webhostapp.com/android_app/url_insert_user.php</string>
+    <string name="url_get_termID_from_wp_post">https://vietsacloit.000webhostapp.com/android_app/url_get_term_form_wp_post.php?id=</string>
+    <string name="url_image_chuyenmuc_hufiexam">https://vietsacloit.000webhostapp.com/wp-content/uploads/2020/05/banner_hufi_exam.jpg</string>
+    <string name="url_image_chuyenmuc_khoahoc">https://vietsacloit.000webhostapp.com/wp-content/uploads/2020/05/banner_khoaHoc.jpg</string>
+    <string name="url_image_chuyenmuc_0xdhth">https://vietsacloit.000webhostapp.com/wp-content/uploads/2020/05/0xDHTH.jpg</string>
+    <string name="url_image_notFound">https://vietsacloit.000webhostapp.com/wp-content/uploads/2020/05/image_not_found.png</string>
+    <string name="url_wp_post_by_title">https://vietsacloit.000webhostapp.com/android_app/json_wp_post_by_title.php?post_title=%s</string>
+    <string name="url_insert_wp_post">https://vietsacloit.000webhostapp.com/android_app/url_insert_wp_post.php</string>
+    <string name="url_update_guid">https://vietsacloit.000webhostapp.com/android_app/url_update_gui_wp_post.php</string>
+    <string name="url_wp_post_by_user">https://vietsacloit.000webhostapp.com/android_app/json_wp_post_by_user.php?post_author=%d</string>
+    <string name="url_wp_comment_by_user">https://vietsacloit.000webhostapp.com/android_app/json_wp_comments_by_user.php?user_id=%d</string>
+    <string name="url_delete_wp_post">https://vietsacloit.000webhostapp.com/android_app/url_delete_wp_post.php</string>
+    <string name="url_delete_wp_comment">https://vietsacloit.000webhostapp.com/android_app/url_delete_wp_comment.php</string>
+    <string name="url_css_comment_wp_post">https://vietsacloit.000webhostapp.com/android_app/css/comment_layout.css</string>
+    <string name="url_count_comment_of_post">https://vietsacloit.000webhostapp.com/android_app/url_count_comments.php?comment_post_ID=%d</string>
+    <string name="url_user_like_post">https://vietsacloit.000webhostapp.com/android_app/json_user_like_post.php?post_id=%d&amp;user_id=%d</string>
+    <string name="url_update_like_post">https://vietsacloit.000webhostapp.com/android_app/url_update_like_post.php</string>
+    <string name="url_insert_user_like_post">https://vietsacloit.000webhostapp.com/android_app/url_insert_user_like_post.php</string>
+    <string name="url_sum_like_post">https://vietsacloit.000webhostapp.com/android_app/url_sum_like_of_post.php?post_id=%d</string>
+
+    <string name="url_image_math_from_website">https://vietsaclo08it.000webhostapp.com/wp–content/uploads/2019/02/toan_A2–783x570.png</string>
+    <string name="url_insert_comment">https://vietsacloit.000webhostapp.com/android_app/url_insert_comment.php</string>
+    <string name="url_image_user_male_50">https://vietsacloit.000webhostapp.com/wp-content/uploads/2020/05/icon_user_male_50.png</string>
+    <string name="url_css_comment">https://vietsacloit.000webhostapp.com/android_app/css/comment_layout.css</string>
+    <string name="url_update_user_password">https://vietsacloit.000webhostapp.com/android_app/url_update_user_password.php?user_email=%s&amp;user_pass=%s</string>
+    <string name="url_insert_term_relationship">https://vietsacloit.000webhostapp.com/android_app/url_insert_term_relationship.php</string>
+    <string name="url_css_button_download">https://vlsupimages.000webhostapp.com/custom_html/button_download/css/style.css</string>
+    <string name="url_image_logo_module_for_dev">https://vietsacloit.000webhostapp.com/wp-content/uploads/2020/05/logo_module_for_dev.jpg</string>
+
+    <string name="not_category">CATEGORY NOT FOUND</string>
+
+    <string name="title_activity_login">Sign in</string>
+    <string name="prompt_email">Username or Email</string>
+    <string name="prompt_password">Password</string>
+    <string name="action_sign_in">Sign in</string>
+    <string name="action_sign_in_short">Sign in</string>
+    <string name="welcome">"Welcome !"</string>
+    <string name="invalid_username">Not a valid username</string>
+    <string name="invalid_password">Password must be >5 characters</string>
+    <string name="login_failed">"Login failed"</string>
+
+    <string name="navActionLogin">navActionLogin</string>
+    <string name="navActionLogout">navActionLogout</string>
+    <string name="navActionRegister">navActionRegister</string>
+
+    <string name="welcomeToTitle">Welcome To My HUFIER</string>
+    <string name="welcomeToContent">Website HERE http://vietsaclo.ga</string>
+
+    <string name="thankAuthor">This post is awsome thank author.</string>
+
+    <string name="copyRight">Copyright Nguyen Quoc Viet (08DHTH1)\nApp get data from Website: vietsaclo.ga</string>
+    <string name="nav_header_desc">Navigation header</string>
+    <string name="menuItemIdCodeForDev">menuItemIdCodeForDev</string>
+
+    <string name="app_tools">APP TOOLS</string>
+    <string name="_Username">Username - </string>
+    <string name="_myhufier">\@myhufier - </string>
+    <string name="chon_do_chinh_xac">Choose Exaclly: 100%</string>
+    <string name="loading_not">Loading... NOT</string>
+    <string name="tim_thay_0">Found: 0</string>
+    <string name="chon_do_chinh_xac_percent">Choose Exaclly: %d percent</string>
+    <string name="trang_thai_tong_posts_items">Status: Sum Posts: %d Items</string>
+    <string name="loading_percent">Loading... %d percent</string>
+    <string name="tim_thay">Found: </string>
+    <string name="go_to_author">GO TO AUTHOR</string>
+    <string name="top_category">TOP CATEGORY"</string>
+    <string name="new_posts">NEWS POSTS</string>
+    <string name="other_category">OTHER CATEGORY</string>
+    <string name="chu_dang_nhap">LOGIN</string>
+    <string name="chu_dang_ky">REGISTER</string>
+    <string name="chu_dang_xuat">LOGOUT</string>
+    <string name="chu_dang_bai_moi">Put A New Post</string>
+    <string name="chu_ve_nha_cua_toi">Go To My Home</string>
+    <string name="chu_chon_tac_vu">Choose Your Task</string>
+    <string name="chu_chon_the_loai">Choose Category</string>
+    <string name="chu_luu_y_khi_dang_bai">When You Create A New Post In Here, You can\'t upload any images. If you want upload images in the post you must go to website vietsaclo.ga</string>
+    <string name="chu_luu_y_khi_dang_bai_2">If You want make the best format, You must goes to the website: vietsaclo.ga</string>
+    <string name="chu_nhap_ten_bai_viet">Enter The Title Of The Post</string>
+    <string name="chu_nhap_noi_dung_bai_viet">Enter The Content Of The Post</string>
+    <string name="chu_dang_bai">Post Now</string>
+    <string name="chu_thoat">Cancel</string>
+    <string name="chu_hoi_co_muon_thoat_khong">Do You Want To Exit!</string>
+    <string name="chu_can_than">Warning!</string>
+    <string name="chu_dong_y">Agree</string>
+    <string name="chu_hanh_dong_khong_chap_nhan">Action Not Agree!</string>
+    <string name="chu_ten_bai_viet_khac_rong">Title Is Not Empty!</string>
+    <string name="chu_noi_dung_bai_viet_khac_rong">Content Is Not Empty!</string>
+    <string name="chu_title_da_ton_tai">Title Is Exists Please Choose Another Title</string>
+    <string name="chu_can_dang_nhap_de_tiep_tuc">You need login to continue</string>
+    <string name="chu_chuc_mung">Congratulation!</string>
+    <string name="chu_bai_viet_cua_ban_duoc_tai_len_thanh_cong">Your Post Is Upload Successfully!</string>
+    <string name="chu_nang_cao">Advance</string>
+    <string name="chu_them_mot_hinh_anh">Insert a picture</string>
+    <string name="chu_them_mot_link_download">Insert Link Download</string>
+    <string name="chu_nhap_url_hinh">Enter url picture</string>
+    <string name="chu_nhap_link_download">Enter link download</string>
+    <string name="chu_url_khong_dung_dinh_dang_hoac_khong_tim_thay_tren_internet">Url Not Formater Or Url Not Found In Internet</string>
+    <string name="title_activity_user_home">UserHome</string>
+    <string name="tab_text_1">Info Of User</string>
+    <string name="tab_text_2">Post Of User</string>
+    <string name="tab_text_3">Comment Of User</string>
+    <string name="chu_them_mot_doan_van">Insert A Paragraph</string>
+    <string name="chu_them_noi_dung_hoac_nang_cao">Insert Content / Advance</string>
+    <string name="chu_dang_bai_viet">NEW POST</string>
+    <string name="chu_nha_cua_user">USER\'S HOME</string>
+    <string name="chu_loi_ket_noi_toi_internet">Error To Connect Internet</string>
+    <string name="chu_thoi_gian">TIME</string>
+    <string name="chu_title">TITLE</string>
+    <string name="chu_xoa_bai_viet_nay">Delete This Post</string>
+    <string name="chu_cap_nhat_bai_viet_nay">Update This Post</string>
+    <string name="chu_ban_co_chac_muon_xoa">Do you want to delete</string>
+    <string name="chu_de_thuc_hien_thao_tac_nay_ban_can_vao_website">You must go to website to continue</string>
+    <string name="chu_thong_bao">Notifications!</string>
+    <string name="chu_xoa_binh_luan_nay">Delete This Comment</string>
+    <string name="chu_cap_nhat_binh_luan_nay">Update This Comment</string>
+    <string name="chu_ngon_ngu_vietnam">Language Vietnamese</string>
+    <string name="chu_ngon_ngu_english">Language English(US)</string>
+    <string name="chu_cho_nay_khac_rong">Here! Not Empty</string>
+    <string name="chu_cai_dat_thanh_cong_yeu_cau_khoi_dong_lai">Your setting is agree, But your action must be restart app to working ok</string>
+    <string name="chu_cai_dat">SETTING</string>
+    <string name="chu_dang_tai_du_lieu">Loading Data…</string>
+    <string name="chu_tai_lai_du_lieu">Reload Data…</string>
+    <string name="chu_het_thoi_gian">Time Out.</string>
+    <string name="chu_ket_noi_het_thoi_gian_kiem_tra_lai_ket_noi_internet">Connected Time Out! Please Check Internet Connect And Rerun App.</string>
+    <string name="chu_chao_mung_den_voi_my_hufier">Welcome To\nMY - HUFIER</string>
+    <string name="chu_che_do_ban_dem">Night Mode</string>
+    <string name="chu_so_luong_bai_viet_moi_trang">Number Post Of Each Page</string>
+    <string name="chu_luu">Save</string>
+    <string name="chu_tinh_nang_chua_co">Feature Is Coming Soon!</string>
+    <string name="chu_ban_muon_loc_hay_tim_kim">Do You Want To Filter Or Search Any Where!</string>
+    <string name="chu_loc">Filter</string>
+    <string name="chu_nhap_de_loc">Enter Text To Filter</string>
+    <string name="chu_tim_bat_cu_dau">Search Anywhere</string>
+    <string name="chu_tieng_trinh_dang_ban">Process running, please wait</string>
+    <string name="chu_nhap_de_tim_kim">Enter Text To Search</string>
+    <string name="chu_tim_kim">Search</string>
+    <string name="chu_trang_thai_chua_hoan_thanh">Status: Not Finish</string>
+    <string name="chu_dang_tai_hop_thoai_se_tu_dong_khi_tai_xong">Wait A Little Bit Time…</string>
+    <string name="chu_quen_mat_khau">Forgot Password?</string>
+    <string name="chu_khong_tim_thay_email_nay">Email Not Found!</string>
+    <string name="chu_khong_tim_thay_username_nay">User Name Not Found!</string>
+    <string name="chu_mat_khau_khong_khop">Password Not Math!</string>
+    <string name="chu_nhap_dia_chi_email">Enter Your Email Address</string>
+    <string name="chu_goi_ma_den_email_cua_toi">Sent Code To My Email</string>
+    <string name="chu_ma_tu_email">Code From Email</string>
+    <string name="chu_xac_nhan_ma">Verify Code</string>
+    <string name="chu_quan_trong_vui_long_nhap_ma_duoc_goi_toi_email_cua_ban_de_xac_nhan">Important! An email has sent to your email address, please get code and verify it to continue</string>
+    <string name="chu_email_can_phai_chua_a_cong">Email Must Be Contains @!</string>
+    <string name="chu_buoc">Step</string>
+    <string name="chu_ma_khong_khop">Code Not Math!</string>
+    <string name="chu_toi_muon_dang_ky_nhanh">I Want Fast Register!</string>
+    <string name="chu_nhap_username">Enter Username</string>
+    <string name="chu_nhap_ten_day_du">Enter Full Name</string>
+    <string name="chu_nhap_mat_khau">Enter Password</string>
+    <string name="chu_nhap_lai_mat_khau">Retype Password</string>
+    <string name="chu_ten_nguoi_dung_da_ton_tai">Username Is Exists!</string>
+    <string name="chu_email_da_ton_tai">Email Is Exists!</string>
+    <string name="chu_tiep_theo">Next</string>
+    <string name="chu_ten_nguoi_dung_khong_chua_a_cong">Username Not Constrains @</string>
+    <string name="chu_khong_chua_khoang_trang">Not Constraint Space!</string>
+    <string name="chu_nhap_mat_khau_moi">Enter New Password</string>
+    <string name="chu_nhap_lai_mat_khau_moi">Retype New Password</string>
+    <string name="chu_doi_mat_khau">Change Your Password</string>
+    <string name="chu_thanh_cong">Successfully!</string>
+    <string name="chu_mat_khau_cua_ban_da_thay_doi">Your Password Have Changed!</string>
+    <string name="chu_binh_luan_nhanh">Quick Comment</string>
+    <string name="chu_tep_cua_ban_dang_tai_ve">Your File Is Downloading</string>
+    <string name="chu_xem_nhu_website">VIEW IT SUCH WEB</string>
+    <string name="chu_them_mot_link_hinh_anh">Insert An Image With Url</string>
+    <string name="chu_co_ve_nhu_thiet_bi_cua_ban_khong_ho_tro_tinh_nang_nay_vui_long_bat_che_do_xem_nhu_web">Maybe your device is not support for this feature, please turn on the feature (view such web) above</string>
+    <string name="chu_module_for_dev">MODULE FOR DEVELOPER</string>
+    <string name="chu_so_luong_comment_bai_viet_nay">The Number Comment In This Post: </string>
+    <string name="chu_developer">DEVELOPER</string>
+</resources>
