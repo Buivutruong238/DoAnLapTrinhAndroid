@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.graphics.Color;
+import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.os.Bundle;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -30,12 +31,16 @@ import com.nhom08.doanlaptrinhandroid.Interface_enum.KindStatusRunning;
 import com.nhom08.doanlaptrinhandroid.Interface_enum.OnMyFinishListener;
 import com.nhom08.doanlaptrinhandroid.Interface_enum.OnMyUpdateProgress;
 import com.nhom08.doanlaptrinhandroid.Modulds.FunctionsStatic;
+import com.nhom08.doanlaptrinhandroid.adapter.Wp_postRecyclerViewAdapter;
 import com.nhom08.doanlaptrinhandroid.adapter.Wp_postsAdapter;
 
 import androidx.drawerlayout.widget.DrawerLayout;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.recyclerview.widget.DividerItemDecoration;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import android.view.Menu;
@@ -52,17 +57,30 @@ import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.Locale;
+import java.util.Objects;
 
+/*
+    06/2020
+        Activity chính hiển thị các nội dung bài viết và các danh mục trên menu.
+    Khi mới khỏi đội Activity sẽ gọi một Activity là loading để hiển thị cho người dùng
+    biết là ứng dụng đang tải dữ liệu, bởi vì việc tải dữ liệu là lấy từ internet.
+    khi tải xong dữ liệu. Activity Loading sẽ tự động đóng và hiển thị các danh mục và bài
+    viết.
+ */
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        //region khởi tạo ngôn ngữ mặt định được lấy từ SharedPreferences
         loadLocale();
+        //endregion
+
+        //region khởi tạo view và khỏi tạo menu
         setContentView(R.layout.activity_main);
         Toolbar toolbar = findViewById(R.id.toolbar);
-
         setSupportActionBar(toolbar);
         FloatingActionButton fab = findViewById(R.id.fab);
         fab.setOnClickListener(fabClicked);
@@ -73,34 +91,50 @@ public class MainActivity extends AppCompatActivity
         drawer.addDrawerListener(toggle);
         toggle.syncState();
         navigationView.setNavigationItemSelectedListener(this);
+        //endregion
 
-        //initial component
+        //region chuẩn bị đầy đủ các dữ liệu và load dữ liệu
         init();
+        //endregion
     }
 
+    /*
+        khởi tạo các biến bổ sung và load dữ liệu vào các listView, Recycleview
+     */
     private void init(){
-        //show logo while loading data.
+        //Loading xong chưa?
         notifyLoadingData();
 
+        //region khỏi tạo biến
         swipeRefreshLayout = findViewById(R.id.swipeRefresh);
         swipeRefreshLayout.setColorSchemeColors(Color.BLUE, Color.RED, Color.GREEN);
         swipeRefreshLayout.setOnRefreshListener(swipeRefreshLayoutOnRefresh);
-
         isRefreshing = false;
-
-        //Login Back to?
-        getUserWasLogin();
 
         wp_post_bll = new Wp_post_BLL();
         wp_term_bll = new Wp_term_BLL();
 
         processDialog = FunctionsStatic.createProcessDialog(MainActivity.this);
-        updateListView(getString(R.string.url_wp_posts));
+        //endregion
 
+        //user đã login?
+        getUserWasLogin();
+
+        //region tải dữ liệu cho menu và listView
+        updateRecyclerView(getString(R.string.url_wp_posts));
         NavigationView navigationView = findViewById(R.id.nav_view);
         loadMenuNavigationView(navigationView.getMenu());
+        //endregion
     }
 
+    /*
+        function: loadMenuNavigationView
+        params:
+        - menu: truyền vào menu của Drawer mặt định để khi có dữ liệu
+        sẽ tự động load động và add vào menu đó.
+
+        #load menu thực hiện trên một luồng khác khi xong sẽ gọi lại MainActivity
+     */
     private void loadMenuNavigationView(final Menu menu){
         if(!isRefreshing)
             processDialog.show();
@@ -115,6 +149,7 @@ public class MainActivity extends AppCompatActivity
                 //For other category
                 ArrayList<Wp_term> otherCates = new ArrayList<>();
 
+                //Thêm vào mặc định các thể loại
                 for(Wp_term term : result) {
                     int id = term.getTerm_id();
                     String name = term.getName();
@@ -148,7 +183,7 @@ public class MainActivity extends AppCompatActivity
                     }
                 }
 
-                //add other category if found!
+                //thêm vào các thể loại khác nếu tìm thấy
                 SubMenu subMenu2 = menu.addSubMenu(getString(R.string.other_category));
                 for(Wp_term term : otherCates){
                     int id = term.getTerm_id();
@@ -161,7 +196,8 @@ public class MainActivity extends AppCompatActivity
 
                 SubMenu subMenu3 = menu.addSubMenu(getString(R.string.app_tools));
 
-                if (userWasLogin != null){
+                //User đã login?
+                if (userWasLogin != null){//user đã login!
                     subMenu3.add(3, R.string.navActionLogout, 0, getString(R.string.chu_dang_xuat)).setIcon(R.drawable.ic_menu_logout);
 
                     TextView tvNavTitle = findViewById(R.id.tvNavActonBarTitle),
@@ -169,7 +205,7 @@ public class MainActivity extends AppCompatActivity
                     tvNavTitle.setText(getString(R.string._Username)+userWasLogin.getUser_login());
                     tvNavContent.setText(getString(R.string._myhufier)+userWasLogin.getDisplay_name());
                 }
-                else{
+                else{//user chưa login!
                     subMenu3.add(3, R.string.navActionLogin, 0, getString(R.string.chu_dang_nhap)).setIcon(R.drawable.ic_menu_login);
                     subMenu3.add(3, R.string.navActionRegister, 0, getString(R.string.chu_dang_ky)).setIcon(R.drawable.ic_menu_register);
 
@@ -185,14 +221,15 @@ public class MainActivity extends AppCompatActivity
                 DrawerLayout drawerLayout = findViewById(R.id.drawer_layout);
                 drawerLayout.openDrawer(GravityCompat.START);
 
-                notifyLoadingDataFinish();//Notify finish loading. To screen logo destroy
+                //Đã tải xong dữ liêu! phá hủy Activity loading
+                notifyLoadingDataFinish();
             }
 
             @Override
             public void onError(Throwable error, Object bonusOfCoder) {
                 FunctionsStatic.cancelDialog(processDialog);
                 cancelSwipeRefreshLayout();
-                //Toast.makeText(MainActivity.this, "LOAD MENU ERROR: "+bonusOfCoder.toString(), Toast.LENGTH_SHORT).show();
+                Toast.makeText(MainActivity.this, "LOAD MENU ERROR: Unknown Error!", Toast.LENGTH_SHORT).show();
             }
         });
     }
@@ -283,23 +320,30 @@ public class MainActivity extends AppCompatActivity
         item.setChecked(true);
         menuItemChecked = item;
 
-        if (id == 0)
-            updateListView(getString(R.string.url_wp_posts));
-        else
-            updateListView(getString(R.string.url_wp_posts_term) + id);
+//        if (id == 0)
+//            updateListView(getString(R.string.url_wp_posts));
+//        else
+//            updateListView(getString(R.string.url_wp_posts_term) + id);
 
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
 
+    /*
+        # Function: updateListView
+        # params: String
+        # thực hiện cập nhật listView khi truyền vào một link API.
+        thực hiện công việc băng một luồng khác và khi thực hiện xong sẽ gọi lại
+        MainActivity
+     */
     private void updateListView(String strUrl){
         if(!isRefreshing)
             processDialog.show();
         wp_post_bll.toArrayWp_posts(strUrl, new OnMyFinishListener<ArrayList<Wp_post>>() {
             @Override
             public void onFinish(ArrayList<Wp_post> result) {
-                updateListView(result);
+                //updateListView(result);
                 processDialog.cancel();
                 cancelSwipeRefreshLayout();
             }
@@ -312,21 +356,71 @@ public class MainActivity extends AppCompatActivity
         });
     }
 
-    private void updateListView(final ArrayList<Wp_post> list){
-        wp_postsAdapter = new Wp_postsAdapter(MainActivity.this, list);
-        ListView lvShow = findViewById(R.id.lvShowWp_posts);
-        lvShow.setAdapter(wp_postsAdapter);
-        lvShow.setDividerHeight(20);
-        lvShow.setBackgroundColor(Color.WHITE);
-        lvShow.setOnItemClickListener(lvShowItemClicked);
-        lvShow.setOnScrollListener(lvShowScroll);
+    /*
+        # Function: updateRecyclerView
+        # params: String
+        # thực hiện cập nhật RecyclerView khi truyền vào một link API.
+        thực hiện công việc băng một luồng khác và khi thực hiện xong sẽ gọi lại
+        MainActivity
+     */
+    private void updateRecyclerView(String strUrl){
+        if(!isRefreshing)
+            processDialog.show();
+        wp_post_bll.toArrayWp_posts(strUrl, new OnMyFinishListener<ArrayList<Wp_post>>() {
+            @Override
+            public void onFinish(ArrayList<Wp_post> result) {
+                updateRecyclerView(result);
+                processDialog.cancel();
+                cancelSwipeRefreshLayout();
+            }
+
+            @Override
+            public void onError(Throwable error, Object bonusOfCoder) {
+                processDialog.cancel();
+                cancelSwipeRefreshLayout();
+            }
+        });
     }
 
+    /*
+        Overloading: updateListView
+        Params: danh sách bài viết đã có dữ liệu
+     */
+    private void updateListView(final ArrayList<Wp_post> list){
+//        wp_postsAdapter = new Wp_postsAdapter(MainActivity.this, list);
+//        ListView lvShow = findViewById(R.id.lvShowWp_posts);
+//        lvShow.setAdapter(wp_postsAdapter);
+//        lvShow.setDividerHeight(20);
+//        lvShow.setBackgroundColor(Color.WHITE);
+//        lvShow.setOnItemClickListener(lvShowItemClicked);
+//        lvShow.setOnScrollListener(lvShowScroll);
+    }
+
+    /*
+        Overloading: updateRecyclerView
+        Params: danh sách bài viết đã có dữ liệu
+     */
+    private void updateRecyclerView(final ArrayList<Wp_post> list){
+        Wp_postRecyclerViewAdapter adapter = new Wp_postRecyclerViewAdapter(list);
+        RecyclerView recyclerView = findViewById(R.id.recycler_show_wp_post);
+        recyclerView.setAdapter(adapter);
+        recyclerView.setHasFixedSize(true);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+
+        DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(this, DividerItemDecoration.VERTICAL);
+        dividerItemDecoration.setDrawable(Objects.requireNonNull(getDrawable(R.drawable.divider)));
+        recyclerView.addItemDecoration(dividerItemDecoration);
+    }
+
+    /*
+        Trong khi thực hiện việc Scroll Listview
+        button fab icon sẽ bị ẩn đi.
+     */
     private AbsListView.OnScrollListener lvShowScroll = new AbsListView.OnScrollListener() {
         @Override
         public void onScrollStateChanged(AbsListView view, int scrollState) {
             FloatingActionButton fab = findViewById(R.id.fab);
-            if (scrollState > 0)
+            if (scrollState > 0)//len
                 fab.hide();
             else
                 fab.show();
@@ -338,6 +432,10 @@ public class MainActivity extends AppCompatActivity
         }
     };
 
+    /*
+        sự kiện cho list view khi click vào một bài viết.
+        gởi bài viết sang Activity mới và hiển thị chi tiết.
+     */
     private AdapterView.OnItemClickListener lvShowItemClicked = new AdapterView.OnItemClickListener() {
         @Override
         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -350,6 +448,11 @@ public class MainActivity extends AppCompatActivity
         }
     };
 
+    /*
+        hàm trợ giúp.
+        Trả về một user nếu đã đăng nhập trước đó.
+        null nếu chưa đăng nhập.
+     */
     private void getUserWasLogin(){
         SharedPreferences sp = getSharedPreferences("myHufierLogin", MODE_PRIVATE);
         String uName = sp.getString("uName", null),
@@ -377,6 +480,9 @@ public class MainActivity extends AppCompatActivity
             userWasLogin = null;
     }
 
+    /*
+        sự kiện khi làm mới bằng swipeRefresh
+     */
     private SwipeRefreshLayout.OnRefreshListener swipeRefreshLayoutOnRefresh = new SwipeRefreshLayout.OnRefreshListener() {
         @Override
         public void onRefresh() {
@@ -384,19 +490,26 @@ public class MainActivity extends AppCompatActivity
             if(menuItemChecked == null) {
                 NavigationView navigationView = findViewById(R.id.nav_view);
                 loadMenuNavigationView(navigationView.getMenu());
-                updateListView(getString(R.string.url_wp_posts));
+                //updateListView(getString(R.string.url_wp_posts));
             }else {
                 onNavigationItemSelected(menuItemChecked);
             }
         }
     };
 
+    /*
+        hàm trợ giúp
+     */
     private void cancelSwipeRefreshLayout(){
         if(isRefreshing)
             swipeRefreshLayout.setRefreshing(false);
         isRefreshing = !isRefreshing;
     }
 
+    /*
+        đang tải dữ liệu nè!
+        hiển thị form loading lên.
+     */
     private void notifyLoadingData(){
         Handler handler = new Handler();
         handler.post(new Runnable() {
@@ -414,6 +527,10 @@ public class MainActivity extends AppCompatActivity
         });
     }
 
+    /*
+        gởi một thông báo đến form Loading.
+        loading sẽ nhận lại nếu thấy đã xong sẽ tự phá hủy.
+     */
     private void notifyLoadingDataFinish(){
         //Notify Loading.. data finish;
         SharedPreferences sp = getSharedPreferences("@myHufierLoading", MODE_PRIVATE);
@@ -422,6 +539,9 @@ public class MainActivity extends AppCompatActivity
         editor.apply();
     }
 
+    /*
+        Lọc dữ liệu
+     */
     private SearchView.OnQueryTextListener searchViewQuerySubmit = new SearchView.OnQueryTextListener() {
         @Override
         public boolean onQueryTextSubmit(String query) {
@@ -436,6 +556,9 @@ public class MainActivity extends AppCompatActivity
         }
     };
 
+    /*
+        tìm kiếm dữ liệu trên database
+     */
     private View.OnClickListener searchViewClicked = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
@@ -464,6 +587,9 @@ public class MainActivity extends AppCompatActivity
         }
     };
 
+    /*
+        hàm trợ giúp cho sự kiện: searchViewClicked
+     */
     private void showSearchViewPopup(final AlertDialog alertDialog){
         alertDialog.setCancelable(false);
         alertDialog.show();
@@ -560,7 +686,7 @@ public class MainActivity extends AppCompatActivity
                         wp_post_bll.findItems(result, keySearch, DO_CHINH_XAC[0], new OnMyFinishListener<ArrayList<Wp_post>>() {
                             @Override
                             public void onFinish(ArrayList<Wp_post> result) {
-                                updateListView(result);
+                                //updateListView(result);
                                 isBusy[0] = false;
                             }
 
@@ -603,6 +729,7 @@ public class MainActivity extends AppCompatActivity
         });
     }
 
+    //Hiển thị tùy chọn ngôn ngữ
     private void showLanguagesDialog(){
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle("Chose Language...");
@@ -622,14 +749,16 @@ public class MainActivity extends AppCompatActivity
         alertDialog.show();
     }
 
+    /*
+        set Local:
+        params: lang = vi or en
+     */
     private void setLocale(String lang){
         Locale locale = new Locale(lang);
         Locale.setDefault(locale);
         Configuration conf = getResources().getConfiguration();
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR1) {
-            conf.setLocale(locale);
-            getResources().updateConfiguration(conf, getResources().getDisplayMetrics());
-        }
+        conf.setLocale(locale);
+        getResources().updateConfiguration(conf, getResources().getDisplayMetrics());
     }
 
     private void loadLocale(){
@@ -640,6 +769,9 @@ public class MainActivity extends AppCompatActivity
         setLocale(lang);
     }
 
+    /*
+        Dành cho sự kiện fab
+     */
     private View.OnClickListener fabClicked = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
@@ -654,11 +786,13 @@ public class MainActivity extends AppCompatActivity
                     }
                     switch (which){
                         case 0:{
+                            //Hiển thị Activity Đăng bài viết mới
                             Intent intent = new Intent(MainActivity.this, DangBaiMoi.class);
                             startActivity(intent);
                             break;
                         }
                         case 1:{
+                            //Hiển thị Activity về nhà của user.
                             Intent intent = new Intent(MainActivity.this, UserHome.class);
                             startActivity(intent);
                             break;
