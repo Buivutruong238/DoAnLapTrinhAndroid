@@ -22,7 +22,6 @@ import com.nhom08.doanlaptrinhandroid.mail.GMailSender;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
@@ -312,7 +311,7 @@ public class FunctionsStatic {
         final String MD5 = "MD5";
         try {
             // Create MD5 Hash
-            MessageDigest digest = MessageDigest
+            MessageDigest digest = java.security.MessageDigest
                     .getInstance(MD5);
             digest.update(s.getBytes());
             byte messageDigest[] = digest.digest();
