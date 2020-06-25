@@ -43,7 +43,7 @@ public class Wp_postRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerVie
     public static class VH extends RecyclerView.ViewHolder{
         TextView tvTitlePost, tvAuthor, tvPostDay, tvContent, tvSoLuongLike;
         ImageView imgHinh, imgAvatar;
-        Button btnTangLike, btnGiamLike;
+        ImageView btnTangLike, btnGiamLike;
         ProgressBar progressBar;
 
         VH(@NonNull View itemView) {
@@ -92,7 +92,7 @@ public class Wp_postRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerVie
         vh.btnGiamLike.setOnClickListener(btnGiamLikeClicked);
     }
 
-    //event
+    //region event
     private View.OnClickListener btnTangLikeClicked = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
@@ -290,6 +290,7 @@ public class Wp_postRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerVie
 
         }
     };
+    //endregion
 
     //region Support Method
     @SuppressLint("SetTextI18n")
