@@ -65,7 +65,7 @@ public class ModuleForDevAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
     //<important>
 
     //--------------- 1
-    class newViewHolder extends RecyclerView.ViewHolder{
+    static class newViewHolder extends RecyclerView.ViewHolder{
         private LinearLayout linearLayoutItem;
         private TextView tvTitle;
         private TextView tvPostDay;
@@ -77,7 +77,7 @@ public class ModuleForDevAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
         private ProgressBar progressBar;
         private TextView tvSoLuongLike;
 
-        public newViewHolder(@NonNull View itemView) {
+        newViewHolder(@NonNull View itemView) {
             super(itemView);
             linearLayoutItem = itemView.findViewById(R.id.linearLayoutItemModuleForDev);
             tvTitle = itemView.findViewById(R.id.tvTitleItemModuleForDev);

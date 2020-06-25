@@ -178,7 +178,7 @@
     <string name="menuItemIdCodeForDev">menuItemIdCodeForDev</string>
     <string name="chu_module_for_dev">MODULE FOR DEVELOPER</string>
     <string name="url_count_comment_of_post">http://192.168.56.1/android_app/url_count_comments.php?comment_post_ID=%d</string>
-    <string name="chu_so_luong_comment_bai_viet_nay">"Số lượng bình luận bài viết này: "</string>
+    <string name="chu_so_luong_comment_bai_viet_nay">Bình Luân: </string>
     <string name="url_user_like_post">http://192.168.56.1/android_app/json_user_like_post.php?post_id=%d&amp;user_id=%d</string>
     <string name="url_update_like_post">http://192.168.56.1/android_app/url_update_like_post.php</string>
     <string name="url_insert_user_like_post">http://192.168.56.1/android_app/url_insert_user_like_post.php</string>
@@ -186,4 +186,5 @@
     <string name="chu_developer">DEVELOPER</string>
     <string name="url_image_logo_module_for_dev">http://192.168.56.1/wp-content/uploads/2020/05/logo_module_for_dev.jpg</string>
     <string name="chu_doc_them">Đọc Thêm!</string>
+    <string name="chu_thich">Thích: </string>
 </resources>
