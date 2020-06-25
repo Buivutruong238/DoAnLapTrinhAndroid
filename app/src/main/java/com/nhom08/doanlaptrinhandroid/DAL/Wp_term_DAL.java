@@ -1,7 +1,6 @@
 package com.nhom08.doanlaptrinhandroid.DAL;
 
 import com.nhom08.doanlaptrinhandroid.DTO.Wp_term;
-import com.nhom08.doanlaptrinhandroid.DTO.Wp_term;
 import com.nhom08.doanlaptrinhandroid.Interface_enum.OnMyFinishListener;
 import com.nhom08.doanlaptrinhandroid.Modulds.FunctionsStatic;
 import com.nhom08.doanlaptrinhandroid.Modulds.TaskBackground;

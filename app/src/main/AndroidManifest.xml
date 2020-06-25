@@ -3,7 +3,7 @@
     package="com.nhom08.doanlaptrinhandroid">
 
     <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
     <application
@@ -13,8 +13,26 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <activity android:name=".ModuleForDev"></activity>
         <activity
-            android:configChanges="orientation|screenSize"
+            android:name=".UserHome"
+            android:label="@string/title_activity_user_home"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".DangBaiMoi" />
+        <activity android:name=".Setting" />
+        <activity android:name=".ChangePassword" />
+        <activity android:name=".ForgotPassword" />
+        <activity
+            android:name=".ScreenWaitLogo"
+            android:theme="@style/Theme.AppCompat.NoActionBar" />
+        <activity android:name=".FastRegister" />
+        <activity android:name=".Register" />
+        <activity android:name=".Login" />
+        <activity android:name=".ViewDetailPostActivity">
+
+            <!-- <meta-data android:name="android.support.PARENT_ACTIVITY" android:value="com.nhom08.doanlaptrinhandroid.MainActivity"/> -->
+        </activity>
+        <activity
             android:name=".MainActivity"
             android:label="@string/app_name"
             android:theme="@style/AppTheme.NoActionBar">
