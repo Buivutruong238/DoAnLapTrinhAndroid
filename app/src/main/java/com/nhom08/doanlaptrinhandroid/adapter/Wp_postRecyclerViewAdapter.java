@@ -17,6 +17,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.nhom08.doanlaptrinhandroid.BLL.UserLikePostBLL;
+import com.nhom08.doanlaptrinhandroid.BLL.Wp_comment_BLL;
 import com.nhom08.doanlaptrinhandroid.BLL.Wp_user_BLL;
 import com.nhom08.doanlaptrinhandroid.DTO.UserLikePost;
 import com.nhom08.doanlaptrinhandroid.DTO.Wp_post;
@@ -41,7 +42,7 @@ public class Wp_postRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerVie
     }
 
     public static class VH extends RecyclerView.ViewHolder{
-        TextView tvTitlePost, tvAuthor, tvPostDay, tvContent, tvSoLuongLike;
+        TextView tvTitlePost, tvAuthor, tvPostDay, tvContent, tvSoLuongLike, tvSoLuongComment;
         ImageView imgHinh, imgAvatar;
         ImageView btnTangLike, btnGiamLike;
         ProgressBar progressBar;
@@ -58,6 +59,7 @@ public class Wp_postRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerVie
             btnGiamLike = itemView.findViewById(R.id.imageButtonDisLikeRecy);
             tvSoLuongLike = itemView.findViewById(R.id.tvSoLuongLikeRecy);
             progressBar = itemView.findViewById(R.id.progressBarItemRecy);
+            tvSoLuongComment = itemView.findViewById(R.id.tvSoLuongCommentRecy);
         }
     }
 
@@ -90,6 +92,11 @@ public class Wp_postRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerVie
 
         vh.btnGiamLike.setTag(new PostAndProgressBarAndTextView(post, vh.progressBar, vh.tvSoLuongLike));
         vh.btnGiamLike.setOnClickListener(btnGiamLikeClicked);
+
+        //Load so luong like
+        loadSoLuongLike(vh.tvSoLuongLike, post);
+
+        loadCommentCount(context, vh.tvSoLuongComment, post);
     }
 
     //region event
@@ -293,6 +300,22 @@ public class Wp_postRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerVie
     //endregion
 
     //region Support Method
+    private void loadCommentCount(final Context context, final TextView tvCommentCount, Wp_post post){
+        String strAPI1 = String.format(context.getString(R.string.url_count_comment_of_post), post.getID());
+        new Wp_comment_BLL().countCommentOfPost(strAPI1, new OnMyFinishListener<Integer>() {
+            @SuppressLint("SetTextI18n")
+            @Override
+            public void onFinish(Integer count) {
+                tvCommentCount.setText(context.getString(R.string.chu_so_luong_comment_bai_viet_nay) +" "+count);
+            }
+
+            @Override
+            public void onError(Throwable error, Object bonusOfCoder) {
+                tvCommentCount.setText(R.string.chu_loi_ket_noi_toi_internet);
+            }
+        });
+    }
+
     @SuppressLint("SetTextI18n")
     private void loadSoLuongLike(final TextView tvSoLuongLike, Wp_post post){
         String strAPI2 = String.format(tvSoLuongLike.getContext().getString(R.string.url_sum_like_post), post.getID());
@@ -300,9 +323,9 @@ public class Wp_postRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerVie
             @Override
             public void onFinish(Integer sumLike) {
                 if (sumLike > 0)
-                    tvSoLuongLike.setText("+"+sumLike);
+                    tvSoLuongLike.setText(tvSoLuongLike.getContext().getString(R.string.chu_thich)+" +"+sumLike);
                 else
-                    tvSoLuongLike.setText(String.valueOf(sumLike));
+                    tvSoLuongLike.setText(tvSoLuongLike.getContext().getString(R.string.chu_thich)+" "+String.valueOf(sumLike));
             }
 
             @Override

@@ -192,7 +192,8 @@
     <string name="chu_them_mot_link_hinh_anh">Insert An Image With Url</string>
     <string name="chu_co_ve_nhu_thiet_bi_cua_ban_khong_ho_tro_tinh_nang_nay_vui_long_bat_che_do_xem_nhu_web">Maybe your device is not support for this feature, please turn on the feature (view such web) above</string>
     <string name="chu_module_for_dev">MODULE FOR DEVELOPER</string>
-    <string name="chu_so_luong_comment_bai_viet_nay">The Number Comment In This Post: </string>
+    <string name="chu_so_luong_comment_bai_viet_nay">Comment Count: </string>
     <string name="chu_developer">DEVELOPER</string>
     <string name="chu_doc_them">Read More!</string>
+    <string name="chu_thich">Like: </string>
 </resources>
