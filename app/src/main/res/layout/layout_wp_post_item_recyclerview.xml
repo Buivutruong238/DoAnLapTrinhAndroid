@@ -9,7 +9,7 @@
     android:paddingBottom="10dp">
 
     <TextView
-        android:id="@+id/tvContentItemWpPostListView"
+        android:id="@+id/tvContentItemWpPostRecy"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="10dp"
@@ -23,10 +23,10 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tvTitleItemWpPostListView" />
+        app:layout_constraintTop_toBottomOf="@id/tvTitleItemWpPostRecy" />
 
     <TextView
-        android:id="@+id/tvTitleItemWpPostListView"
+        android:id="@+id/tvTitleItemWpPostRecy"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="10dp"
@@ -41,11 +41,11 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/imgHinhItemWpPostListView" />
+        app:layout_constraintTop_toBottomOf="@id/imgHinhItemWpPostRecy" />
 
 
     <ImageView
-        android:id="@+id/imgHinhItemWpPostListView"
+        android:id="@+id/imgHinhItemWpPostRecy"
         android:layout_width="0dp"
         android:layout_height="200dp"
         android:layout_marginStart="20dp"
@@ -54,14 +54,14 @@
         android:layout_marginEnd="20dp"
         android:layout_marginRight="20dp"
         android:layout_marginBottom="50dp"
-        app:layout_constraintBottom_toTopOf="@+id/tvTitleItemWpPostListView"
+        app:layout_constraintBottom_toTopOf="@+id/tvTitleItemWpPostRecy"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/imageViewAvatarPostItemListView"
+        app:layout_constraintTop_toBottomOf="@id/imageViewAvatarPostItemRecy"
         app:srcCompat="@color/cardview_shadow_start_color" />
 
     <ImageView
-        android:id="@+id/imageViewAvatarPostItemListView"
+        android:id="@+id/imageViewAvatarPostItemRecy"
         android:layout_width="50dp"
         android:layout_height="50dp"
         android:layout_marginStart="20dp"
@@ -73,7 +73,7 @@
         tools:ignore="VectorDrawableCompat" />
 
     <TextView
-        android:id="@+id/tvAuthorPostItemListView"
+        android:id="@+id/tvAuthorPostItemRecy"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="10dp"
@@ -86,11 +86,11 @@
         android:textSize="16sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/imageViewAvatarPostItemListView"
+        app:layout_constraintStart_toEndOf="@+id/imageViewAvatarPostItemRecy"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/tvPostDayItemListView"
+        android:id="@+id/tvPostDayItemRecy"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="10dp"
@@ -101,49 +101,71 @@
         android:layout_marginBottom="20dp"
         android:text="Post Day."
         android:textStyle="italic"
-        app:layout_constraintBottom_toTopOf="@+id/imgHinhItemWpPostListView"
+        app:layout_constraintBottom_toTopOf="@+id/imgHinhItemWpPostRecy"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/imageViewAvatarPostItemListView"
-        app:layout_constraintTop_toBottomOf="@+id/tvAuthorPostItemListView" />
+        app:layout_constraintStart_toEndOf="@+id/imageViewAvatarPostItemRecy"
+        app:layout_constraintTop_toBottomOf="@+id/tvAuthorPostItemRecy" />
 
     <ImageButton
-        android:id="@+id/imageButton"
+        android:id="@+id/imageButtonLikeRecy"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="30dp"
         android:layout_marginTop="20dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvContentItemWpPostListView"
+        app:layout_constraintTop_toBottomOf="@+id/tvContentItemWpPostRecy"
         app:srcCompat="@drawable/ic_exposure_plus_1_black_24dp" />
 
     <ImageButton
-        android:id="@+id/imageButton2"
+        android:id="@+id/imageButtonDisLikeRecy"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
         android:layout_marginTop="20dp"
-        app:layout_constraintStart_toEndOf="@+id/textView2"
-        app:layout_constraintTop_toBottomOf="@+id/tvContentItemWpPostListView"
+        app:layout_constraintStart_toEndOf="@+id/tvSoLuongLikeRecy"
+        app:layout_constraintTop_toBottomOf="@+id/tvContentItemWpPostRecy"
         app:srcCompat="@drawable/ic_exposure_neg_1_black_24dp" />
 
     <TextView
-        android:id="@+id/textView2"
+        android:id="@+id/tvSoLuongLikeRecy"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="5dp"
         android:text="like: 5"
-        app:layout_constraintStart_toEndOf="@+id/imageButton"
-        app:layout_constraintTop_toBottomOf="@+id/tvContentItemWpPostListView" />
+        app:layout_constraintStart_toEndOf="@+id/imageButtonLikeRecy"
+        app:layout_constraintTop_toBottomOf="@+id/progressBarItemRecy" />
 
     <TextView
-        android:id="@+id/textView3"
+        android:id="@+id/tvSoLuongCommentRecy"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="30dp"
         android:layout_marginTop="30dp"
         android:text="Comment: 5"
-        app:layout_constraintStart_toEndOf="@+id/imageButton2"
-        app:layout_constraintTop_toBottomOf="@+id/tvContentItemWpPostListView" />
+        app:layout_constraintStart_toEndOf="@+id/imageButtonDisLikeRecy"
+        app:layout_constraintTop_toBottomOf="@+id/tvContentItemWpPostRecy" />
+
+    <Button
+        android:id="@+id/btnDocThemRecy"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="30dp"
+        android:text="@string/chu_doc_them"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageButtonLikeRecy" />
+
+    <ProgressBar
+        android:id="@+id/progressBarItemRecy"
+        style="?android:attr/progressBarStyle"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_marginTop="10dp"
+        app:layout_constraintEnd_toStartOf="@+id/imageButtonDisLikeRecy"
+        app:layout_constraintStart_toEndOf="@+id/imageButtonLikeRecy"
+        app:layout_constraintTop_toBottomOf="@+id/tvContentItemWpPostRecy" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
