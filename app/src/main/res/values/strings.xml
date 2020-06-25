@@ -79,11 +79,11 @@
     <string name="_Username">Username - </string>
     <string name="_myhufier">\@myhufier - </string>
     <string name="chon_do_chinh_xac">Choose Exaclly: 100%</string>
-    <string name="loading_not">Loading... NOT</string>
+    <string name="loading_not">Loading… NOT</string>
     <string name="tim_thay_0">Found: 0</string>
     <string name="chon_do_chinh_xac_percent">Choose Exaclly: %d percent</string>
     <string name="trang_thai_tong_posts_items">Status: Sum Posts: %d Items</string>
-    <string name="loading_percent">Loading... %d percent</string>
+    <string name="loading_percent">Loading… %d percent</string>
     <string name="tim_thay">Found: </string>
     <string name="go_to_author">GO TO AUTHOR</string>
     <string name="top_category">TOP CATEGORY"</string>
@@ -194,4 +194,5 @@
     <string name="chu_module_for_dev">MODULE FOR DEVELOPER</string>
     <string name="chu_so_luong_comment_bai_viet_nay">The Number Comment In This Post: </string>
     <string name="chu_developer">DEVELOPER</string>
+    <string name="chu_doc_them">Read More!</string>
 </resources>

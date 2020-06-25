@@ -370,7 +370,6 @@ public class MainActivity extends AppCompatActivity
             @Override
             public void onFinish(ArrayList<Wp_post> result) {
                 updateRecyclerView(result);
-                Toast.makeText(MainActivity.this, "Size: "+result.size(), Toast.LENGTH_SHORT).show();
                 processDialog.cancel();
                 cancelSwipeRefreshLayout();
             }
