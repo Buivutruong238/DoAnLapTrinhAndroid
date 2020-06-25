@@ -3,6 +3,7 @@ package com.nhom08.doanlaptrinhandroid;
 import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.os.Handler;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.SubMenu;
 import android.view.View;
@@ -20,6 +21,7 @@ import com.android.volley.toolbox.Volley;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.navigation.NavigationView;
+import com.nhom08.doanlaptrinhandroid.BLL.Wp_post_BLL;
 import com.nhom08.doanlaptrinhandroid.BLL.Wp_term_BLL;
 import com.nhom08.doanlaptrinhandroid.DTO.Wp_post;
 import com.nhom08.doanlaptrinhandroid.DTO.Wp_term;
@@ -33,6 +35,10 @@ import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -65,61 +71,47 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         //initial component
         init();
 
-        //thong bao
-        thongBaoKhiCoBaiViet(null, 3000);
+        //Test ham thong bao khi co bai viet moi
+        ArrayList<String> lstHienTai = new ArrayList<>();
+        lstHienTai.add("a");
+        lstHienTai.add("b");
+        lstHienTai.add("c");
+        lstHienTai.add("a");
+        lstHienTai.add("b");
+        lstHienTai.add("c");
+        thongBaoKhiCoBaiViet(lstHienTai, 5000);
 
-        //test update volley
-        RequestQueue requestQueue = Volley.newRequestQueue(this);
-        StringRequest stringRequest = new StringRequest(Request.Method.POST, "https://vietsacloit.000webhostapp.com/android_app/url_update_like_post.php", new Response.Listener<String>() {
-            @Override
-            public void onResponse(String response) {
-                Toast.makeText(MainActivity.this, response, Toast.LENGTH_SHORT).show();
-            }
-        }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                Toast.makeText(MainActivity.this, "Error", Toast.LENGTH_SHORT).show();
-            }
-        }){
-            @Override
-            protected Map<String, String> getParams() throws AuthFailureError {
-                Map<String, String> map = new HashMap<>();
-                map.put("post_id", "49");
-                map.put("user_id", "2");
-                map.put("like", "100");
-
-                return map;
-            }
-        };
-        requestQueue.add(stringRequest);
     }
 
-    private void init(){
+    private void init() {
         //initial variable
         wp_term_bll = new Wp_term_BLL();
         processDialog = FunctionsStatic.createProcessDialog(this);
+        wp_post_bll = new Wp_post_BLL();
 
+        textView = findViewById(R.id.tvThongBaoBaiVietMoi);
         NavigationView navigationView = findViewById(R.id.nav_view);
         loadMenuNavigationView(navigationView.getMenu());
     }
 
-    private void loadMenuNavigationView(final Menu menu){
+    private void loadMenuNavigationView(final Menu menu) {
         menu.clear();
         wp_term_bll.toArrayWp_terms(getString(R.string.url_wp_terms), new OnMyFinishListener<ArrayList<Wp_term>>() {
             @SuppressLint("SetTextI18n")
             @Override
             public void onFinish(ArrayList<Wp_term> result) {
-                menu.add(0, 42,0,R.string.chu_module_for_dev).setIcon(R.drawable.ic_widgets_black_24dp);
+                menu.add(0, 42, 0, R.string.chu_module_for_dev).setIcon(R.drawable.ic_widgets_black_24dp);
                 SubMenu subMenu1 = menu.addSubMenu(getString(R.string.top_category));
                 menuItemChecked = subMenu1.add(1, 0, 0, getString(R.string.new_posts)).setIcon(R.drawable.ic_menu_news_post).setChecked(true);
                 //For other category
                 ArrayList<Wp_term> otherCates = new ArrayList<>();
 
-                for(Wp_term term : result) {
+                for (Wp_term term : result) {
                     int id = term.getTerm_id();
                     String name = term.getName();
-                    switch (id){
-                        case 42:break;//module for dev was added
+                    switch (id) {
+                        case 42:
+                            break;//module for dev was added
 
                         case 3: {
                             MenuItem menuItem = subMenu1.add(1, id, 0, name);
@@ -150,7 +142,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
                 //add other category if found!
                 SubMenu subMenu2 = menu.addSubMenu(getString(R.string.other_category));
-                for(Wp_term term : otherCates){
+                for (Wp_term term : otherCates) {
                     int id = term.getTerm_id();
                     String name = term.getName();
                     if (id == 1)
@@ -173,7 +165,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             @Override
             public void onError(Throwable error, Object bonusOfCoder) {
                 FunctionsStatic.cancelDialog(processDialog);
-                Toast.makeText(MainActivity.this, "LOAD MENU ERROR: "+bonusOfCoder.toString(), Toast.LENGTH_SHORT).show();
+                Toast.makeText(MainActivity.this, "LOAD MENU ERROR: " + bonusOfCoder.toString(), Toast.LENGTH_SHORT).show();
             }
         });
     }
@@ -197,17 +189,17 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         if (id < 0)
             return false;
 
-        if(id == R.string.navActionLogout){
+        if (id == R.string.navActionLogout) {
             Toast.makeText(this, "Logout", Toast.LENGTH_SHORT).show();
             return true;
         }
 
-        if (id == R.string.navActionLogin){
+        if (id == R.string.navActionLogin) {
             Toast.makeText(this, "Login", Toast.LENGTH_SHORT).show();
             return true;
         }
 
-        if (id == R.string.navActionRegister){
+        if (id == R.string.navActionRegister) {
             Toast.makeText(this, "Register", Toast.LENGTH_SHORT).show();
             return true;
         }
@@ -234,21 +226,102 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     }
 
     //Thu code phan thong bao khi co bai viet
-    private void thongBaoKhiCoBaiViet(List<Wp_post> listHienTai, final int milisec){
+    /*Lay all bai viet*/
+    private ArrayList<Wp_post> getAllWp_Post() {
+        RequestQueue requestQueue = Volley.newRequestQueue(MainActivity.this);
+        StringRequest stringRequest = new StringRequest(Request.Method.GET, getString(R.string.url_wp_posts),
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        try {
+                            JSONObject obj = new JSONObject(response);
+                            JSONArray array = obj.getJSONArray("wp_post");
+                            JSONObject object;
+                            Wp_post post;
+                            listMoi.clear();
+                            for (int i = 0; i < array.length(); i++) {
+                                object = array.getJSONObject(i);
+                                post = new Wp_post();
+                                post.setID(object.getInt("ID"));
+                                post.setPost_author(object.getInt("post_author"));
+                                post.setPost_date(object.getString("post_date"));
+                                post.setPost_content(object.getString("post_content"));
+                                post.setPost_title(object.getString("post_title"));
+                                post.setPost_modified(object.getString("post_modified"));
+
+                                post.setGuid(object.getString("guid"));
+                                listMoi.add(post);
+                            }
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Toast.makeText(MainActivity.this, "Loi", Toast.LENGTH_SHORT).show();
+                    }
+                });
+        requestQueue.add(stringRequest);
+        return listMoi;
+    }
+
+    private void thongBaoKhiCoBaiViet(final ArrayList<String> listHienTai, final int milisecond) {
         final Handler handler = new Handler();
-        final int[] i = {0};
         handler.postDelayed(new Runnable() {
             @Override
             public void run() {
-                //len
-                TextView textView = findViewById(R.id.tvThongBaoBaiVietMoi);
-                textView.setText("thong bao: "+ i[0]++);
-                handler.postDelayed(this, milisec);
+                //ArrayList<Wp_post> list = getAllWp_Post();
+                wp_post_bll.toArrayWp_posts(getString(R.string.url_wp_posts), new OnMyFinishListener<ArrayList<Wp_post>>() {
+                    @Override
+                    public void onFinish(ArrayList<Wp_post> result) {
+                        Toast.makeText(MainActivity.this, result.size() + "", Toast.LENGTH_SHORT).show();
+                    }
+
+                    @Override
+                    public void onError(Throwable error, Object bonusOfCoder) {
+                        Toast.makeText(MainActivity.this, "Loi", Toast.LENGTH_SHORT).show();
+                    }
+                });
+                handler.postDelayed(this, milisecond);
             }
-        }, milisec);
+        }, milisecond);
     }
 
+    /*Sua thong tin ca nhan cua account*/
+    private void updateThongTinCaNhan(String userLogin, String userEmail) {
+        //test update volley
+        RequestQueue requestQueue = Volley.newRequestQueue(this);
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, "https://vietsacloit.000webhostapp.com/android_app/url_update_like_post.php", new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                Toast.makeText(MainActivity.this, response, Toast.LENGTH_SHORT).show();
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Toast.makeText(MainActivity.this, "Error", Toast.LENGTH_SHORT).show();
+            }
+        }) {
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String, String> map = new HashMap<>();
+                map.put("post_id", "49");
+                map.put("user_id", "2");
+                map.put("like", "100");
+
+                return map;
+            }
+        };
+        requestQueue.add(stringRequest);
+    }
+
+
+    private Wp_post_BLL wp_post_bll;
     private Wp_term_BLL wp_term_bll;
     private MenuItem menuItemChecked;
     private AlertDialog processDialog;
+    private ArrayList<Wp_post> listMoi = new ArrayList<>();
+    TextView textView;
 }

@@ -23,5 +23,5 @@
         android:paddingBottom="10dp"
         android:text="@string/chu_thong_bao"
         android:textColor="#032477"
-        android:visibility="visible" />
+        android:visibility="gone" />
 </RelativeLayout>

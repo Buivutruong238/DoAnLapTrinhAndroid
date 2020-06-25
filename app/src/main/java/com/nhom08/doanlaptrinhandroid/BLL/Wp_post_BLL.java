@@ -50,4 +50,6 @@ public class Wp_post_BLL {
         wp_post_dal = new Wp_post_DAL();
         wp_post_dal.deleteWpPost(strUrl, ID, onMyFinishListener);
     }
+
+    //public void getAllPost(String strUrl)
 }
