@@ -324,4 +324,5 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private AlertDialog processDialog;
     private ArrayList<Wp_post> listMoi = new ArrayList<>();
     TextView textView;
+    //////////
 }
