@@ -6,7 +6,6 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.graphics.Color;
-import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.os.Bundle;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -331,32 +330,6 @@ public class MainActivity extends AppCompatActivity
     }
 
     /*
-        # Function: updateListView
-        # params: String
-        # thực hiện cập nhật listView khi truyền vào một link API.
-        thực hiện công việc băng một luồng khác và khi thực hiện xong sẽ gọi lại
-        MainActivity
-     */
-    private void updateListView(String strUrl){
-        if(!isRefreshing)
-            processDialog.show();
-        wp_post_bll.toArrayWp_posts(strUrl, new OnMyFinishListener<ArrayList<Wp_post>>() {
-            @Override
-            public void onFinish(ArrayList<Wp_post> result) {
-                //updateListView(result);
-                processDialog.cancel();
-                cancelSwipeRefreshLayout();
-            }
-
-            @Override
-            public void onError(Throwable error, Object bonusOfCoder) {
-                processDialog.cancel();
-                cancelSwipeRefreshLayout();
-            }
-        });
-    }
-
-    /*
         # Function: updateRecyclerView
         # params: String
         # thực hiện cập nhật RecyclerView khi truyền vào một link API.
@@ -380,20 +353,6 @@ public class MainActivity extends AppCompatActivity
                 cancelSwipeRefreshLayout();
             }
         });
-    }
-
-    /*
-        Overloading: updateListView
-        Params: danh sách bài viết đã có dữ liệu
-     */
-    private void updateListView(final ArrayList<Wp_post> list){
-//        wp_postsAdapter = new Wp_postsAdapter(MainActivity.this, list);
-//        ListView lvShow = findViewById(R.id.lvShowWp_posts);
-//        lvShow.setAdapter(wp_postsAdapter);
-//        lvShow.setDividerHeight(20);
-//        lvShow.setBackgroundColor(Color.WHITE);
-//        lvShow.setOnItemClickListener(lvShowItemClicked);
-//        lvShow.setOnScrollListener(lvShowScroll);
     }
 
     /*

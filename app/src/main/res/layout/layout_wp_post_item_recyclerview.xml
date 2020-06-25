@@ -6,7 +6,8 @@
     android:layout_height="wrap_content"
     android:layout_margin="3dp"
     android:background="#F3F3F3"
-    android:paddingBottom="10dp">
+    android:paddingBottom="10dp"
+    android:visibility="visible">
 
     <TextView
         android:id="@+id/tvContentItemWpPostRecy"
@@ -131,10 +132,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
-        android:layout_marginTop="5dp"
+        android:layout_marginTop="45dp"
         android:text="like: 5"
         app:layout_constraintStart_toEndOf="@+id/imageButtonLikeRecy"
-        app:layout_constraintTop_toBottomOf="@+id/progressBarItemRecy" />
+        app:layout_constraintTop_toBottomOf="@+id/tvContentItemWpPostRecy" />
 
     <TextView
         android:id="@+id/tvSoLuongCommentRecy"
@@ -164,6 +165,7 @@
         android:layout_width="30dp"
         android:layout_height="30dp"
         android:layout_marginTop="10dp"
+        android:visibility="gone"
         app:layout_constraintEnd_toStartOf="@+id/imageButtonDisLikeRecy"
         app:layout_constraintStart_toEndOf="@+id/imageButtonLikeRecy"
         app:layout_constraintTop_toBottomOf="@+id/tvContentItemWpPostRecy" />
