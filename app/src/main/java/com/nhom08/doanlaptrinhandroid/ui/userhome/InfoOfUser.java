@@ -6,18 +6,30 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import com.android.volley.AuthFailureError;
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
 import com.squareup.picasso.Picasso;
 import com.nhom08.doanlaptrinhandroid.DTO.Wp_user;
 import com.nhom08.doanlaptrinhandroid.Modulds.FunctionsStatic;
 import com.nhom08.doanlaptrinhandroid.R;
+
+import java.util.HashMap;
+import java.util.Map;
 
 public class InfoOfUser extends Fragment {
 
@@ -41,6 +53,39 @@ public class InfoOfUser extends Fragment {
         ListView lvInfo = root.findViewById(R.id.lvInfoOfUser);
         lvInfo.setAdapter(adapter);
         lvInfo.setChoiceMode(ListView.CHOICE_MODE_SINGLE);
+
+        lvInfo.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, final View view, int position, long id) {
+                if (position == 2){
+                    String strAPI = "http://192.168.56.1/android_app/url_update_test.php";
+                    RequestQueue requestQueue = Volley.newRequestQueue(view.getContext());
+                    StringRequest request = new StringRequest(Request.Method.POST, strAPI, new Response.Listener<String>() {
+                        @Override
+                        public void onResponse(String response) {
+                            Toast.makeText(view.getContext(), response, Toast.LENGTH_SHORT).show();
+                        }
+                    }, new Response.ErrorListener() {
+                        @Override
+                        public void onErrorResponse(VolleyError error) {
+                            Toast.makeText(view.getContext(), "Error Unknown!", Toast.LENGTH_SHORT).show();
+                        }
+                    }){
+                        @Override
+                        protected Map<String, String> getParams() throws AuthFailureError {
+                            Map<String, String> map = new HashMap<>();
+                            map.put("post_id", "49");
+                            map.put("user_id", "2");
+                            map.put("like", "5");
+
+                            return map;
+                        }
+                    };
+
+                    requestQueue.add(request);
+                }
+            }
+        });
 
         return root;
     }
