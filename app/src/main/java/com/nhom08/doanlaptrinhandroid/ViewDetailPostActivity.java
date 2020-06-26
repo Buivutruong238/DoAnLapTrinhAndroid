@@ -79,7 +79,7 @@ public class ViewDetailPostActivity extends AppCompatActivity {
         if (bundle != null){
             wp_post_id = bundle.getInt("wp_post_id", -1);
             wp_post_content = bundle.getString("wp_post_content", null);
-            wp_post_guid = bundle.getString("guid", "vietsaclo.ga");
+            wp_post_guid = bundle.getString("guid", getString(R.string.url_host));
         }
 
         if (wp_post_content != null)

@@ -2,6 +2,7 @@ package com.nhom08.doanlaptrinhandroid.adapter;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Build;
 import android.text.Html;
 import android.view.LayoutInflater;
@@ -26,6 +27,7 @@ import com.nhom08.doanlaptrinhandroid.Interface_enum.OnMyFinishListener;
 import com.nhom08.doanlaptrinhandroid.Modulds.FunctionsStatic;
 import com.nhom08.doanlaptrinhandroid.Modulds.PostAndProgressBarAndTextView;
 import com.nhom08.doanlaptrinhandroid.R;
+import com.nhom08.doanlaptrinhandroid.ViewDetailPostActivity;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
@@ -46,6 +48,7 @@ public class Wp_postRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerVie
         ImageView imgHinh, imgAvatar;
         ImageView btnTangLike, btnGiamLike;
         ProgressBar progressBar;
+        Button btnXemThem;
 
         VH(@NonNull View itemView) {
             super(itemView);
@@ -60,6 +63,7 @@ public class Wp_postRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerVie
             tvSoLuongLike = itemView.findViewById(R.id.tvSoLuongLikeRecy);
             progressBar = itemView.findViewById(R.id.progressBarItemRecy);
             tvSoLuongComment = itemView.findViewById(R.id.tvSoLuongCommentRecy);
+            btnXemThem = itemView.findViewById(R.id.btnDocThemRecy);
         }
     }
 
@@ -97,9 +101,24 @@ public class Wp_postRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerVie
         loadSoLuongLike(vh.tvSoLuongLike, post);
 
         loadCommentCount(context, vh.tvSoLuongComment, post);
+
+        vh.btnXemThem.setTag(post);
+        vh.btnXemThem.setOnClickListener(btnXemThemClicked);
     }
 
     //region event
+    private View.OnClickListener btnXemThemClicked = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            Wp_post post = (Wp_post)v.getTag();
+            Intent intent = new Intent(v.getContext(), ViewDetailPostActivity.class);
+            intent.putExtra("wp_post_id", post.getID());
+            intent.putExtra("wp_post_content", post.getPost_content());
+            intent.putExtra("guid", post.getGuid());
+            v.getContext().startActivity(intent);
+        }
+    };
+
     private View.OnClickListener btnTangLikeClicked = new View.OnClickListener() {
         @Override
         public void onClick(View v) {

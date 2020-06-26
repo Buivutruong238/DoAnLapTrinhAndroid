@@ -36,9 +36,9 @@ public class Wp_post_BLL {
         wp_post_dal.addWpPost(strUrl, wp_post, onMyFinishListener);
     }
 
-    public void updateGuid(final String strUrl, final int ID, OnMyFinishListener<Boolean> onMyFinishListener){
+    public void updateGuid(final String strUrl, final int ID, String host, OnMyFinishListener<Boolean> onMyFinishListener){
         wp_post_dal = new Wp_post_DAL();
-        wp_post_dal.updateGuid(strUrl, ID, onMyFinishListener);
+        wp_post_dal.updateGuid(strUrl, ID, host, onMyFinishListener);
     }
 
     public void insertTermRelationship(final String strUrl, final int object_id, final int term_id, OnMyFinishListener<Boolean> onMyFinishListener){

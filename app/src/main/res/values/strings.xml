@@ -13,6 +13,7 @@
     <string name="menu_share">Share</string>
     <string name="menu_send">Send</string>
 
+    <string name="url_host">http://192.168.56.1</string>
     <string name="url_wp_posts">http://192.168.56.1/android_app/json_wp_posts.php</string>
     <string name="url_wp_post">http://192.168.56.1/android_app/json_wp_post.php?id=</string>
     <string name="url_wp_terms">http://192.168.56.1/android_app/json_wp_terms.php</string>
