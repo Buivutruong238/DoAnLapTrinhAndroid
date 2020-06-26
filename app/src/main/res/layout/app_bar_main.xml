@@ -30,4 +30,15 @@
         android:layout_margin="@dimen/fab_margin"
         app:srcCompat="@android:drawable/ic_menu_myplaces" />
 
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fabNotify"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|left"
+        android:layout_margin="16dp"
+        app:backgroundTint="@null"
+        app:maxImageSize="32dp"
+        app:srcCompat="@drawable/ic_bell_notify_00" />
+
+
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
