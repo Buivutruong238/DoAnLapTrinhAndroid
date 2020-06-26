@@ -775,4 +775,11 @@ public class MainActivity extends AppCompatActivity
     private Wp_postsAdapter wp_postsAdapter;
 
     private Wp_user userWasLogin;
+
+
+
+
+
+
+    ///////////////
 }
