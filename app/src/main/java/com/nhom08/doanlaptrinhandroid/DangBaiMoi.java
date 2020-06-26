@@ -3,6 +3,7 @@ package com.nhom08.doanlaptrinhandroid;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.annotation.SuppressLint;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.text.method.ScrollingMovementMethod;
@@ -180,7 +181,7 @@ public class DangBaiMoi extends AppCompatActivity {
                                             if (wp_post_get_by_title.size() != 0){//get ok
                                                 final int ID = wp_post_get_by_title.get(0).getID();
                                                 //update guid.
-                                                wp_post_bll.updateGuid(getString(R.string.url_update_guid), ID, new OnMyFinishListener<Boolean>() {
+                                                wp_post_bll.updateGuid(getString(R.string.url_update_guid), ID, getString(R.string.url_host), new OnMyFinishListener<Boolean>() {
                                                     @Override
                                                     public void onFinish(Boolean isUpdated) {
                                                         if (isUpdated){//ok
@@ -331,6 +332,7 @@ public class DangBaiMoi extends AppCompatActivity {
             });
 
             btnDongY.setOnClickListener(new View.OnClickListener() {
+                @SuppressLint("SetTextI18n")
                 @Override
                 public void onClick(View v) {
                     final String strInsertInput = edtNhapURL.getText().toString();
@@ -344,13 +346,13 @@ public class DangBaiMoi extends AppCompatActivity {
                             if (strNoiDung.isEmpty())
                                 edtNoiDung.setText(BEGIN+"\n");
 
-                            StringBuilder stringBuilder = new StringBuilder();
-                            stringBuilder.append(edtNoiDung.getText().toString());
-                            stringBuilder.append("\n");
-                            stringBuilder.append("<div style=\"margin-top: 50px; \"></div>\n");
-                            stringBuilder.append(strInsertInput);
-                            stringBuilder.append(String.format(END, ++paragraph[0]));
-                            edtNoiDung.setText(stringBuilder.toString());
+                            @SuppressLint("DefaultLocale")
+                            String stringBuilder = edtNoiDung.getText().toString() +
+                                    "\n" +
+                                    "<div style=\"margin-top: 50px; \"></div>\n" +
+                                    "<p>" + strInsertInput + "</p>" +
+                                    String.format(END, ++paragraph[0]);
+                            edtNoiDung.setText(stringBuilder);
                             progressBar.setVisibility(View.GONE);
                             dialog.cancel();
 
@@ -365,21 +367,18 @@ public class DangBaiMoi extends AppCompatActivity {
 
                                         if (strNoiDung.isEmpty())
                                             edtNoiDung.setText(BEGIN);
-                                        if (strNoiDung.contains(END)){
-                                            strNoiDung.replace(END, "");
-                                        }
 
-                                        StringBuilder stringBuilder = new StringBuilder();
-                                        stringBuilder.append(edtNoiDung.getText().toString());//old value;
-                                        stringBuilder.append("\n");//new line;
-                                        stringBuilder.append("<!-- wp:image -->\n");
-                                        stringBuilder.append("<div style=\"margin-top: 50px; \"></div>\n");
-                                        stringBuilder.append("<figure class=\"wp-block-image\"><img src=\"");
-                                        stringBuilder.append(strInsertInput);
-                                        stringBuilder.append("\" alt=\"Image Upload from app\"/></figure>\n");
-                                        stringBuilder.append("<!-- /wp:image -->");
-                                        stringBuilder.append(String.format(END, ++paragraph[0]));
-                                        edtNoiDung.setText(stringBuilder.toString());
+                                        @SuppressLint("DefaultLocale")
+                                        String stringBuilder = edtNoiDung.getText().toString() +//old value;
+                                                "\n" +//new line;
+                                                "<!-- wp:image -->\n" +
+                                                "<div style=\"margin-top: 50px; \"></div>\n" +
+                                                "<figure class=\"wp-block-image\"><img src=\"" +
+                                                strInsertInput +
+                                                "\" alt=\"Image Upload from app\"/></figure>\n" +
+                                                "<!-- /wp:image -->" +
+                                                String.format(END, ++paragraph[0]);
+                                        edtNoiDung.setText(stringBuilder);
                                         dialog.cancel();
                                     }else{//not found
                                         edtNhapURL.setError(getString(R.string.chu_url_khong_dung_dinh_dang_hoac_khong_tim_thay_tren_internet));
@@ -407,26 +406,22 @@ public class DangBaiMoi extends AppCompatActivity {
 
                                         if (strNoiDung.isEmpty())
                                             edtNoiDung.setText(BEGIN);
-                                        if (strNoiDung.contains(END)){
-                                            strNoiDung.replace(END, "");
-                                        }
 
-                                        StringBuilder stringBuilder = new StringBuilder();
-                                        stringBuilder.append(edtNoiDung.getText().toString());//old value;
-                                        stringBuilder.append("\n");//new line;
-                                        stringBuilder.append("<!-- wp:html -->");
-                                        stringBuilder.append("<div style=\"margin-top: 50px; \"></div>\n");
-                                        stringBuilder.append("<h3 style=\"color: red\">Báo lỗi!</h3><div><i><p style=\"color: red;\">Mọi thắc mắc vui lòng để lại bình luận dưới bài viết <big style=\"color: black;\">nếu link hỏng hãy báo cho</big> <a href=\"");
-                                        stringBuilder.append(userWasLogin.getUser_url());
-                                        stringBuilder.append("\" target=\"_blank\">"+userWasLogin.getDisplay_name()+"</a></p></i></div>");
-                                        stringBuilder.append("<link rel=\"stylesheet\" href=\""+getString(R.string.url_css_button_download)+"\">");
-                                        stringBuilder.append("<div class=\"border-btn-download\"><a href=\"");
-                                        stringBuilder.append(strInsertInput);
-                                        stringBuilder.append("\" target=\"_blank\"><button id=\"myBtnDownload\">Viet_SacLo</button></a></div>");
-                                        stringBuilder.append("<!-- /wp:html -->");
-                                        stringBuilder.append(String.format(END, ++paragraph[0]));
-
-                                        edtNoiDung.setText(stringBuilder.toString());
+                                        @SuppressLint("DefaultLocale")
+                                        String stringBuilder = edtNoiDung.getText().toString() +//old value;
+                                                "\n" +//new line;
+                                                "<!-- wp:html -->" +
+                                                "<div style=\"margin-top: 50px; \"></div>\n" +
+                                                "<h3 style=\"color: red\">Báo lỗi!</h3><div><i><p style=\"color: red;\">Mọi thắc mắc vui lòng để lại bình luận dưới bài viết <big style=\"color: black;\">nếu link hỏng hãy báo cho</big> <a href=\"" +
+                                                userWasLogin.getUser_url() +
+                                                "\" target=\"_blank\">" + userWasLogin.getDisplay_name() + "</a></p></i></div>" +
+                                                "<link rel=\"stylesheet\" href=\"" + getString(R.string.url_css_button_download) + "\">" +
+                                                "<div class=\"border-btn-download\"><a href=\"" +
+                                                strInsertInput +
+                                                "\" target=\"_blank\"><button id=\"myBtnDownload\">Viet_SacLo</button></a></div>" +
+                                                "<!-- /wp:html -->" +
+                                                String.format(END, ++paragraph[0]);
+                                        edtNoiDung.setText(stringBuilder);
                                         dialog.cancel();
                                     }else{
                                         edtNhapURL.setError(getString(R.string.chu_url_khong_dung_dinh_dang_hoac_khong_tim_thay_tren_internet));

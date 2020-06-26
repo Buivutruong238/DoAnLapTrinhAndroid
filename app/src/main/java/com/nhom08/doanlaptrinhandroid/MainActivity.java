@@ -47,7 +47,6 @@ import android.widget.AbsListView;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.SearchView;
 import android.widget.SeekBar;
@@ -319,10 +318,10 @@ public class MainActivity extends AppCompatActivity
         item.setChecked(true);
         menuItemChecked = item;
 
-//        if (id == 0)
-//            updateListView(getString(R.string.url_wp_posts));
-//        else
-//            updateListView(getString(R.string.url_wp_posts_term) + id);
+        if (id == 0)
+            updateRecyclerView(getString(R.string.url_wp_posts));
+        else
+            updateRecyclerView(getString(R.string.url_wp_posts_term) + id);
 
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);

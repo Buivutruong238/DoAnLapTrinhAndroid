@@ -97,7 +97,7 @@
     <string name="chu_nhap_link_download">Nhập Link Download</string>
     <string name="chu_url_khong_dung_dinh_dang_hoac_khong_tim_thay_tren_internet">Url không đúng định dạng hoặc Url không tìm thấy trên internet</string>
     <string name="title_activity_user_home">Nhà User</string>
-    <string name="url_css_button_download">https://vlsupimages.000webhostapp.com/custom_html/button_download/css/style.css</string>
+    <string name="url_css_button_download">http://192.168.56.1/custom_html/button_download/css/style.css</string>
     <string name="chu_them_mot_doan_van">Thêm Một Đoạn Văn</string>
     <string name="chu_them_noi_dung_hoac_nang_cao">Thêm Nội Dung / Nâng Cao</string>
     <string name="tab_text_3">Đã Bình Luận</string>
@@ -187,4 +187,5 @@
     <string name="url_image_logo_module_for_dev">http://192.168.56.1/wp-content/uploads/2020/05/logo_module_for_dev.jpg</string>
     <string name="chu_doc_them">Đọc Thêm!</string>
     <string name="chu_thich">Thích: </string>
+    <string name="url_host">http://192.168.56.1</string>
 </resources>
