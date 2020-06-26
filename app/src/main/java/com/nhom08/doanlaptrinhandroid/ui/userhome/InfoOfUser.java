@@ -1,15 +1,17 @@
 package com.nhom08.doanlaptrinhandroid.ui.userhome;
 
 import android.content.Context;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.text.InputType;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
-import android.widget.ImageView;
-import android.widget.ListView;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -23,8 +25,8 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
-import com.squareup.picasso.Picasso;
 import com.nhom08.doanlaptrinhandroid.DTO.Wp_user;
+import com.nhom08.doanlaptrinhandroid.MainActivity;
 import com.nhom08.doanlaptrinhandroid.Modulds.FunctionsStatic;
 import com.nhom08.doanlaptrinhandroid.R;
 
@@ -33,60 +35,111 @@ import java.util.Map;
 
 public class InfoOfUser extends Fragment {
 
-    public static Fragment newInstance(){
+    public static Fragment newInstance() {
         InfoOfUser infoOfUser = new InfoOfUser();
         return infoOfUser;
     }
 
+    EditText edtId, edtUsername, edtFullName, edtEmail, edtURL, edtPass;
+    Button btnLuu;
+
     @Nullable
     @Override
-    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View root = inflater.inflate(R.layout.fragmemt_info_of_user, container, false);
-        ArrayAdapter<String> adapter = new ArrayAdapter<>(root.getContext(), android.R.layout.simple_list_item_single_choice);
-        Wp_user userWasLogin = FunctionsStatic.newInstance().getUserWasLogin(root.getContext());
-        adapter.add(String.format("ID: %d", userWasLogin.getID()));
-        adapter.add(String.format("USER NAME: %s", userWasLogin.getUser_login()));
-        adapter.add(String.format("FULL NAME: %s", userWasLogin.getDisplay_name()));
-        adapter.add(String.format("EMAIL ADDRESS: %s", userWasLogin.getUser_email()));
-        adapter.add(String.format("USER URL: %s", userWasLogin.getUser_url() == null || userWasLogin.getUser_url().isEmpty() ? "Not Found" : userWasLogin.getUser_url()));
-        adapter.add(String.format("PASSWORD: %s", userWasLogin.getUser_pass()));
-        ListView lvInfo = root.findViewById(R.id.lvInfoOfUser);
-        lvInfo.setAdapter(adapter);
-        lvInfo.setChoiceMode(ListView.CHOICE_MODE_SINGLE);
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable final ViewGroup container, @Nullable Bundle savedInstanceState) {
+        Log.e("aaa", "1");
+        final View root = inflater.inflate(R.layout.fragmemt_info_of_user, container, false);
+        final Wp_user userWasLogin = FunctionsStatic.newInstance().getUserWasLogin(root.getContext());
 
-        lvInfo.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        edtId = root.findViewById(R.id.edtID);
+        edtUsername = root.findViewById(R.id.edtUsername);
+        edtFullName = root.findViewById(R.id.edtFullName);
+        edtEmail = root.findViewById(R.id.edtEmail);
+        edtURL = root.findViewById(R.id.edtUrl);
+        btnLuu = root.findViewById(R.id.btnSave);
+
+        edtId.setText(String.format("%d", userWasLogin.getID()));
+        edtUsername.setText(String.format("%s", userWasLogin.getUser_login()));
+        edtFullName.setText(String.format("%s", userWasLogin.getDisplay_name()));
+        edtEmail.setText(String.format("%s", userWasLogin.getUser_email()));
+        edtURL.setText(String.format("%s", userWasLogin.getUser_url() == null || userWasLogin.getUser_url().isEmpty() ? "Not Found" : userWasLogin.getUser_url()));
+
+        edtId.setOnLongClickListener(suKienLongClicked_TuChoiUpdate);
+        edtUsername.setOnLongClickListener(suKienLongClicked_TuChoiUpdate);
+        edtEmail.setOnLongClickListener(suKienLongClicked_TuChoiUpdate);
+
+        edtFullName.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
-            public void onItemClick(AdapterView<?> parent, final View view, int position, long id) {
-                if (position == 2){
-                    String strAPI = "http://192.168.56.1/android_app/url_update_test.php";
-                    RequestQueue requestQueue = Volley.newRequestQueue(view.getContext());
-                    StringRequest request = new StringRequest(Request.Method.POST, strAPI, new Response.Listener<String>() {
-                        @Override
-                        public void onResponse(String response) {
-                            Toast.makeText(view.getContext(), response, Toast.LENGTH_SHORT).show();
-                        }
-                    }, new Response.ErrorListener() {
-                        @Override
-                        public void onErrorResponse(VolleyError error) {
-                            Toast.makeText(view.getContext(), "Error Unknown!", Toast.LENGTH_SHORT).show();
-                        }
-                    }){
-                        @Override
-                        protected Map<String, String> getParams() throws AuthFailureError {
-                            Map<String, String> map = new HashMap<>();
-                            map.put("post_id", "49");
-                            map.put("user_id", "2");
-                            map.put("like", "5");
+            public boolean onLongClick(View v) {
+                edtFullName.setInputType(InputType.TYPE_TEXT_VARIATION_PERSON_NAME);
+                return false;
+            }
+        });
 
-                            return map;
-                        }
-                    };
+        edtURL.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View v) {
+                edtURL.setInputType(InputType.TYPE_TEXT_VARIATION_PERSON_NAME);
+                return false;
+            }
+        });
 
-                    requestQueue.add(request);
-                }
+        btnLuu.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(final View v) {
+                //region-------------------------------
+                if (userWasLogin == null)
+                    return;
+                final String fullname = edtFullName.getText().toString();
+                final String userurl = edtURL.getText().toString();
+
+                RequestQueue requestQueue = Volley.newRequestQueue(v.getContext());
+                StringRequest stringRequest = new StringRequest(Request.Method.POST, getString(R.string.url_update_user_byid),
+                        new Response.Listener<String>() {
+                            @Override
+                            public void onResponse(String response) {
+
+                                SharedPreferences sp = v.getContext().getSharedPreferences("myHufierLogin", Context.MODE_PRIVATE);
+                                SharedPreferences.Editor editor = sp.edit();
+                                editor.clear();
+                                editor.putString("uID", String.valueOf(userWasLogin.getID()));
+                                editor.putString("uEmail", userWasLogin.getUser_email());
+                                editor.putString("uName", userWasLogin.getUser_login());
+                                editor.putString("uFName", fullname);
+                                editor.putString("uPass", userWasLogin.getUser_pass());
+                                editor.putString("uUrl", userWasLogin.getUser_url());
+                                editor.apply();
+                                FunctionsStatic.hienThiThongBaoDialog(v.getContext(), "Thông báo", "Vui lòng restart lại để thấy thay đổi");
+                            }
+                        },
+                        new Response.ErrorListener() {
+                            @Override
+                            public void onErrorResponse(VolleyError error) {
+                                Toast.makeText(v.getContext(), "Loi Update User", Toast.LENGTH_SHORT).show();
+                            }
+                        }) {
+                    @Override
+                    protected Map<String, String> getParams() throws AuthFailureError {
+                        Map<String, String> map = new HashMap<>();
+                        map.put("user_id", userWasLogin.getID() + "");
+                        map.put("user_fullname", fullname);
+                        map.put("user_url", userurl);
+                        return map;
+                    }
+                };
+                requestQueue.add(stringRequest);
+                //end region --------------------------------
             }
         });
 
         return root;
     }
+
+
+    public View.OnLongClickListener suKienLongClicked_TuChoiUpdate = new View.OnLongClickListener() {
+        @Override
+        public boolean onLongClick(View v) {
+            FunctionsStatic.hienThiThongBaoDialog(v.getContext(), "Thông báo", "Thuộc tính này không thể sửa được!!");
+            return false;
+        }
+    };
 }

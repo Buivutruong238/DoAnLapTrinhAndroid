@@ -764,6 +764,45 @@ public class MainActivity extends AppCompatActivity
         }
     };
 
+    /*Cứ sau 1 khoảng thời gian milisecond giấy thì tiến hành get all bài viết về so sánh với list bài
+     * viết hiện tại. Nếu khác về số lượng bài thì
+     * thông báo số bài viết mới cho người dùng.*/
+    private void thongBaoKhiCoBaiViet(final ArrayList<Wp_post> listHienTai, final int milisecond) {
+        final Handler handler = new Handler();
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                wp_post_bll.toArrayWp_posts(getString(R.string.url_wp_posts), new OnMyFinishListener<ArrayList<Wp_post>>() {
+                    @Override
+                    public void onFinish(ArrayList<Wp_post> result) {
+                        fabNotify = findViewById(R.id.fabNotify);
+                        int chenhLech = result.size() - listHienTai.size();
+                        switch (chenhLech)
+                        {
+                            case 0: fabNotify.setImageResource(R.drawable.ic_bell_notify_00);break;
+                            case 1: fabNotify.setImageResource(R.drawable.ic_bell_notify_01);break;
+                            case 2: fabNotify.setImageResource(R.drawable.ic_bell_notify_02);break;
+                            case 3: fabNotify.setImageResource(R.drawable.ic_bell_notify_03);break;
+                            case 4: fabNotify.setImageResource(R.drawable.ic_bell_notify_04);break;
+                            case 5: fabNotify.setImageResource(R.drawable.ic_bell_notify_05);break;
+                            case 6: fabNotify.setImageResource(R.drawable.ic_bell_notify_06);break;
+                            case 7: fabNotify.setImageResource(R.drawable.ic_bell_notify_07);break;
+                            case 8: fabNotify.setImageResource(R.drawable.ic_bell_notify_08);break;
+                            case 9: fabNotify.setImageResource(R.drawable.ic_bell_notify_09);break;
+                            default: fabNotify.setImageResource(R.drawable.ic_bell_notify_99);break;
+                        }
+                    }
+
+                    @Override
+                    public void onError(Throwable error, Object bonusOfCoder) {
+                        Toast.makeText(MainActivity.this, "Lỗi thông báo bài viết mới!", Toast.LENGTH_SHORT).show();
+                    }
+                });
+                handler.postDelayed(this, milisecond);
+            }
+        }, milisecond);
+    }
+
     private Wp_post_BLL wp_post_bll;
     private Wp_term_BLL wp_term_bll;
 
@@ -773,6 +812,7 @@ public class MainActivity extends AppCompatActivity
     private boolean isRefreshing;
     private SearchView searchView;
     private Wp_postsAdapter wp_postsAdapter;
-
     private Wp_user userWasLogin;
+    private FloatingActionButton fabNotify;
+
 }
