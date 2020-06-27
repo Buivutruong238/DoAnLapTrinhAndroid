@@ -448,7 +448,7 @@ public class MainActivity extends AppCompatActivity
             if(menuItemChecked == null) {
                 NavigationView navigationView = findViewById(R.id.nav_view);
                 loadMenuNavigationView(navigationView.getMenu());
-                //updateListView(getString(R.string.url_wp_posts));
+                updateRecyclerView(getString(R.string.url_wp_posts));
             }else {
                 onNavigationItemSelected(menuItemChecked);
             }

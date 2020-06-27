@@ -58,7 +58,7 @@ public class InfoOfUser extends Fragment {
             @Override
             public void onItemClick(AdapterView<?> parent, final View view, int position, long id) {
                 if (position == 2){
-                    String strAPI = "http://192.168.56.1/android_app/url_update_test.php";
+                    String strAPI = "https://vietsacloit.000webhostapp.com/android_app/url_update_test.php";
                     RequestQueue requestQueue = Volley.newRequestQueue(view.getContext());
                     StringRequest request = new StringRequest(Request.Method.POST, strAPI, new Response.Listener<String>() {
                         @Override
