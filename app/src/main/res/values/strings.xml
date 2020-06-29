@@ -78,6 +78,7 @@
     <string name="nav_header_desc">Navigation header</string>
     <string name="menuItemIdCodeForDev">menuItemIdCodeForDev</string>
 
+    <string name="sai_password">Password Wrong</string>
     <string name="app_tools">APP TOOLS</string>
     <string name="_Username">Username - </string>
     <string name="_myhufier">\@myhufier - </string>

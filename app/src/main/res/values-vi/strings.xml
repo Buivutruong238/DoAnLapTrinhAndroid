@@ -194,4 +194,5 @@
     <string name="chu_da_tim_thay_d_bai_viet_tren_tong_d_bai_viet">"Đã tìm thấy %d bài viết trên tổng %d bài "</string>
     <string name="chu_nhap_lai_password_cu">Nhập lại mật khẩu cũ</string>
     <string name="chu_cancel">Thoát</string>
+    <string name="sai_password">Sai mật khẩu</string>
 </resources>
