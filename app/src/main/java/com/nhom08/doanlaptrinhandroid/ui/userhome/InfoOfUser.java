@@ -26,6 +26,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.nhom08.doanlaptrinhandroid.DTO.Wp_user;
+import com.nhom08.doanlaptrinhandroid.MainActivity;
 import com.nhom08.doanlaptrinhandroid.Modulds.FunctionsStatic;
 import com.nhom08.doanlaptrinhandroid.R;
 
@@ -41,7 +42,6 @@ public class InfoOfUser extends Fragment {
 
     EditText edtId, edtUsername, edtFullName, edtEmail, edtURL, edtPass;
     Button btnLuu;
-    TextView txtThayDoiMatKhau;
 
     @Nullable
     @Override
@@ -56,7 +56,6 @@ public class InfoOfUser extends Fragment {
         edtEmail = root.findViewById(R.id.edtEmail);
         edtURL = root.findViewById(R.id.edtUrl);
         btnLuu = root.findViewById(R.id.btnSave);
-        txtThayDoiMatKhau = root.findViewById(R.id.txtThayDoiMatKhau);
 
         edtId.setText(String.format("%d", userWasLogin.getID()));
         edtUsername.setText(String.format("%s", userWasLogin.getUser_login()));
@@ -132,18 +131,9 @@ public class InfoOfUser extends Fragment {
             }
         });
 
-        txtThayDoiMatKhau.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(v.getContext(), ChangePassword_ByInfoUser.class);
-                intent.putExtra("user_email_ByInfoUser", userWasLogin.getUser_email());
-                intent.putExtra("user_pass_old", userWasLogin.getUser_pass());
-                startActivity(intent);
-
-            }
-        });
         return root;
     }
+
 
     public View.OnLongClickListener suKienLongClicked_TuChoiUpdate = new View.OnLongClickListener() {
         @Override

@@ -146,7 +146,7 @@ public class Wp_postsAdapter extends BaseAdapter {
     }
 
     public void filter(String query){
-        wp_posts.removeAll(wp_posts);
+        wp_posts.clear();
         if (query.isEmpty())
             wp_posts.addAll(wp_posts_tmp);
         else {

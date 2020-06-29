@@ -34,7 +34,6 @@
                 android:layout_marginTop="10dp"
                 android:gravity="left|center"
                 android:text="@string/chu_che_do_ban_dem"
-                android:textColor="#000000"
                 android:textSize="20sp" />
 
             <Switch
@@ -66,7 +65,6 @@
                 android:layout_marginTop="10dp"
                 android:gravity="left|center"
                 android:text="@string/chu_so_luong_bai_viet_moi_trang"
-                android:textColor="#000000"
                 android:textSize="20sp" />
 
             <EditText
@@ -129,7 +127,6 @@
                 android:layout_marginRight="20dp"
                 android:gravity="left|center"
                 android:text="@string/copyRight"
-                android:textColor="#27417A"
                 android:textSize="16sp"
                 android:textStyle="bold|italic" />
 
@@ -141,8 +138,7 @@
                 android:layout_centerInParent="true"
                 android:layout_marginTop="20dp"
                 android:layout_marginBottom="20dp"
-                app:srcCompat="@drawable/ic_menu_hufi_exam"
-                tools:ignore="VectorDrawableCompat" />
+                app:srcCompat="@drawable/ic_school_black_24dp" />
 
         </RelativeLayout>
 

@@ -151,18 +151,6 @@
                 android:layout_gravity="center_horizontal"
                 android:text="Lưu" />
 
-            <TextView
-                android:id="@+id/txtThayDoiMatKhau"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="50dp"
-                android:layout_weight="1"
-                android:gravity="center_horizontal"
-                android:text="Thay đổi mật khẩu"
-                android:textColor="#4CAF50"
-                android:textSize="18sp"
-                android:textStyle="bold|italic" />
-
         </LinearLayout>
 
     </LinearLayout>

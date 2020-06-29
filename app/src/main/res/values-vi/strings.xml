@@ -23,13 +23,13 @@
     <string name="url_wp_user_by_id">https://vietsacloit.000webhostapp.com/android_app/json_wp_user_by_id.php?ID=%d</string>
     <string name="url_insert_user">https://vietsacloit.000webhostapp.com/android_app/url_insert_user.php</string>
     <string name="url_get_termID_from_wp_post">https://vietsacloit.000webhostapp.com/android_app/url_get_term_form_wp_post.php?id=</string>
-    <string name="url_image_chuyenmuc_hufiexam">http://192.168.56.1/wp-content/uploads/2020/05/banner_hufi_exam.jpg</string>
-    <string name="url_image_chuyenmuc_khoahoc">http://192.168.56.1/wp-content/uploads/2020/05/banner_khoaHoc.jpg</string>
-    <string name="url_image_chuyenmuc_0xdhth">http://192.168.56.1/wp-content/uploads/2020/05/0xDHTH.jpg</string>
-    <string name="url_image_notFound">http://192.168.56.1/wp-content/uploads/2020/05/image_not_found.png</string>
-    <string name="url_image_math_from_website">https://vietsaclo08it.000webhostapp.com/wp–content/uploads/2019/02/toan_A2–783x570.png</string>
+    <string name="url_image_chuyenmuc_hufiexam">https://vietsacloit.000webhostapp.com/wp-content/uploads/2020/05/banner_hufi_exam.jpg</string>
+    <string name="url_image_chuyenmuc_khoahoc">https://vietsacloit.000webhostapp.com/wp-content/uploads/2020/05/banner_khoaHoc.jpg</string>
+    <string name="url_image_chuyenmuc_0xdhth">https://vietsacloit.000webhostapp.com/wp-content/uploads/2020/05/0xDHTH.jpg</string>
+    <string name="url_image_notFound">https://vietsacloit.000webhostapp.com/wp-content/uploads/2020/05/image_not_found.png</string>
+    <string name="url_image_math_from_website">https://vietsacloit.000webhostapp.com/wp–content/uploads/2019/02/toan_A2–783x570.png</string>
     <string name="url_insert_comment">https://vietsacloit.000webhostapp.com/android_app/url_insert_comment.php</string>
-    <string name="url_image_user_male_50">http://192.168.56.1/wp-content/uploads/2020/05/icon_user_male_50.png</string>
+    <string name="url_image_user_male_50">https://vietsacloit.000webhostapp.com/wp-content/uploads/2020/05/icon_user_male_50.png</string>
     <string name="url_css_comment">https://vietsacloit.000webhostapp.com/android_app/css/comment_layout.css</string>
     <string name="url_update_user_password">https://vietsacloit.000webhostapp.com/android_app/url_update_user_password.php?user_email=%s&amp;user_pass=%s</string>
     <string name="not_category">CHƯA ĐƯỢC PHÂN LOẠI</string>
@@ -97,7 +97,7 @@
     <string name="chu_nhap_link_download">Nhập Link Download</string>
     <string name="chu_url_khong_dung_dinh_dang_hoac_khong_tim_thay_tren_internet">Url không đúng định dạng hoặc Url không tìm thấy trên internet</string>
     <string name="title_activity_user_home">Nhà User</string>
-    <string name="url_css_button_download">http://192.168.56.1/custom_html/button_download/css/style.css</string>
+    <string name="url_css_button_download">https://vietsacloit.000webhostapp.com/custom_html/button_download/css/style.css</string>
     <string name="chu_them_mot_doan_van">Thêm Một Đoạn Văn</string>
     <string name="chu_them_noi_dung_hoac_nang_cao">Thêm Nội Dung / Nâng Cao</string>
     <string name="tab_text_3">Đã Bình Luận</string>
@@ -184,13 +184,14 @@
     <string name="url_insert_user_like_post">https://vietsacloit.000webhostapp.com/android_app/url_insert_user_like_post.php</string>
     <string name="url_sum_like_post">https://vietsacloit.000webhostapp.com/android_app/url_sum_like_of_post.php?post_id=%d</string>
     <string name="chu_developer">DEVELOPER</string>
-    <string name="url_image_logo_module_for_dev">http://192.168.56.1/wp-content/uploads/2020/05/logo_module_for_dev.jpg</string>
+    <string name="url_image_logo_module_for_dev">https://vietsacloit.000webhostapp.com/wp-content/uploads/2020/05/logo_module_for_dev.jpg</string>
     <string name="chu_doc_them">Đọc Thêm!</string>
     <string name="chu_thich">Thích: </string>
-    <string name="url_host">http://192.168.56.1</string>
+    <string name="url_host">https://vietsacloit.000webhostapp.com</string>
     <string name="url_update_user_byid">https://vietsacloit.000webhostapp.com/android_app/url_update_user_byid.php</string>
     <string name="url_update_pass_byemail">https://vietsacloit.000webhostapp.com/android_app/url_update_user_password.php</string>
+    <string name="chu_thiet_bi_khong_ho_tro_am_thanh">Thiết bị của bạn không hổ trợ tìm kiếm bằng âm thanh!</string>
+    <string name="chu_da_tim_thay_d_bai_viet_tren_tong_d_bai_viet">"Đã tìm thấy %d bài viết trên tổng %d bài "</string>
     <string name="chu_nhap_lai_password_cu">Nhập lại mật khẩu cũ</string>
-    <string name="chu_cancel">Huỷ bỏ</string>
-    <string name="url_get_user_byemail">https://vietsacloit.000webhostapp.com/android_app/json_wp_user_by_email.php</string>
+    <string name="chu_cancel">Thoát</string>
 </resources>
