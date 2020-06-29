@@ -1,19 +1,16 @@
 package com.nhom08.doanlaptrinhandroid.ui.userhome;
 
-import androidx.appcompat.app.AlertDialog;
-import androidx.appcompat.app.AppCompatActivity;
-
-import android.app.Dialog;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
+
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
@@ -23,15 +20,11 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.nhom08.doanlaptrinhandroid.BLL.Wp_user_BLL;
-import com.nhom08.doanlaptrinhandroid.ChangePassword;
 import com.nhom08.doanlaptrinhandroid.DTO.Wp_user;
-import com.nhom08.doanlaptrinhandroid.Interface_enum.OnMyFinishListener;
-import com.nhom08.doanlaptrinhandroid.Login;
 import com.nhom08.doanlaptrinhandroid.MainActivity;
 import com.nhom08.doanlaptrinhandroid.Modulds.FunctionsStatic;
 import com.nhom08.doanlaptrinhandroid.R;
 
-import java.lang.reflect.Method;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -68,6 +61,12 @@ public class ChangePassword_ByInfoUser extends AppCompatActivity {
                     ChangePassword_ByInfoUser.this.finish();
 
                 //check old password
+                if (!checkOldPass(edtOldPass.getText().toString(), v.getContext()))
+                {
+                    edtOldPass.setError(getString(R.string.sai_password));
+                    edtOldPass.requestFocus();
+                    return;
+                }
 
 
                 final String newPass = edtNewPass.getText().toString(),
@@ -134,28 +133,12 @@ public class ChangePassword_ByInfoUser extends AppCompatActivity {
         processDialog = FunctionsStatic.createProcessDialog(this);
     }
 
-    private void checkOldPass() {
-//        RequestQueue requestQueue = Volley.newRequestQueue(ChangePassword_ByInfoUser.this);
-//        StringRequest stringRequest = new StringRequest(Request.Method.GET, getString(R.string.url_get_user_byemail),
-//                new Response.Listener<String>() {
-//                    @Override
-//                    public void onResponse(String response) {
-//
-//                    }
-//                },
-//                new Response.ErrorListener() {
-//                    @Override
-//                    public void onErrorResponse(VolleyError error) {
-//
-//                    }
-//                }) {
-//            @Override
-//            protected Map<String, String> getParams() throws AuthFailureError {
-//                Map<String, String> map = new HashMap<>();
-//                //map.get("user_emai", user_email + "");
-//                return map;
-//            }
-//        };
-//        requestQueue.add(stringRequest);
+    private boolean checkOldPass(String pass_cu_nhap, Context context) {
+        final Wp_user userWasLogin = FunctionsStatic.newInstance().getUserWasLogin(context);
+        String passmahoa = FunctionsStatic.hashMD5(pass_cu_nhap);
+        if (passmahoa.equals(userWasLogin.getUser_pass())) {
+            return true;
+        }
+        return false;
     }
 }

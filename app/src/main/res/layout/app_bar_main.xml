@@ -34,11 +34,11 @@
         android:id="@+id/fabNotify"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="bottom|left"
+        android:layout_gravity="bottom|start"
         android:layout_margin="16dp"
         app:backgroundTint="@null"
         app:maxImageSize="32dp"
-        app:srcCompat="@drawable/ic_bell_notify_00" />
+        app:srcCompat="@drawable/ic_notifications_none_black_24dp" />
 
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

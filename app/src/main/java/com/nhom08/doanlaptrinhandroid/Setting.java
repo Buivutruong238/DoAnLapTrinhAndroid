@@ -1,6 +1,7 @@
 package com.nhom08.doanlaptrinhandroid;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatDelegate;
 
 import android.content.DialogInterface;
 import android.content.SharedPreferences;
@@ -31,8 +32,12 @@ public class Setting extends AppCompatActivity {
         SharedPreferences sp = getSharedPreferences("myHufierSetting", MODE_PRIVATE);
         langOld = sp.getString("myHufierLang", "vi");
         postNumOld = sp.getInt("myHufierPostNum", 50);
+        isDarkModeOld = sp.getBoolean("isDarkMode", false);
+
 
         Switch aSwitchNightMode = findViewById(R.id.switchNightModeSetting);
+        aSwitchNightMode.setChecked(isDarkModeOld);
+
         Button btnSave = findViewById(R.id.btnSaveSetting),
         btnCancel = findViewById(R.id.btnCancelSetting);
 
@@ -55,7 +60,7 @@ public class Setting extends AppCompatActivity {
     private CompoundButton.OnCheckedChangeListener aSwitchNightModeCheckedChange = new CompoundButton.OnCheckedChangeListener() {
         @Override
         public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-            Toast.makeText(Setting.this, R.string.chu_tinh_nang_chua_co, Toast.LENGTH_SHORT).show();
+            //isDarkModeOld = isChecked;
         }
     };
 
@@ -83,12 +88,17 @@ public class Setting extends AppCompatActivity {
             //condition 2
             RadioButton radioButtonLangVi = findViewById(R.id.radioButtonLangViSetting);
 
-            if ((num != postNumOld) || (langOld.equals("vi") && !radioButtonLangVi.isChecked()) || (langOld.isEmpty() && radioButtonLangVi.isChecked())){
+            //condition 3
+            Switch sw = findViewById(R.id.switchNightModeSetting);
+            boolean isDark = sw.isChecked();
+
+            if ((num != postNumOld) || (langOld.equals("vi") && !radioButtonLangVi.isChecked()) || (langOld.isEmpty() && radioButtonLangVi.isChecked()) || isDarkModeOld != isDark){
                 //save sharedPreferences
                 SharedPreferences sp = getSharedPreferences("myHufierSetting", MODE_PRIVATE);
                 SharedPreferences.Editor editor = sp.edit();
                 editor.putString("myHufierLang",radioButtonLangVi.isChecked() ? "vi" : "");
                 editor.putInt("myHufierPostNum", num);
+                editor.putBoolean("isDarkMode", !isDarkModeOld);
                 editor.apply();
 
                 //reload Request
@@ -113,4 +123,5 @@ public class Setting extends AppCompatActivity {
 
     private String langOld;
     private int postNumOld;
+    private boolean isDarkModeOld;
 }

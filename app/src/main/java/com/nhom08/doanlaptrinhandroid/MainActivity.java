@@ -1,30 +1,27 @@
 package com.nhom08.doanlaptrinhandroid;
 
 import android.annotation.SuppressLint;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.Configuration;
+import android.graphics.BitmapFactory;
 import android.graphics.Color;
+import android.media.MediaPlayer;
 import android.os.Build;
 import android.os.Bundle;
-
-import com.android.volley.AuthFailureError;
-import com.android.volley.Request;
-import com.android.volley.RequestQueue;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
-import com.android.volley.toolbox.StringRequest;
-import com.android.volley.toolbox.Volley;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import android.os.Handler;
+import android.speech.RecognizerIntent;
 import android.view.SubMenu;
 import android.view.View;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatDelegate;
 import androidx.core.view.GravityCompat;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import android.view.MenuItem;
@@ -40,8 +37,6 @@ import com.nhom08.doanlaptrinhandroid.Interface_enum.OnMyFinishListener;
 import com.nhom08.doanlaptrinhandroid.Interface_enum.OnMyUpdateProgress;
 import com.nhom08.doanlaptrinhandroid.Modulds.FunctionsStatic;
 import com.nhom08.doanlaptrinhandroid.adapter.Wp_postRecyclerViewAdapter;
-import com.nhom08.doanlaptrinhandroid.adapter.Wp_postsAdapter;
-import com.nhom08.doanlaptrinhandroid.ui.userhome.ChangePassword_ByInfoUser;
 
 import androidx.drawerlayout.widget.DrawerLayout;
 
@@ -63,10 +58,10 @@ import android.widget.SeekBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.io.IOException;
 import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.List;
 import java.util.Locale;
-import java.util.Map;
 import java.util.Objects;
 
 /*
@@ -80,20 +75,22 @@ import java.util.Objects;
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
+    public static final int REQUEST_SEARCH_BY_VOICE = 1;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-
-        //region khởi tạo ngôn ngữ mặt định được lấy từ SharedPreferences
+        //region # khởi tạo ngôn ngữ mặt định, theme được lấy từ SharedPreferences
         loadLocale();
+        checkTheme();
         //endregion
+
+        super.onCreate(savedInstanceState);
 
         //region khởi tạo view và khỏi tạo menu
         setContentView(R.layout.activity_main);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        FloatingActionButton fab = findViewById(R.id.fab);
-        fab.setOnClickListener(fabClicked);
+
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         NavigationView navigationView = findViewById(R.id.nav_view);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -106,7 +103,6 @@ public class MainActivity extends AppCompatActivity
         //region chuẩn bị đầy đủ các dữ liệu và load dữ liệu
         init();
         //endregion
-
     }
 
     /*
@@ -121,6 +117,32 @@ public class MainActivity extends AppCompatActivity
         swipeRefreshLayout.setColorSchemeColors(Color.BLUE, Color.RED, Color.GREEN);
         swipeRefreshLayout.setOnRefreshListener(swipeRefreshLayoutOnRefresh);
         isRefreshing = false;
+
+        mediaPlayerNewPostRing = MediaPlayer.create(MainActivity.this, R.raw.new_posts_ring);
+        fabNotify = findViewById(R.id.fabNotify);
+        fabUser = findViewById(R.id.fab);
+        fabNotify.setOnClickListener(fabNotifyClicked);
+        fabUser.setOnClickListener(fabClicked);
+
+        doChenhLenh = 0;
+        coCapNhapTuChuong = true;
+        postsHienTaiChuaCapNhat = new ArrayList<>();
+
+        recyLoadBaiViet = findViewById(R.id.recycler_show_wp_post);
+        recyLoadBaiViet.addOnScrollListener(new RecyclerView.OnScrollListener() {
+            @Override
+            public void onScrolled(@NonNull RecyclerView recyclerView, int dx, int dy) {
+                super.onScrolled(recyclerView, dx, dy);
+                if (dy > 0){
+                    fabUser.hide();
+                    fabNotify.hide();
+                }else{
+                    fabUser.show();
+                    if (doChenhLenh != 0)
+                        fabNotify.show();
+                }
+            }
+        });
 
         wp_post_bll = new Wp_post_BLL();
         wp_term_bll = new Wp_term_BLL();
@@ -169,7 +191,7 @@ public class MainActivity extends AppCompatActivity
 
                         case 3: {
                             MenuItem menuItem = subMenu1.add(1, id, 0, name);
-                            menuItem.setIcon(R.drawable.ic_menu_hufi_exam);
+                            menuItem.setIcon(R.drawable.ic_school_black_24dp);
                             break;
                         }
                         case 4: {
@@ -281,6 +303,8 @@ public class MainActivity extends AppCompatActivity
             startActivity(intent);
         }else if (id == 1){
             showLanguagesDialog();
+        }else if (id == R.id.mnuSearchVoice){
+            setupSearchByVoice();
         }
 
         return super.onOptionsItemSelected(item);
@@ -331,8 +355,10 @@ public class MainActivity extends AppCompatActivity
         item.setChecked(true);
         menuItemChecked = item;
 
-        if (id == 0)
+        if (id == 0) {
+            coCapNhapTuChuong = true;
             updateRecyclerView(getString(R.string.url_wp_posts));
+        }
         else
             updateRecyclerView(getString(R.string.url_wp_posts_term) + id);
 
@@ -372,15 +398,22 @@ public class MainActivity extends AppCompatActivity
         Params: danh sách bài viết đã có dữ liệu
      */
     private void updateRecyclerView(final ArrayList<Wp_post> list){
-        Wp_postRecyclerViewAdapter adapter = new Wp_postRecyclerViewAdapter(list);
-        RecyclerView recyclerView = findViewById(R.id.recycler_show_wp_post);
-        recyclerView.setAdapter(adapter);
-        recyclerView.setHasFixedSize(true);
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        if (postsHienTaiChuaCapNhat.size() == 0 || coCapNhapTuChuong) {
+            postsHienTaiChuaCapNhat.clear();
+            postsHienTaiChuaCapNhat.addAll(list);
+            fabNotify.hide();
+            doChenhLenh = 0;
+            coCapNhapTuChuong = false;
+        }
+
+        wp_postAdapter = new Wp_postRecyclerViewAdapter(list);
+        recyLoadBaiViet.setAdapter(wp_postAdapter);
+        recyLoadBaiViet.setHasFixedSize(true);
+        recyLoadBaiViet.setLayoutManager(new LinearLayoutManager(this));
 
         DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(this, DividerItemDecoration.VERTICAL);
         dividerItemDecoration.setDrawable(Objects.requireNonNull(getDrawable(R.drawable.divider)));
-        recyclerView.addItemDecoration(dividerItemDecoration);
+        recyLoadBaiViet.addItemDecoration(dividerItemDecoration);
     }
 
     /*
@@ -461,7 +494,7 @@ public class MainActivity extends AppCompatActivity
             if(menuItemChecked == null) {
                 NavigationView navigationView = findViewById(R.id.nav_view);
                 loadMenuNavigationView(navigationView.getMenu());
-                //updateListView(getString(R.string.url_wp_posts));
+                updateRecyclerView(getString(R.string.url_wp_posts));
             }else {
                 onNavigationItemSelected(menuItemChecked);
             }
@@ -508,6 +541,7 @@ public class MainActivity extends AppCompatActivity
         SharedPreferences.Editor editor = sp.edit();
         editor.putString("status", KindStatusRunning.FINISH_LOADING_DATA.toString());
         editor.apply();
+        setUpThongBaoKhiCoBaiViet(3000);
     }
 
     /*
@@ -522,7 +556,7 @@ public class MainActivity extends AppCompatActivity
 
         @Override
         public boolean onQueryTextChange(String newText) {
-            wp_postsAdapter.filter(newText);
+            wp_postAdapter.filter(newText);
             return true;
         }
     };
@@ -657,7 +691,7 @@ public class MainActivity extends AppCompatActivity
                         wp_post_bll.findItems(result, keySearch, DO_CHINH_XAC[0], new OnMyFinishListener<ArrayList<Wp_post>>() {
                             @Override
                             public void onFinish(ArrayList<Wp_post> result) {
-                                //updateListView(result);
+                                updateRecyclerView(result);
                                 isBusy[0] = false;
                             }
 
@@ -743,6 +777,14 @@ public class MainActivity extends AppCompatActivity
     /*
         Dành cho sự kiện fab
      */
+    private View.OnClickListener fabNotifyClicked = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            coCapNhapTuChuong = true;
+            updateRecyclerView(getString(R.string.url_wp_posts));
+        }
+    };
+
     private View.OnClickListener fabClicked = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
@@ -777,33 +819,45 @@ public class MainActivity extends AppCompatActivity
         }
     };
 
+
+    //region # tu dong cap nhat bai viet
     /*Cứ sau 1 khoảng thời gian milisecond giấy thì tiến hành get all bài viết về so sánh với list bài
      * viết hiện tại. Nếu khác về số lượng bài thì
      * thông báo số bài viết mới cho người dùng.*/
-    private void thongBaoKhiCoBaiViet(final ArrayList<Wp_post> listHienTai, final int milisecond) {
+    private void setUpThongBaoKhiCoBaiViet(final int milisecond) {
         final Handler handler = new Handler();
         handler.postDelayed(new Runnable() {
             @Override
             public void run() {
+                if (postsHienTaiChuaCapNhat == null)
+                    return;
+
                 wp_post_bll.toArrayWp_posts(getString(R.string.url_wp_posts), new OnMyFinishListener<ArrayList<Wp_post>>() {
                     @Override
                     public void onFinish(ArrayList<Wp_post> result) {
-                        fabNotify = findViewById(R.id.fabNotify);
-                        int chenhLech = result.size() - listHienTai.size();
-                        switch (chenhLech)
-                        {
-                            case 0: fabNotify.setImageResource(R.drawable.ic_bell_notify_00);break;
-                            case 1: fabNotify.setImageResource(R.drawable.ic_bell_notify_01);break;
-                            case 2: fabNotify.setImageResource(R.drawable.ic_bell_notify_02);break;
-                            case 3: fabNotify.setImageResource(R.drawable.ic_bell_notify_03);break;
-                            case 4: fabNotify.setImageResource(R.drawable.ic_bell_notify_04);break;
-                            case 5: fabNotify.setImageResource(R.drawable.ic_bell_notify_05);break;
-                            case 6: fabNotify.setImageResource(R.drawable.ic_bell_notify_06);break;
-                            case 7: fabNotify.setImageResource(R.drawable.ic_bell_notify_07);break;
-                            case 8: fabNotify.setImageResource(R.drawable.ic_bell_notify_08);break;
-                            case 9: fabNotify.setImageResource(R.drawable.ic_bell_notify_09);break;
-                            default: fabNotify.setImageResource(R.drawable.ic_bell_notify_99);break;
-                        }
+                        final int chenhLech = result.size() - postsHienTaiChuaCapNhat.size();
+                        runOnUiThread(new Runnable() {
+                            @SuppressLint("DefaultLocale")
+                            @Override
+                            public void run() {
+                                try {
+                                    if (doChenhLenh < chenhLech){
+                                        fabNotify.hide();
+                                        if (doChenhLenh <= 9)
+                                            fabNotify.setImageBitmap(BitmapFactory.decodeStream(getAssets().open(String.format("icon/bell/ic_bell_notify_0%d.png", chenhLech))));
+                                        else
+                                            fabNotify.setImageBitmap(BitmapFactory.decodeStream(getAssets().open("icon/bell/ic_bell_notify_99.png")));
+
+                                        if (!mediaPlayerNewPostRing.isPlaying())
+                                            mediaPlayerNewPostRing.start();
+                                        fabNotify.show();
+                                        doChenhLenh = chenhLech;
+                                    }
+                                }catch (IOException ioex){
+                                    Toast.makeText(MainActivity.this, ioex.getMessage(), Toast.LENGTH_SHORT).show();
+                                }
+                            }
+                        });
                     }
 
                     @Override
@@ -815,6 +869,84 @@ public class MainActivity extends AppCompatActivity
             }
         }, milisecond);
     }
+    //endregion
+
+    //region # search by voice
+    /*
+        Setup search by voice
+     */
+    private void setupSearchByVoice(){
+        try{
+            Intent intent = new Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH);
+            intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE, "vi|en-US");
+            startActivityForResult(intent, REQUEST_SEARCH_BY_VOICE);
+        }catch (Exception ex){
+            FunctionsStatic.hienThiThongBaoDialog(this, getString(R.string.chu_thong_bao), getString(R.string.chu_thiet_bi_khong_ho_tro_am_thanh));
+        }
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == REQUEST_SEARCH_BY_VOICE
+        && resultCode == RESULT_OK
+        && data != null){
+            final ArrayList<String> strings = data.getStringArrayListExtra(RecognizerIntent.EXTRA_RESULTS);
+            assert strings != null;
+
+            //do in background find by voice
+            FunctionsStatic.showDialog(processDialog);
+            final String keySearch = strings.get(0);
+            wp_post_bll.toArrayWp_posts(getString(R.string.url_wp_posts), new OnMyFinishListener<ArrayList<Wp_post>>() {
+                @Override
+                public void onFinish(final ArrayList<Wp_post> posts) {
+                    wp_post_bll.findItems(posts, keySearch, 100, new OnMyFinishListener<ArrayList<Wp_post>>() {
+                        @Override
+                        public void onFinish(ArrayList<Wp_post> result) {
+                            FunctionsStatic.cancelDialog(processDialog);
+                            FunctionsStatic.hienThiThongBaoDialog(MainActivity.this, getString(R.string.chu_thong_bao), String.format(getString(R.string.chu_da_tim_thay_d_bai_viet_tren_tong_d_bai_viet), result.size(), posts.size()));
+                            updateRecyclerView(result);
+                        }
+
+                        @Override
+                        public void onError(Throwable error, Object bonusOfCoder) {
+                            FunctionsStatic.cancelDialog(processDialog);
+                            FunctionsStatic.hienThiThongBaoDialog(MainActivity.this, getString(R.string.chu_thong_bao), getString(R.string.chu_loi_ket_noi_toi_internet));
+                        }
+                    }, new OnMyUpdateProgress<Integer, Integer>() {
+                        @Override
+                        public void onUpdateProgress(Integer percent) {
+
+                        }
+
+                        @Override
+                        public void onUpdateValue(Integer integer) {
+
+                        }
+                    });
+                }
+
+                @Override
+                public void onError(Throwable error, Object bonusOfCoder) {
+
+                }
+            });
+        }
+    }
+
+    //endregion
+
+    /*
+        User setting dark mode?
+     */
+    private void checkTheme(){
+        SharedPreferences sharedPreferences = getSharedPreferences("myHufierSetting", MODE_PRIVATE);
+        boolean isDarkMode = sharedPreferences.getBoolean("isDarkMode", false);
+        if (isDarkMode)
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
+        else
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+    }
 
     private Wp_post_BLL wp_post_bll;
     private Wp_term_BLL wp_term_bll;
@@ -824,8 +956,13 @@ public class MainActivity extends AppCompatActivity
     private androidx.swiperefreshlayout.widget.SwipeRefreshLayout swipeRefreshLayout;
     private boolean isRefreshing;
     private SearchView searchView;
-    private Wp_postsAdapter wp_postsAdapter;
+    private Wp_postRecyclerViewAdapter wp_postAdapter;
     private Wp_user userWasLogin;
-    private FloatingActionButton fabNotify;
+    private FloatingActionButton fabNotify, fabUser;
+    private RecyclerView recyLoadBaiViet;//set
 
+    private MediaPlayer mediaPlayerNewPostRing;
+    private int doChenhLenh;
+    private boolean coCapNhapTuChuong;//khi bấm chuông cờ = true. lúc này cập nhập lại postHienTaiChuaCapNhat
+    private List<Wp_post> postsHienTaiChuaCapNhat;//danh sách thể hiện các bài viết chưa cập nhật. nếu có bài viết mới sẽ lấy danh sách này để đối chiếu.
 }

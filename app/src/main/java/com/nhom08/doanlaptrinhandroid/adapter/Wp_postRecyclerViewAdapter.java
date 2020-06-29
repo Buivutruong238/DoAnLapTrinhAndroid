@@ -34,13 +34,15 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Wp_postRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
-    private List<Wp_post> wp_posts;
+    private List<Wp_post> wp_posts, wp_posts_tmp;
     private boolean isBusy;
     private Wp_user userWasLogin;
 
     public Wp_postRecyclerViewAdapter(List<Wp_post> wp_posts){
         this.wp_posts = wp_posts;
         isBusy = false;
+        wp_posts_tmp =  new ArrayList<>();
+        wp_posts_tmp.addAll(wp_posts);
     }
 
     public static class VH extends RecyclerView.ViewHolder{
@@ -439,5 +441,30 @@ public class Wp_postRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerVie
     @Override
     public int getItemCount() {
         return wp_posts.size();
+    }
+
+    /*
+        Loc bài viết theo một đoạn text được truyền vào.
+     */
+    public void filter(String query){
+        wp_posts.clear();
+        if (query.isEmpty())
+            wp_posts.addAll(wp_posts_tmp);
+        else {
+            String target = "";
+            query = FunctionsStatic.VNCharacterToEnglishCharacter(query);
+            for (final Wp_post post : wp_posts_tmp) {
+                //merge title and content of post => change it into English character.
+
+                String stringBuilder = post.getPost_title() +
+                        post.getPost_content();
+                target = FunctionsStatic.VNCharacterToEnglishCharacter(stringBuilder);
+
+                if (target.toLowerCase().contains(query.toLowerCase()))
+                    wp_posts.add(post);
+            }
+        }
+
+        notifyDataSetChanged();
     }
 }
