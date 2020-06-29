@@ -1,6 +1,7 @@
 package com.nhom08.doanlaptrinhandroid;
 
 import android.annotation.SuppressLint;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -8,6 +9,14 @@ import android.content.res.Configuration;
 import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
+
+import com.android.volley.AuthFailureError;
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import android.os.Handler;
@@ -32,6 +41,7 @@ import com.nhom08.doanlaptrinhandroid.Interface_enum.OnMyUpdateProgress;
 import com.nhom08.doanlaptrinhandroid.Modulds.FunctionsStatic;
 import com.nhom08.doanlaptrinhandroid.adapter.Wp_postRecyclerViewAdapter;
 import com.nhom08.doanlaptrinhandroid.adapter.Wp_postsAdapter;
+import com.nhom08.doanlaptrinhandroid.ui.userhome.ChangePassword_ByInfoUser;
 
 import androidx.drawerlayout.widget.DrawerLayout;
 
@@ -54,7 +64,9 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Locale;
+import java.util.Map;
 import java.util.Objects;
 
 /*
@@ -94,6 +106,7 @@ public class MainActivity extends AppCompatActivity
         //region chuẩn bị đầy đủ các dữ liệu và load dữ liệu
         init();
         //endregion
+
     }
 
     /*

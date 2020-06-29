@@ -190,4 +190,7 @@
     <string name="url_host">http://192.168.56.1</string>
     <string name="url_update_user_byid">https://vietsacloit.000webhostapp.com/android_app/url_update_user_byid.php</string>
     <string name="url_update_pass_byemail">https://vietsacloit.000webhostapp.com/android_app/url_update_user_password.php</string>
+    <string name="chu_nhap_lai_password_cu">Nhập lại mật khẩu cũ</string>
+    <string name="chu_cancel">Huỷ bỏ</string>
+    <string name="url_get_user_byemail">https://vietsacloit.000webhostapp.com/android_app/json_wp_user_by_email.php</string>
 </resources>
