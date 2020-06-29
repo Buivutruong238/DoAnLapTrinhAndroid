@@ -959,7 +959,7 @@ public class MainActivity extends AppCompatActivity
     private Wp_postRecyclerViewAdapter wp_postAdapter;
     private Wp_user userWasLogin;
     private FloatingActionButton fabNotify, fabUser;
-    private RecyclerView recyLoadBaiViet;
+    private RecyclerView recyLoadBaiViet;//set
 
     private MediaPlayer mediaPlayerNewPostRing;
     private int doChenhLenh;
