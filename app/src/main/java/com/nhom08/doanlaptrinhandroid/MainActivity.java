@@ -543,7 +543,7 @@ public class MainActivity extends AppCompatActivity
         SharedPreferences.Editor editor = sp.edit();
         editor.putString("status", KindStatusRunning.FINISH_LOADING_DATA.toString());
         editor.apply();
-        setUpThongBaoKhiCoBaiViet(7000);
+        //setUpThongBaoKhiCoBaiViet(20000);
     }
 
     /*
