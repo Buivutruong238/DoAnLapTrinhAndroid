@@ -43,6 +43,7 @@
     <string name="url_update_like_post">https://vietsacloit.000webhostapp.com/android_app/url_update_like_post.php</string>
     <string name="url_insert_user_like_post">https://vietsacloit.000webhostapp.com/android_app/url_insert_user_like_post.php</string>
     <string name="url_sum_like_post">https://vietsacloit.000webhostapp.com/android_app/url_sum_like_of_post.php?post_id=%d</string>
+    <string name="url_update_comment">https://vietsacloit.000webhostapp.com/android_app/url_update_comment.php</string>
 
     <string name="url_image_math_from_website">https://vietsacloit.000webhostapp.com/wp–content/uploads/2019/02/toan_A2–783x570.png</string>
     <string name="url_insert_comment">https://vietsacloit.000webhostapp.com/android_app/url_insert_comment.php</string>

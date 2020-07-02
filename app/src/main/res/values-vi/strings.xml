@@ -195,4 +195,5 @@
     <string name="chu_nhap_lai_password_cu">Nhập lại mật khẩu cũ</string>
     <string name="chu_cancel">Thoát</string>
     <string name="sai_password">Sai mật khẩu</string>
+    <string name="url_update_comment">https://vietsacloit.000webhostapp.com/android_app/url_update_comment.php</string>
 </resources>
