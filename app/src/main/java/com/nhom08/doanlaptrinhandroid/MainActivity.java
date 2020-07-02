@@ -79,6 +79,8 @@ public class MainActivity extends AppCompatActivity
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        setUpThongBaoKhiCoBaiViet(100);
+
         //region # khởi tạo ngôn ngữ mặt định, theme được lấy từ SharedPreferences
         loadLocale();
         checkTheme();
@@ -541,7 +543,7 @@ public class MainActivity extends AppCompatActivity
         SharedPreferences.Editor editor = sp.edit();
         editor.putString("status", KindStatusRunning.FINISH_LOADING_DATA.toString());
         editor.apply();
-        setUpThongBaoKhiCoBaiViet(3000);
+        setUpThongBaoKhiCoBaiViet(7000);
     }
 
     /*
