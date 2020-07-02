@@ -8,6 +8,7 @@ import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
@@ -15,6 +16,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.nhom08.doanlaptrinhandroid.BLL.UserLikePostBLL;
@@ -51,6 +53,7 @@ public class Wp_postRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerVie
         ImageView btnTangLike, btnGiamLike;
         ProgressBar progressBar;
         Button btnXemThem;
+        ConstraintLayout container;
 
         VH(@NonNull View itemView) {
             super(itemView);
@@ -66,6 +69,7 @@ public class Wp_postRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerVie
             progressBar = itemView.findViewById(R.id.progressBarItemRecy);
             tvSoLuongComment = itemView.findViewById(R.id.tvSoLuongCommentRecy);
             btnXemThem = itemView.findViewById(R.id.btnDocThemRecy);
+            container = itemView.findViewById(R.id.container_item_recycerview);
         }
     }
 
@@ -106,6 +110,9 @@ public class Wp_postRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerVie
 
         vh.btnXemThem.setTag(post);
         vh.btnXemThem.setOnClickListener(btnXemThemClicked);
+
+        //load Animation
+        loadAnimation(context, vh.imgHinh, vh.container);
     }
 
     //region event
@@ -321,6 +328,11 @@ public class Wp_postRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerVie
     //endregion
 
     //region Support Method
+    private void loadAnimation(Context context, View v1, View v2){
+        v1.setAnimation(AnimationUtils.loadAnimation(context, R.anim.fade_anim));
+        v2.setAnimation(AnimationUtils.loadAnimation(context, R.anim.scale_anim));
+    }
+
     private void loadCommentCount(final Context context, final TextView tvCommentCount, Wp_post post){
         String strAPI1 = String.format(context.getString(R.string.url_count_comment_of_post), post.getID());
         new Wp_comment_BLL().countCommentOfPost(strAPI1, new OnMyFinishListener<Integer>() {
@@ -379,6 +391,7 @@ public class Wp_postRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerVie
         }, "h1","h2","h3","h4","h5","h6","p");
     }
 
+    @SuppressLint("SetTextI18n")
     private void loadAuthor(Context context, final TextView tvAuthor, Wp_post wp_post){
         final String author = "anonymous",
                 strAPI = String.format(context.getString(R.string.url_wp_user_by_id), wp_post.getPost_author());
