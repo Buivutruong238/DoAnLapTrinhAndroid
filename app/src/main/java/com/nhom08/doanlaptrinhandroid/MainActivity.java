@@ -79,8 +79,6 @@ public class MainActivity extends AppCompatActivity
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        setUpThongBaoKhiCoBaiViet(100);
-
         //region # khởi tạo ngôn ngữ mặt định, theme được lấy từ SharedPreferences
         loadLocale();
         checkTheme();

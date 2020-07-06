@@ -13,46 +13,46 @@
     <string name="menu_share">Share</string>
     <string name="menu_send">Send</string>
 
-    <string name="url_host">https://vietsacloit.000webhostapp.com</string>
-    <string name="url_update_pass_byemail">https://vietsacloit.000webhostapp.com/android_app/url_update_user_password.php</string>
-    <string name="url_update_user_byid">https://vietsacloit.000webhostapp.com/android_app/url_update_user_byid.php</string>
-    <string name="url_wp_posts">https://vietsacloit.000webhostapp.com/android_app/json_wp_posts.php</string>
-    <string name="url_wp_post">https://vietsacloit.000webhostapp.com/android_app/json_wp_post.php?id=</string>
-    <string name="url_wp_terms">https://vietsacloit.000webhostapp.com/android_app/json_wp_terms.php</string>
-    <string name="url_wp_posts_term">https://vietsacloit.000webhostapp.com/android_app/json_wp_posts_term.php?term_id=</string>
-    <string name="url_wp_comments">https://vietsacloit.000webhostapp.com/android_app/json_wp_comments.php</string>
-    <string name="url_wp_users">https://vietsacloit.000webhostapp.com/android_app/json_wp_users.php</string>
-    <string name="url_wp_user">https://vietsacloit.000webhostapp.com/android_app/json_wp_user.php?user_login=%s&amp;user_email=%s</string>
-    <string name="url_wp_user_by_id">https://vietsacloit.000webhostapp.com/android_app/json_wp_user_by_id.php?ID=%d</string>
-    <string name="url_insert_user">https://vietsacloit.000webhostapp.com/android_app/url_insert_user.php</string>
-    <string name="url_get_termID_from_wp_post">https://vietsacloit.000webhostapp.com/android_app/url_get_term_form_wp_post.php?id=</string>
-    <string name="url_image_chuyenmuc_hufiexam">https://vietsacloit.000webhostapp.com/wp-content/uploads/2020/05/banner_hufi_exam.jpg</string>
-    <string name="url_image_chuyenmuc_khoahoc">https://vietsacloit.000webhostapp.com/wp-content/uploads/2020/05/banner_khoaHoc.jpg</string>
-    <string name="url_image_chuyenmuc_0xdhth">https://vietsacloit.000webhostapp.com/wp-content/uploads/2020/05/0xDHTH.jpg</string>
-    <string name="url_image_notFound">https://vietsacloit.000webhostapp.com/wp-content/uploads/2020/05/image_not_found.png</string>
-    <string name="url_wp_post_by_title">https://vietsacloit.000webhostapp.com/android_app/json_wp_post_by_title.php?post_title=%s</string>
-    <string name="url_insert_wp_post">https://vietsacloit.000webhostapp.com/android_app/url_insert_wp_post.php</string>
-    <string name="url_update_guid">https://vietsacloit.000webhostapp.com/android_app/url_update_gui_wp_post.php</string>
-    <string name="url_wp_post_by_user">https://vietsacloit.000webhostapp.com/android_app/json_wp_post_by_user.php?post_author=%d</string>
-    <string name="url_wp_comment_by_user">https://vietsacloit.000webhostapp.com/android_app/json_wp_comments_by_user.php?user_id=%d</string>
-    <string name="url_delete_wp_post">https://vietsacloit.000webhostapp.com/android_app/url_delete_wp_post.php</string>
-    <string name="url_delete_wp_comment">https://vietsacloit.000webhostapp.com/android_app/url_delete_wp_comment.php</string>
-    <string name="url_css_comment_wp_post">https://vietsacloit.000webhostapp.com/android_app/css/comment_layout.css</string>
-    <string name="url_count_comment_of_post">https://vietsacloit.000webhostapp.com/android_app/url_count_comments.php?comment_post_ID=%d</string>
-    <string name="url_user_like_post">https://vietsacloit.000webhostapp.com/android_app/json_user_like_post.php?post_id=%d&amp;user_id=%d</string>
-    <string name="url_update_like_post">https://vietsacloit.000webhostapp.com/android_app/url_update_like_post.php</string>
-    <string name="url_insert_user_like_post">https://vietsacloit.000webhostapp.com/android_app/url_insert_user_like_post.php</string>
-    <string name="url_sum_like_post">https://vietsacloit.000webhostapp.com/android_app/url_sum_like_of_post.php?post_id=%d</string>
-    <string name="url_update_comment">https://vietsacloit.000webhostapp.com/android_app/url_update_comment.php</string>
+    <string name="url_host">http://192.168.56.1:8080</string>
+    <string name="url_update_pass_byemail">http://192.168.56.1:8080/android_app/url_update_user_password.php</string>
+    <string name="url_update_user_byid">http://192.168.56.1:8080/android_app/url_update_user_byid.php</string>
+    <string name="url_wp_posts">http://192.168.56.1:8080/android_app/json_wp_posts.php</string>
+    <string name="url_wp_post">http://192.168.56.1:8080/android_app/json_wp_post.php?id=</string>
+    <string name="url_wp_terms">http://192.168.56.1:8080/android_app/json_wp_terms.php</string>
+    <string name="url_wp_posts_term">http://192.168.56.1:8080/android_app/json_wp_posts_term.php?term_id=</string>
+    <string name="url_wp_comments">http://192.168.56.1:8080/android_app/json_wp_comments.php</string>
+    <string name="url_wp_users">http://192.168.56.1:8080/android_app/json_wp_users.php</string>
+    <string name="url_wp_user">http://192.168.56.1:8080/android_app/json_wp_user.php?user_login=%s&amp;user_email=%s</string>
+    <string name="url_wp_user_by_id">http://192.168.56.1:8080/android_app/json_wp_user_by_id.php?ID=%d</string>
+    <string name="url_insert_user">http://192.168.56.1:8080/android_app/url_insert_user.php</string>
+    <string name="url_get_termID_from_wp_post">http://192.168.56.1:8080/android_app/url_get_term_form_wp_post.php?id=</string>
+    <string name="url_image_chuyenmuc_hufiexam">http://192.168.56.1:8080/wp-content/uploads/2020/05/banner_hufi_exam.jpg</string>
+    <string name="url_image_chuyenmuc_khoahoc">http://192.168.56.1:8080/wp-content/uploads/2020/05/banner_khoaHoc.jpg</string>
+    <string name="url_image_chuyenmuc_0xdhth">http://192.168.56.1:8080/wp-content/uploads/2020/05/0xDHTH.jpg</string>
+    <string name="url_image_notFound">http://192.168.56.1:8080/wp-content/uploads/2020/05/image_not_found.png</string>
+    <string name="url_wp_post_by_title">http://192.168.56.1:8080/android_app/json_wp_post_by_title.php?post_title=%s</string>
+    <string name="url_insert_wp_post">http://192.168.56.1:8080/android_app/url_insert_wp_post.php</string>
+    <string name="url_update_guid">http://192.168.56.1:8080/android_app/url_update_gui_wp_post.php</string>
+    <string name="url_wp_post_by_user">http://192.168.56.1:8080/android_app/json_wp_post_by_user.php?post_author=%d</string>
+    <string name="url_wp_comment_by_user">http://192.168.56.1:8080/android_app/json_wp_comments_by_user.php?user_id=%d</string>
+    <string name="url_delete_wp_post">http://192.168.56.1:8080/android_app/url_delete_wp_post.php</string>
+    <string name="url_delete_wp_comment">http://192.168.56.1:8080/android_app/url_delete_wp_comment.php</string>
+    <string name="url_css_comment_wp_post">http://192.168.56.1:8080/android_app/css/comment_layout.css</string>
+    <string name="url_count_comment_of_post">http://192.168.56.1:8080/android_app/url_count_comments.php?comment_post_ID=%d</string>
+    <string name="url_user_like_post">http://192.168.56.1:8080/android_app/json_user_like_post.php?post_id=%d&amp;user_id=%d</string>
+    <string name="url_update_like_post">http://192.168.56.1:8080/android_app/url_update_like_post.php</string>
+    <string name="url_insert_user_like_post">http://192.168.56.1:8080/android_app/url_insert_user_like_post.php</string>
+    <string name="url_sum_like_post">http://192.168.56.1:8080/android_app/url_sum_like_of_post.php?post_id=%d</string>
+    <string name="url_update_comment">http://192.168.56.1:8080/android_app/url_update_comment.php</string>
 
-    <string name="url_image_math_from_website">https://vietsacloit.000webhostapp.com/wp–content/uploads/2019/02/toan_A2–783x570.png</string>
-    <string name="url_insert_comment">https://vietsacloit.000webhostapp.com/android_app/url_insert_comment.php</string>
-    <string name="url_image_user_male_50">https://vietsacloit.000webhostapp.com/wp-content/uploads/2020/05/icon_user_male_50.png</string>
-    <string name="url_css_comment">https://vietsacloit.000webhostapp.com/android_app/css/comment_layout.css</string>
-    <string name="url_update_user_password">https://vietsacloit.000webhostapp.com/android_app/url_update_user_password.php?user_email=%s&amp;user_pass=%s</string>
-    <string name="url_insert_term_relationship">https://vietsacloit.000webhostapp.com/android_app/url_insert_term_relationship.php</string>
-    <string name="url_css_button_download">https://vietsacloit.000webhostapp.com/custom_html/button_download/css/style.css</string>
-    <string name="url_image_logo_module_for_dev">https://vietsacloit.000webhostapp.com/wp-content/uploads/2020/05/logo_module_for_dev.jpg</string>
+    <string name="url_image_math_from_website">http://192.168.56.1:8080/wp–content/uploads/2019/02/toan_A2–783x570.png</string>
+    <string name="url_insert_comment">http://192.168.56.1:8080/android_app/url_insert_comment.php</string>
+    <string name="url_image_user_male_50">http://192.168.56.1:8080/wp-content/uploads/2020/05/icon_user_male_50.png</string>
+    <string name="url_css_comment">http://192.168.56.1:8080/android_app/css/comment_layout.css</string>
+    <string name="url_update_user_password">http://192.168.56.1:8080/android_app/url_update_user_password.php?user_email=%s&amp;user_pass=%s</string>
+    <string name="url_insert_term_relationship">http://192.168.56.1:8080/android_app/url_insert_term_relationship.php</string>
+    <string name="url_css_button_download">http://192.168.56.1:8080/custom_html/button_download/css/style.css</string>
+    <string name="url_image_logo_module_for_dev">http://192.168.56.1:8080/wp-content/uploads/2020/05/logo_module_for_dev.jpg</string>
 
     <string name="not_category">CATEGORY NOT FOUND</string>
 
