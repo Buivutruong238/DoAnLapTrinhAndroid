@@ -218,12 +218,6 @@ public class Wp_post_DAL {
                     if(num > 0)
                         return true;
 
-                } catch (MalformedURLException e) {
-                    e.printStackTrace();
-                } catch (UnsupportedEncodingException e) {
-                    e.printStackTrace();
-                } catch (ClientProtocolException e) {
-                    e.printStackTrace();
                 } catch (IOException e) {
                     e.printStackTrace();
                 }

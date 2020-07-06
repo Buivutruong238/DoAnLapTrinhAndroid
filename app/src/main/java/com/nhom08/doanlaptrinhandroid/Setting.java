@@ -92,13 +92,13 @@ public class Setting extends AppCompatActivity {
             Switch sw = findViewById(R.id.switchNightModeSetting);
             boolean isDark = sw.isChecked();
 
-            if ((num != postNumOld) || (langOld.equals("vi") && !radioButtonLangVi.isChecked()) || (langOld.isEmpty() && radioButtonLangVi.isChecked()) || isDarkModeOld != isDark){
+            if ((num != postNumOld) || ((langOld.equals("vi") && !radioButtonLangVi.isChecked())) || (langOld.isEmpty() && radioButtonLangVi.isChecked()) || isDarkModeOld != isDark){
                 //save sharedPreferences
                 SharedPreferences sp = getSharedPreferences("myHufierSetting", MODE_PRIVATE);
                 SharedPreferences.Editor editor = sp.edit();
                 editor.putString("myHufierLang",radioButtonLangVi.isChecked() ? "vi" : "");
                 editor.putInt("myHufierPostNum", num);
-                editor.putBoolean("isDarkMode", !isDarkModeOld);
+                editor.putBoolean("isDarkMode", isDark);
                 editor.apply();
 
                 //reload Request
