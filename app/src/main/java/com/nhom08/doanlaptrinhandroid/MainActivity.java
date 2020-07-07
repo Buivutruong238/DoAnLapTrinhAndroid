@@ -428,7 +428,7 @@ public class MainActivity extends AppCompatActivity
             postsHienTaiChuaCapNhat.addAll(list);
             fabNotify.hide();
             doChenhLenh = 0;
-            coCapNhapTuChuong = false;
+            coCapNhapTuChuong = false;//cn
         }
 
         wp_postAdapter = new Wp_postRecyclerViewAdapter(list);
