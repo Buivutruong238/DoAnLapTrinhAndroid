@@ -4,6 +4,7 @@ import android.annotation.SuppressLint;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.res.AssetManager;
 import android.content.res.Configuration;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
@@ -79,6 +80,7 @@ public class MainActivity extends AppCompatActivity
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         //region # khởi tạo ngôn ngữ mặt định, theme được lấy từ SharedPreferences
         loadLocale();
         checkTheme();
@@ -158,6 +160,9 @@ public class MainActivity extends AppCompatActivity
         NavigationView navigationView = findViewById(R.id.nav_view);
         loadMenuNavigationView(navigationView.getMenu());
         //endregion
+
+        dividerItemDecoration = new DividerItemDecoration(this, DividerItemDecoration.VERTICAL);
+        dividerItemDecoration.setDrawable(Objects.requireNonNull(getDrawable(R.drawable.divider)));
     }
 
     /*
@@ -306,8 +311,28 @@ public class MainActivity extends AppCompatActivity
         }else if (id == R.id.mnuSearchVoice){
             setupSearchByVoice();
         }
+        else if (id == R.id.action_changeLayout){
+            int layout = getLayoutRecycleView();
+            SharedPreferences.Editor editor = getSharedPreferences("myHufierSetting", MODE_PRIVATE).edit();
+            if (layout == 1) {
+                //recyLoadBaiViet.removeItemDecoration(dividerItemDecoration);
+                editor.putInt("layout", 2);
+            }
+            else {
+                //recyLoadBaiViet.addItemDecoration(dividerItemDecoration);
+                editor.putInt("layout", 1);
+            }
+            editor.apply();
+            updateRecyclerView(postsHienTaiChuaCapNhat);
+        }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    private int getLayoutRecycleView(){
+        SharedPreferences sharedPreferences = getSharedPreferences("myHufierSetting", MODE_PRIVATE);
+        int layout = sharedPreferences.getInt("layout", 1);
+        return layout;
     }
 
     @SuppressWarnings("StatementWithEmptyBody")
@@ -397,7 +422,7 @@ public class MainActivity extends AppCompatActivity
         Overloading: updateRecyclerView
         Params: danh sách bài viết đã có dữ liệu
      */
-    private void updateRecyclerView(final ArrayList<Wp_post> list){
+    private void updateRecyclerView(final List<Wp_post> list){
         if (postsHienTaiChuaCapNhat.size() == 0 || coCapNhapTuChuong) {
             postsHienTaiChuaCapNhat.clear();
             postsHienTaiChuaCapNhat.addAll(list);
@@ -411,9 +436,11 @@ public class MainActivity extends AppCompatActivity
         recyLoadBaiViet.setHasFixedSize(true);
         recyLoadBaiViet.setLayoutManager(new LinearLayoutManager(this));
 
-        DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(this, DividerItemDecoration.VERTICAL);
-        dividerItemDecoration.setDrawable(Objects.requireNonNull(getDrawable(R.drawable.divider)));
-        recyLoadBaiViet.addItemDecoration(dividerItemDecoration);
+//        int layout = getLayoutRecycleView();
+//        if (layout == 1)
+//            recyLoadBaiViet.addItemDecoration(dividerItemDecoration);
+//        else
+//            recyLoadBaiViet.removeItemDecoration(dividerItemDecoration);
     }
 
     /*
@@ -961,8 +988,15 @@ public class MainActivity extends AppCompatActivity
     private FloatingActionButton fabNotify, fabUser;
     private RecyclerView recyLoadBaiViet;//set
 
+    DividerItemDecoration dividerItemDecoration;
+
     private MediaPlayer mediaPlayerNewPostRing;
     private int doChenhLenh;
     private boolean coCapNhapTuChuong;//khi bấm chuông cờ = true. lúc này cập nhập lại postHienTaiChuaCapNhat
     private List<Wp_post> postsHienTaiChuaCapNhat;//danh sách thể hiện các bài viết chưa cập nhật. nếu có bài viết mới sẽ lấy danh sách này để đối chiếu.
+
+    @Override
+    public AssetManager getAssets() {
+        return getResources().getAssets();
+    }
 }

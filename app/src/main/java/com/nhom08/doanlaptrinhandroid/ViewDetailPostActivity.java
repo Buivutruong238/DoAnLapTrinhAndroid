@@ -10,6 +10,7 @@ import android.app.DownloadManager;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.res.AssetManager;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Build;
@@ -389,4 +390,9 @@ public class ViewDetailPostActivity extends AppCompatActivity {
     private ProgressBar progressBarLoadingWebView;
     private Button btnGoBack, btnGoNext;
     private boolean isShowQuickComment;
+
+    @Override
+    public AssetManager getAssets() {
+        return getResources().getAssets();
+    }
 }

@@ -3,6 +3,9 @@ package com.nhom08.doanlaptrinhandroid.adapter;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.graphics.BitmapFactory;
+import android.net.http.DelegatingSSLSession;
 import android.os.Build;
 import android.text.Html;
 import android.view.LayoutInflater;
@@ -32,6 +35,7 @@ import com.nhom08.doanlaptrinhandroid.R;
 import com.nhom08.doanlaptrinhandroid.ViewDetailPostActivity;
 import com.squareup.picasso.Picasso;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -47,13 +51,19 @@ public class Wp_postRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerVie
         wp_posts_tmp.addAll(wp_posts);
     }
 
-    public static class VH extends RecyclerView.ViewHolder{
+    public interface ItemClickListener {
+        void onClick(View view, int position,boolean isLongClick);
+    }
+
+    public static class VH extends RecyclerView.ViewHolder implements View.OnClickListener, View.OnLongClickListener {
         TextView tvTitlePost, tvAuthor, tvPostDay, tvContent, tvSoLuongLike, tvSoLuongComment;
         ImageView imgHinh, imgAvatar;
         ImageView btnTangLike, btnGiamLike;
         ProgressBar progressBar;
         Button btnXemThem;
         ConstraintLayout container;
+
+        ItemClickListener itemClickListener;
 
         VH(@NonNull View itemView) {
             super(itemView);
@@ -70,26 +80,46 @@ public class Wp_postRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerVie
             tvSoLuongComment = itemView.findViewById(R.id.tvSoLuongCommentRecy);
             btnXemThem = itemView.findViewById(R.id.btnDocThemRecy);
             container = itemView.findViewById(R.id.container_item_recycerview);
+
+            itemView.setOnClickListener(this);
+            itemView.setOnLongClickListener(this);
+        }
+
+        @Override
+        public void onClick(View v) {
+            itemClickListener.onClick(v, getAdapterPosition(), false);
+        }
+
+        @Override
+        public boolean onLongClick(View v) {
+            itemClickListener.onClick(v, getAdapterPosition(), true);
+            return true;
         }
     }
 
     @NonNull
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.layout_wp_post_item_recyclerview, parent, false);
+        SharedPreferences sharedPreferences = parent.getContext().getSharedPreferences("myHufierSetting", Context.MODE_PRIVATE);
+        int layout = sharedPreferences.getInt("layout", 1);
+        View view;
+        if (layout == 1)
+            view = LayoutInflater.from(parent.getContext()).inflate(R.layout.layout_wp_post_item_recyclerview, parent, false);
+        else
+            view = LayoutInflater.from(parent.getContext()).inflate(R.layout.layout_wp_post_item_recyclerview2, parent, false);
         return new VH(view);
     }
 
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
-        VH vh = (VH)holder;
+        final VH vh = (VH)holder;
         Wp_post post = wp_posts.get(position);
         vh.tvTitlePost.setText(post.getPost_title().toUpperCase());
-        Context context = vh.tvTitlePost.getContext();
+        final Context context = vh.tvTitlePost.getContext();
 
         loadHinhDaiDienPost(context, vh.imgHinh, post);
 
-        Picasso.with(context).load(context.getString(R.string.url_image_user_male_50)).fit().into(vh.imgAvatar);
+        loadAvatar(context ,vh.imgAvatar);
 
         vh.tvPostDay.setText(post.getPost_modified());
 
@@ -113,6 +143,18 @@ public class Wp_postRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerVie
 
         //load Animation
         loadAnimation(context, vh.imgHinh, vh.container);
+
+        //onclick
+        vh.itemClickListener = new ItemClickListener() {
+            @Override
+            public void onClick(View view, int position, boolean isLongClick) {
+                if (!isLongClick)
+                    btnXemThemClicked.onClick(vh.btnXemThem);
+            }
+        };
+
+        //cap nhat trang thai like dau tien
+        updateLikeStatus(context, post, vh.btnTangLike, vh.btnGiamLike);
     }
 
     //region event
@@ -128,9 +170,24 @@ public class Wp_postRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerVie
         }
     };
 
+    private void setAnimForButtonLike(View view){
+        final View btnLike = view;
+        btnLike.animate().scaleX(3f).scaleY(3f).alpha(0).setDuration(1500).withEndAction(new Runnable() {
+            @Override
+            public void run() {
+                btnLike.animate().scaleX(1f).scaleY(1f).alpha(1).setDuration(0).setStartDelay(500);
+            }
+        });
+    }
+
     private View.OnClickListener btnTangLikeClicked = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
+            final View btnTangLike = v;
+            final View btnGiamLike = ((View)v.getParent()).findViewById(R.id.imageButtonDisLikeRecy);
+
+            setAnimForButtonLike(v);
+
             final Context context = v.getContext();
             if (isBusy){
                 Toast.makeText(context, R.string.chu_tieng_trinh_dang_ban, Toast.LENGTH_SHORT).show();
@@ -166,6 +223,7 @@ public class Wp_postRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerVie
                                     loadSoLuongLike(postAndProgressBar.getTvSoLuongLike(), post);
                                     isBusy = false;
                                     progressBar.setVisibility(View.GONE);
+                                    btnTangLike.setBackground(context.getDrawable(R.drawable.ic_like_like));
                                 }
                                 else {
                                     FunctionsStatic.hienThiThongBaoDialog(context, context.getString(R.string.chu_thong_bao), context.getString(R.string.chu_loi_ket_noi_toi_internet));
@@ -192,6 +250,10 @@ public class Wp_postRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerVie
                                     loadSoLuongLike(postAndProgressBar.getTvSoLuongLike(), post);
                                     isBusy = false;
                                     progressBar.setVisibility(View.GONE);
+
+                                    //cap nhat trang thai like
+                                    btnTangLike.setBackground(context.getDrawable(R.drawable.ic_like_like));
+                                    btnGiamLike.setBackground(context.getDrawable(R.drawable.ic_dislike));
                                 }
                                 else {
                                     FunctionsStatic.hienThiThongBaoDialog(context, context.getString(R.string.chu_thong_bao), context.getString(R.string.chu_loi_ket_noi_toi_internet));
@@ -230,6 +292,11 @@ public class Wp_postRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerVie
     private View.OnClickListener btnGiamLikeClicked = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
+            setAnimForButtonLike(v);
+
+            final View btnGiamLike = v;
+            final View btnTangLike = ((View)v.getParent()).findViewById(R.id.imageButtonLikeRecy);
+
             final Context context = v.getContext();
             if (isBusy){
                 Toast.makeText(context, R.string.chu_tieng_trinh_dang_ban, Toast.LENGTH_SHORT).show();
@@ -256,7 +323,7 @@ public class Wp_postRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerVie
                     userLikePost.setPost_id(post.getID());
                     userLikePost.setUser_id(userWasLogin.getID());
 
-                    if (like == -2) { //user chua like -> insert
+                    if (like == -2) { //user chua dislike -> insert
                         userLikePost.setLike(-1);
                         userLikePostBLL.addOrUpdateUserLikePost(context.getString(R.string.url_insert_user_like_post), userLikePost, new OnMyFinishListener<Boolean>() {
                             @Override
@@ -265,6 +332,8 @@ public class Wp_postRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerVie
                                     loadSoLuongLike(postAndProgressBar.getTvSoLuongLike(), post);
                                     isBusy = false;
                                     progressBar.setVisibility(View.GONE);
+                                    //cap nhat trang thai like
+                                    btnGiamLike.setBackground(context.getDrawable(R.drawable.ic_dislike_dislike));
                                 }
                                 else {
                                     FunctionsStatic.hienThiThongBaoDialog(context, context.getString(R.string.chu_thong_bao), context.getString(R.string.chu_loi_ket_noi_toi_internet));
@@ -291,6 +360,9 @@ public class Wp_postRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerVie
                                     loadSoLuongLike(postAndProgressBar.getTvSoLuongLike(), post);
                                     isBusy = false;
                                     progressBar.setVisibility(View.GONE);
+                                    //cap nhat trang thai dislike
+                                    btnGiamLike.setBackground(context.getDrawable(R.drawable.ic_dislike_dislike));
+                                    btnTangLike.setBackground(context.getDrawable(R.drawable.ic_like));
                                 }
                                 else {
                                     FunctionsStatic.hienThiThongBaoDialog(context, context.getString(R.string.chu_thong_bao), context.getString(R.string.chu_loi_ket_noi_toi_internet));
@@ -328,6 +400,34 @@ public class Wp_postRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerVie
     //endregion
 
     //region Support Method
+    private void updateLikeStatus(final Context context, Wp_post post, final View btnTangLike, final View btnGiamLike){
+        userWasLogin = FunctionsStatic.newInstance().getUserWasLogin(context);
+        String strAPI = String.format(context.getString(R.string.url_user_like_post), post.getID(), userWasLogin.getID());
+        UserLikePostBLL userLikePostBLL = new UserLikePostBLL();
+        userLikePostBLL.getLike(strAPI, new OnMyFinishListener<Integer>() {
+            @Override
+            public void onFinish(Integer result) {
+                if (result == 1)//dang like
+                    btnTangLike.setBackground(context.getDrawable(R.drawable.ic_like_like));
+                else if (result == -1)//dislike
+                    btnGiamLike.setBackground(context.getDrawable(R.drawable.ic_dislike_dislike));
+            }
+
+            @Override
+            public void onError(Throwable error, Object bonusOfCoder) {
+
+            }
+        });
+    }
+
+    private void loadAvatar(Context context ,ImageView imageView){
+        try {
+            imageView.setImageBitmap(BitmapFactory.decodeStream(context.getAssets().open("icons/icon_avatar_100.png")));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
     private void loadAnimation(Context context, View v1, View v2){
         v1.setAnimation(AnimationUtils.loadAnimation(context, R.anim.fade_anim));
         v2.setAnimation(AnimationUtils.loadAnimation(context, R.anim.scale_anim));
@@ -479,5 +579,10 @@ public class Wp_postRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerVie
         }
 
         notifyDataSetChanged();
+    }
+
+    @Override
+    public int getItemViewType(int position) {
+        return super.getItemViewType(position);
     }
 }

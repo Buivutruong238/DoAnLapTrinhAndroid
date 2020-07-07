@@ -34,11 +34,7 @@ import com.nhom08.doanlaptrinhandroid.Modulds.FunctionsStatic;
 import com.nhom08.doanlaptrinhandroid.R;
 import com.nhom08.doanlaptrinhandroid.adapter.Wp_commentsAdapter;
 
-import org.json.JSONObject;
-import org.w3c.dom.Comment;
-
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -67,13 +63,13 @@ public class CommentOfUser extends Fragment {
         return root;
     }
 
-    private void reLoad(Context context, String strUrl){
+    private void reLoad(final Context context, String strUrl){
         Wp_comment_BLL wp_comment_bll = new Wp_comment_BLL();
         wp_comment_bll.toArrayWp_comment(strUrl, new OnMyFinishListener<ArrayList<Wp_comment>>() {
             @Override
             public void onFinish(ArrayList<Wp_comment> comments) {
                 CommentOfUser.this.comments = comments;
-                adapter = new Wp_commentsAdapter(getContext(), comments);
+                adapter = new Wp_commentsAdapter(context, comments);
                 lvCommentOfUser.setAdapter(adapter);
                 lvCommentOfUser.setDividerHeight(20);
                 lvCommentOfUser.setBackgroundColor(Color.WHITE);
@@ -163,7 +159,7 @@ public class CommentOfUser extends Fragment {
                                 final String update_cmt = edt_comment_of_user.getText().toString();
                                 final int cmt_id = cmt.getComment_ID();
 
-                                if(update_cmt == null || update_cmt.isEmpty()){
+                                if(update_cmt.isEmpty()){
                                     FunctionsStatic.hienThiThongBaoDialog(v.getContext(), "Thông báo", "Không thể cập nhật thành rỗng!");
                                     return;
                                 }
