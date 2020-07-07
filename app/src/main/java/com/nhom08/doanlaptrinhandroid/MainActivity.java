@@ -11,6 +11,7 @@ import android.graphics.Color;
 import android.media.MediaPlayer;
 import android.os.Build;
 import android.os.Bundle;
+
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import android.os.Handler;
@@ -26,7 +27,6 @@ import androidx.appcompat.app.AppCompatDelegate;
 import androidx.core.view.GravityCompat;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import android.view.MenuItem;
-
 import com.google.android.material.navigation.NavigationView;
 import com.nhom08.doanlaptrinhandroid.BLL.Wp_post_BLL;
 import com.nhom08.doanlaptrinhandroid.BLL.Wp_term_BLL;
@@ -391,7 +391,6 @@ public class MainActivity extends AppCompatActivity
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
-
     /*
         # Function: updateRecyclerView
         # params: String
