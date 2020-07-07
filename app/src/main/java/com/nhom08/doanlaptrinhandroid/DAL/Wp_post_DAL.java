@@ -218,12 +218,6 @@ public class Wp_post_DAL {
                     if(num > 0)
                         return true;
 
-                } catch (MalformedURLException e) {
-                    e.printStackTrace();
-                } catch (UnsupportedEncodingException e) {
-                    e.printStackTrace();
-                } catch (ClientProtocolException e) {
-                    e.printStackTrace();
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
@@ -236,7 +230,7 @@ public class Wp_post_DAL {
         tmp.execute();
     }
 
-    public void updateGuid(final String strUrl, final int ID, OnMyFinishListener<Boolean> onMyFinishListener){
+    public void updateGuid(final String strUrl, final int ID, final String host, OnMyFinishListener<Boolean> onMyFinishListener){
         class Tmp extends TaskBackground<Boolean>{
 
             public Tmp(OnMyFinishListener<Boolean> onMyFinishListener) {
@@ -256,6 +250,7 @@ public class Wp_post_DAL {
                     //Request: user_login, user_pass, user_email, user_registered, display_name
                     List<NameValuePair> nameValuePairs = new ArrayList<>();
                     nameValuePairs.add(new BasicNameValuePair("ID", String.valueOf(ID)));
+                    nameValuePairs.add(new BasicNameValuePair("Host", host));
 
                     //Insert
                     HttpClient client = new DefaultHttpClient();
@@ -276,12 +271,6 @@ public class Wp_post_DAL {
                     if(num > 0)
                         return true;
 
-                } catch (MalformedURLException e) {
-                    e.printStackTrace();
-                } catch (UnsupportedEncodingException e) {
-                    e.printStackTrace();
-                } catch (ClientProtocolException e) {
-                    e.printStackTrace();
                 } catch (IOException e) {
                     e.printStackTrace();
                 }

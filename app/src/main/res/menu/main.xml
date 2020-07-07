@@ -1,10 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
+
     <item
         android:id="@+id/action_settings"
         android:orderInCategory="100"
         android:title="@string/action_settings"
+        app:showAsAction="never" />
+
+    <item
+        android:id="@+id/action_changeLayout"
+        android:orderInCategory="100"
+        android:title="ChangeLayout"
         app:showAsAction="never" />
 
     <item
@@ -13,5 +20,12 @@
         android:title="Search"
         app:showAsAction="always"
         app:actionViewClass="android.widget.SearchView">
+    </item>
+
+    <item
+        android:icon="@drawable/ic_settings_voice_white_24dp"
+        app:showAsAction="always"
+        android:title="Item"
+        android:id="@+id/mnuSearchVoice">
     </item>
 </menu>

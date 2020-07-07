@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/tvThoiGianItemCommentOfUser"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="10dp"
+        android:text="@string/chu_thoi_gian"
+        android:textColor="#5C8A49"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/tvValueThoiGianItemComemntOfUser"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_toRightOf="@id/tvThoiGianItemCommentOfUser"
+        android:text="@string/chu_loi_ket_noi_toi_internet" />
+
+    <TextView
+        android:id="@+id/tvPostNameItemCommentOfUser"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tvThoiGianItemCommentOfUser"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="10dp"
+        android:text="@string/chu_title"
+        android:textColor="#5C8A49"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/tvValuePostNameItemCommentOfUser"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tvThoiGianItemCommentOfUser"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_toRightOf="@id/tvPostNameItemCommentOfUser"
+        android:text="@string/chu_loi_ket_noi_toi_internet" />
+
+    <View
+        android:id="@+id/divider8"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_below="@id/tvNoiDungBinhLuanItemCommentOfUser"
+        android:layout_marginTop="20dp"
+        android:background="?android:attr/listDivider" />
+
+    <TextView
+        android:id="@+id/tvNoiDungBinhLuanItemCommentOfUser"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tvPostNameItemCommentOfUser"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginRight="10dp"
+        android:text="@string/chu_loi_ket_noi_toi_internet"
+        android:textColor="#283695"
+        android:textSize="16sp"
+        android:textStyle="bold|italic" />
+</RelativeLayout>

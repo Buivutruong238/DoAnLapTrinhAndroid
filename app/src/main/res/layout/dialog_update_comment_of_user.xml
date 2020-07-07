@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <EditText
+        android:id="@+id/tV_comment"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/textView2"
+        android:height="100dp"
+        android:gravity="top"
+        android:padding="12dp"
+        android:text="cmt" />
+
+    <Button
+        android:id="@+id/btn_huy_update_cmt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tV_comment"
+        android:layout_alignParentRight="false"
+        android:layout_marginRight="20dp"
+        android:layout_marginBottom="20dp"
+        android:layout_toLeftOf="@id/btn_update_cmt"
+        android:backgroundTint="@color/colorSecondary"
+        android:text="@string/chu_cancel"
+        android:textColor="#F44336" />
+
+    <Button
+        android:id="@+id/btn_update_cmt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tV_comment"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="30dp"
+        android:layout_marginBottom="20dp"
+        android:backgroundTint="@color/colorSecondary"
+        android:foregroundTint="#FFFFFF"
+        android:shadowColor="#FFFFFF"
+        android:text="@string/chu_cap_nhat_binh_luan_nay"
+        android:textColor="#F44336" />
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:height="65dp"
+        android:padding="12dp"
+        android:text="Chỉnh sửa bình luận"
+        android:textColor="#393838"
+        android:textSize="26sp"
+        android:textStyle="bold" />
+</RelativeLayout>

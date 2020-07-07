@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <RadioGroup
+        android:id="@+id/radioGroupNangCaoDangBaiMoi"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginRight="20dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <RadioButton
+            android:id="@+id/radioButtonThemMotDoanVanNangCaoDangBaiMoi"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:checked="true"
+            android:text="@string/chu_them_mot_doan_van" />
+
+        <RadioButton
+            android:id="@+id/radioButtonThemHinhDangBaiMoi"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:checked="false"
+            android:text="@string/chu_them_mot_link_hinh_anh" />
+
+        <RadioButton
+            android:id="@+id/radioButtonThemLinkDownloadDangBaiMoi"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/chu_them_mot_link_download" />
+    </RadioGroup>
+
+    <EditText
+        android:id="@+id/edtNhapUrlDangBaiMoi"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginRight="20dp"
+        android:ems="10"
+        android:hint="@string/chu_them_mot_doan_van"
+        android:inputType="textPersonName"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/radioGroupNangCaoDangBaiMoi" />
+
+    <Button
+        android:id="@+id/btnDongYNangCaoDangBaiMoi"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginRight="20dp"
+        android:background="#1A4A6C43"
+        android:text="@string/chu_dong_y"
+        android:textColor="#FF0000"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/edtNhapUrlDangBaiMoi" />
+
+    <Button
+        android:id="@+id/btnHuyNangCaoDangBaiMoi"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginRight="10dp"
+        android:background="#1A4A6C43"
+        android:text="@string/chu_thoat"
+        android:textColor="#FF0000"
+        app:layout_constraintEnd_toStartOf="@+id/btnDongYNangCaoDangBaiMoi"
+        app:layout_constraintTop_toBottomOf="@+id/edtNhapUrlDangBaiMoi" />
+
+    <ProgressBar
+        android:id="@+id/progressBarNangCaoDangBaiMoi"
+        style="?android:attr/progressBarStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="30dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/edtNhapUrlDangBaiMoi" />
+
+    <View
+        android:id="@+id/divider3"
+        android:layout_width="358dp"
+        android:layout_height="1dp"
+        android:layout_marginStart="1dp"
+        android:layout_marginLeft="1dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="1dp"
+        android:layout_marginRight="1dp"
+        android:background="?android:attr/listDivider"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btnDongYNangCaoDangBaiMoi" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -120,7 +120,7 @@ public class UserLikePostDAL {
     public void getSumLike(String strAPI, OnMyFinishListener<Integer> onMyFinishListener){
         class Tmp extends TaskBackground<Integer>{
 
-            public Tmp(OnMyFinishListener<Integer> onMyFinishListener) {
+            private Tmp(OnMyFinishListener<Integer> onMyFinishListener) {
                 super(onMyFinishListener);
             }
 
@@ -136,9 +136,7 @@ public class UserLikePostDAL {
                     else{
                         like = Integer.parseInt(jsonArray.getJSONObject(0).getString("sum"));
                     }
-                } catch (JSONException e) {
-                    setBonusOfCoder(e.getMessage());
-                } catch (NumberFormatException e){
+                } catch (JSONException | NumberFormatException e) {
                     setBonusOfCoder(e.getMessage());
                 }
 

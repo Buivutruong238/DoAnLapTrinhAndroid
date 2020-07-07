@@ -1,7 +1,6 @@
 package com.nhom08.doanlaptrinhandroid.Modulds;
 import android.os.AsyncTask;
 
-import com.nhom08.doanlaptrinhandroid.Interface_enum.OnMyFinishListener;
 import com.nhom08.doanlaptrinhandroid.Interface_enum.KindStatusRunning;
 import com.nhom08.doanlaptrinhandroid.Interface_enum.OnMyFinishListener;
 
@@ -15,7 +14,6 @@ public abstract class TaskBackground<T_Result> extends AsyncTask<String,Integer,
 
     public TaskBackground(OnMyFinishListener<T_Result> onMyFinishListener){
         this.onMyFinishListener = onMyFinishListener;
-        bonusOfCoder = "Unknown Error!";
     }
 
     @Override

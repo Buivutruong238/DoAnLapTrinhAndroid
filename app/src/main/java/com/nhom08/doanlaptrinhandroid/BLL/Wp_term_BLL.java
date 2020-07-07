@@ -4,8 +4,6 @@ import androidx.annotation.NonNull;
 
 import com.nhom08.doanlaptrinhandroid.DAL.Wp_term_DAL;
 import com.nhom08.doanlaptrinhandroid.DTO.Wp_term;
-import com.nhom08.doanlaptrinhandroid.DAL.Wp_term_DAL;
-import com.nhom08.doanlaptrinhandroid.DTO.Wp_term;
 import com.nhom08.doanlaptrinhandroid.Interface_enum.OnMyFinishListener;
 
 import java.util.ArrayList;
