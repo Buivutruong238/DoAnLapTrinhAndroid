@@ -402,6 +402,8 @@ public class Wp_postRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerVie
     //region Support Method
     private void updateLikeStatus(final Context context, Wp_post post, final View btnTangLike, final View btnGiamLike){
         userWasLogin = FunctionsStatic.newInstance().getUserWasLogin(context);
+        if (userWasLogin == null)
+            return;
         String strAPI = String.format(context.getString(R.string.url_user_like_post), post.getID(), userWasLogin.getID());
         UserLikePostBLL userLikePostBLL = new UserLikePostBLL();
         userLikePostBLL.getLike(strAPI, new OnMyFinishListener<Integer>() {
