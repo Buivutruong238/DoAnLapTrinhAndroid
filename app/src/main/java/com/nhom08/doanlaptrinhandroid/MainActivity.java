@@ -890,7 +890,7 @@ public class MainActivity extends AppCompatActivity
             wp_post_bll.toArrayWp_posts(getString(R.string.url_wp_posts), new OnMyFinishListener<ArrayList<Wp_post>>() {
                 @Override
                 public void onFinish(final ArrayList<Wp_post> posts) {
-                    wp_post_bll.findItems(posts, keySearch, 100, new OnMyFinishListener<ArrayList<Wp_post>>() {
+                    wp_post_bll.findItems(posts, keySearch, 50, new OnMyFinishListener<ArrayList<Wp_post>>() {
                         @Override
                         public void onFinish(ArrayList<Wp_post> result) {
                             FunctionsStatic.cancelDialog(processDialog);

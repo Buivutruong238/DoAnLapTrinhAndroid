@@ -107,7 +107,7 @@ public class InfoOfUser extends Fragment {
                                 editor.putString("uName", userWasLogin.getUser_login());
                                 editor.putString("uFName", fullname);
                                 editor.putString("uPass", userWasLogin.getUser_pass());
-                                editor.putString("uUrl", userWasLogin.getUser_url());
+                                editor.putString("uUrl", userurl);
                                 editor.apply();
                                 FunctionsStatic.hienThiThongBaoDialog(v.getContext(), "Thông báo", "Vui lòng restart lại để thấy thay đổi");
                             }

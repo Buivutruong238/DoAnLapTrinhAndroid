@@ -1,5 +1,6 @@
 package com.nhom08.doanlaptrinhandroid.adapter;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,11 +15,9 @@ import java.util.ArrayList;
 
 public class Wp_commentsAdapter extends BaseAdapter {
     private ArrayList<Wp_comment> comments;
-    private Context context;
     private LayoutInflater inflater;
 
     public Wp_commentsAdapter(Context context, ArrayList<Wp_comment> comments){
-        this.context = context;
         this.comments = comments;
         inflater = (LayoutInflater)context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
     }
@@ -38,6 +37,7 @@ public class Wp_commentsAdapter extends BaseAdapter {
         return comments.get(position).getComment_ID();
     }
 
+    @SuppressLint("SetTextI18n")
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         if (convertView == null)

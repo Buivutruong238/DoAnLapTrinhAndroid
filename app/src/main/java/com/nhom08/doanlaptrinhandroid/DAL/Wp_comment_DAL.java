@@ -176,12 +176,6 @@ public class Wp_comment_DAL {
                     if (num > 0)
                         return true;
 
-                } catch (MalformedURLException e) {
-                    e.printStackTrace();
-                } catch (UnsupportedEncodingException e) {
-                    e.printStackTrace();
-                } catch (ClientProtocolException e) {
-                    e.printStackTrace();
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
@@ -209,9 +203,7 @@ public class Wp_comment_DAL {
                     JSONObject obj = FunctionsStatic.getJsonObjectFromInternet(urlAPI, FunctionsStatic.TIME_FOR_WAIT_DO_IN_BACKGROUND_NORMAL);
                     JSONArray jsonArray = obj.getJSONArray("wp_comments");
                     count = Integer.parseInt(jsonArray.getJSONObject(0).getString("count(*)"));
-                } catch (NumberFormatException e) {
-                    setBonusOfCoder(e.getMessage());
-                } catch (JSONException e) {
+                } catch (NumberFormatException | JSONException e) {
                     setBonusOfCoder(e.getMessage());
                 }
 

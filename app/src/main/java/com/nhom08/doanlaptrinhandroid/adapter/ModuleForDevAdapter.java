@@ -118,6 +118,7 @@ public class ModuleForDevAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
         final String author = "anonymous",
                 strAPI = String.format(context.getString(R.string.url_wp_user_by_id), post.getPost_author());
         new Wp_user_BLL().toArrayWp_users(strAPI, new OnMyFinishListener<ArrayList<Wp_user>>() {
+            @SuppressLint("SetTextI18n")
             @Override
             public void onFinish(ArrayList<Wp_user> result) {
                 if (result.size() == 0)
@@ -126,6 +127,7 @@ public class ModuleForDevAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
                     tvAuthor.setText("@Hufier: "+result.get(0).getDisplay_name());
             }
 
+            @SuppressLint("SetTextI18n")
             @Override
             public void onError(Throwable error, Object bonusOfCoder) {
                 tvAuthor.setText("@HurierID: "+author);
@@ -136,6 +138,7 @@ public class ModuleForDevAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
         final TextView tvCommentCount = newViewHolder.tvCommentCount;
         String strAPI1 = String.format(context.getString(R.string.url_count_comment_of_post), post.getID());
         new Wp_comment_BLL().countCommentOfPost(strAPI1, new OnMyFinishListener<Integer>() {
+            @SuppressLint("SetTextI18n")
             @Override
             public void onFinish(Integer count) {
                 tvCommentCount.setText(context.getString(R.string.chu_so_luong_comment_bai_viet_nay)+count);
@@ -218,14 +221,12 @@ public class ModuleForDevAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
                             public void onFinish(Boolean isLike) {
                                 if (isLike) {
                                     loadSoLuongLike(postAndProgressBar.getTvSoLuongLike(), post);
-                                    isBusy = false;
-                                    progressBar.setVisibility(View.GONE);
                                 }
                                 else {
                                     FunctionsStatic.hienThiThongBaoDialog(context, context.getString(R.string.chu_thong_bao), context.getString(R.string.chu_loi_ket_noi_toi_internet));
-                                    isBusy = false;
-                                    progressBar.setVisibility(View.GONE);
                                 }
+                                isBusy = false;
+                                progressBar.setVisibility(View.GONE);
                             }
 
                             @Override
@@ -244,14 +245,12 @@ public class ModuleForDevAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
                             public void onFinish(Boolean isLike) {
                                 if (isLike) {
                                     loadSoLuongLike(postAndProgressBar.getTvSoLuongLike(), post);
-                                    isBusy = false;
-                                    progressBar.setVisibility(View.GONE);
                                 }
                                 else {
                                     FunctionsStatic.hienThiThongBaoDialog(context, context.getString(R.string.chu_thong_bao), context.getString(R.string.chu_loi_ket_noi_toi_internet));
-                                    isBusy = false;
-                                    progressBar.setVisibility(View.GONE);
                                 }
+                                isBusy = false;
+                                progressBar.setVisibility(View.GONE);
                             }
 
                             @Override
@@ -315,14 +314,12 @@ public class ModuleForDevAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
                             public void onFinish(Boolean isLike) {
                                 if (isLike) {
                                     loadSoLuongLike(postAndProgressBar.getTvSoLuongLike(), post);
-                                    isBusy = false;
-                                    progressBar.setVisibility(View.GONE);
                                 }
                                 else {
                                     FunctionsStatic.hienThiThongBaoDialog(context, context.getString(R.string.chu_thong_bao), context.getString(R.string.chu_loi_ket_noi_toi_internet));
-                                    isBusy = false;
-                                    progressBar.setVisibility(View.GONE);
                                 }
+                                isBusy = false;
+                                progressBar.setVisibility(View.GONE);
                             }
 
                             @Override
@@ -341,14 +338,12 @@ public class ModuleForDevAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
                             public void onFinish(Boolean isLike) {
                                 if (isLike) {
                                     loadSoLuongLike(postAndProgressBar.getTvSoLuongLike(), post);
-                                    isBusy = false;
-                                    progressBar.setVisibility(View.GONE);
                                 }
                                 else {
                                     FunctionsStatic.hienThiThongBaoDialog(context, context.getString(R.string.chu_thong_bao), context.getString(R.string.chu_loi_ket_noi_toi_internet));
-                                    isBusy = false;
-                                    progressBar.setVisibility(View.GONE);
                                 }
+                                isBusy = false;
+                                progressBar.setVisibility(View.GONE);
                             }
 
                             @Override
@@ -384,19 +379,18 @@ public class ModuleForDevAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
     }
 
     public void filter(String query){
-        posts.removeAll(posts);
+        posts.clear();
         if (query.isEmpty())
             posts.addAll(posts_tmp);
         else {
-            String target = "";
+            String target;
             query = FunctionsStatic.VNCharacterToEnglishCharacter(query);
             for (final Wp_post post : posts_tmp) {
                 //merge title and content of post => change it into English character.
-                StringBuilder stringBuilder = new StringBuilder();
-                stringBuilder.append(post.getPost_title());
-                stringBuilder.append(post.getPost_content());
 
-                target = FunctionsStatic.VNCharacterToEnglishCharacter(stringBuilder.toString());
+                String stringBuilder = post.getPost_title() +
+                        post.getPost_content();
+                target = FunctionsStatic.VNCharacterToEnglishCharacter(stringBuilder);
 
                 if (target.toLowerCase().contains(query.toLowerCase()))
                     posts.add(post);
