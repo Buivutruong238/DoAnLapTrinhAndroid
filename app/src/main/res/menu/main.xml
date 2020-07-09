@@ -11,7 +11,7 @@
     <item
         android:id="@+id/action_changeLayout"
         android:orderInCategory="100"
-        android:title="ChangeLayout"
+        android:title="@string/chu_doc_nhanh"
         app:showAsAction="never" />
 
     <item
