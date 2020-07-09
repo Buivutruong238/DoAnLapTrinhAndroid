@@ -13,7 +13,7 @@
     <string name="menu_tools">Công Cụ</string>
     <string name="menu_share">Chia Sẽ</string>
     <string name="menu_send">Gởi</string>
-<<<<<<< HEAD
+
     <string name="url_wp_posts">http://192.168.137.180/android_app/json_wp_posts.php</string>
     <string name="url_wp_post">http://192.168.137.180/android_app/json_wp_post.php?id=</string>
     <string name="url_wp_terms">http://192.168.137.180/android_app/json_wp_terms.php</string>
@@ -33,27 +33,7 @@
     <string name="url_image_user_male_50">http://192.168.137.180/wp-content/uploads/2020/05/icon_user_male_50.png</string>
     <string name="url_css_comment">http://192.168.137.180/android_app/css/comment_layout.css</string>
     <string name="url_update_user_password">http://192.168.137.180/android_app/url_update_user_password.php?user_email=%s&amp;user_pass=%s</string>
-=======
-    <string name="url_wp_posts">http://192.168.137.113/android_app/json_wp_posts.php</string>
-    <string name="url_wp_post">http://192.168.137.113/android_app/json_wp_post.php?id=</string>
-    <string name="url_wp_terms">http://192.168.137.113/android_app/json_wp_terms.php</string>
-    <string name="url_wp_posts_term">http://192.168.137.113/android_app/json_wp_posts_term.php?term_id=</string>
-    <string name="url_wp_comments">http://192.168.137.113/android_app/json_wp_comments.php</string>
-    <string name="url_wp_users">http://192.168.137.113/android_app/json_wp_users.php</string>
-    <string name="url_wp_user">http://192.168.137.113/android_app/json_wp_user.php?user_login=%s&amp;user_email=%s</string>
-    <string name="url_wp_user_by_id">http://192.168.137.113/android_app/json_wp_user_by_id.php?ID=%d</string>
-    <string name="url_insert_user">http://192.168.137.113/android_app/url_insert_user.php</string>
-    <string name="url_get_termID_from_wp_post">http://192.168.137.113/android_app/url_get_term_form_wp_post.php?id=</string>
-    <string name="url_image_chuyenmuc_hufiexam">http://192.168.137.113/wp-content/uploads/2020/05/banner_hufi_exam.jpg</string>
-    <string name="url_image_chuyenmuc_khoahoc">http://192.168.137.113/wp-content/uploads/2020/05/banner_khoaHoc.jpg</string>
-    <string name="url_image_chuyenmuc_0xdhth">http://192.168.137.113/wp-content/uploads/2020/05/0xDHTH.jpg</string>
-    <string name="url_image_notFound">http://192.168.137.113/wp-content/uploads/2020/05/image_not_found.png</string>
-    <string name="url_image_math_from_website">http://192.168.137.113/wp–content/uploads/2019/02/toan_A2–783x570.png</string>
-    <string name="url_insert_comment">http://192.168.137.113/android_app/url_insert_comment.php</string>
-    <string name="url_image_user_male_50">http://192.168.137.113/wp-content/uploads/2020/05/icon_user_male_50.png</string>
-    <string name="url_css_comment">http://192.168.137.113/android_app/css/comment_layout.css</string>
-    <string name="url_update_user_password">http://192.168.137.113/android_app/url_update_user_password.php?user_email=%s&amp;user_pass=%s</string>
->>>>>>> 0e670d873d628ad2364bd5cf51916cddfb179260
+
     <string name="not_category">CHƯA ĐƯỢC PHÂN LOẠI</string>
     <string name="title_activity_login">Đăng Nhập</string>
     <string name="prompt_email">Tên Người Dùng Hoặc Email</string>
@@ -103,21 +83,14 @@
     <string name="chu_hanh_dong_khong_chap_nhan">Hành Động Không Được Đồng Ý!</string>
     <string name="chu_ten_bai_viet_khac_rong">Tên Bài Viết Khác Rỗng!</string>
     <string name="chu_noi_dung_bai_viet_khac_rong">Nội Dung Khác Rỗng!</string>
-<<<<<<< HEAD
+
     <string name="url_wp_post_by_title">http://192.168.137.180/android_app/json_wp_post_by_title.php?post_title=%s</string>
     <string name="chu_title_da_ton_tai">Tên này đã tồn tại, vui lòng chọn một tên khác</string>
     <string name="url_insert_wp_post">http://192.168.137.180/android_app/url_insert_wp_post.php</string>
     <string name="url_update_guid">http://192.168.137.180/android_app/url_update_gui_wp_post.php</string>
     <string name="chu_can_dang_nhap_de_tiep_tuc">Bạn cần đăng nhập để tiếp tục</string>
     <string name="url_insert_term_relationship">http://192.168.137.180/android_app/url_insert_term_relationship.php</string>
-=======
-    <string name="url_wp_post_by_title">http://192.168.137.113/android_app/json_wp_post_by_title.php?post_title=%s</string>
-    <string name="chu_title_da_ton_tai">Tên này đã tồn tại, vui lòng chọn một tên khác</string>
-    <string name="url_insert_wp_post">http://192.168.137.113/android_app/url_insert_wp_post.php</string>
-    <string name="url_update_guid">http://192.168.137.113/android_app/url_update_gui_wp_post.php</string>
-    <string name="chu_can_dang_nhap_de_tiep_tuc">Bạn cần đăng nhập để tiếp tục</string>
-    <string name="url_insert_term_relationship">http://192.168.137.113/android_app/url_insert_term_relationship.php</string>
->>>>>>> 0e670d873d628ad2364bd5cf51916cddfb179260
+
     <string name="chu_chuc_mung">Chúc Mừng!</string>
     <string name="chu_bai_viet_cua_ban_duoc_tai_len_thanh_cong">Bài viết của bạn đã được tải lên thành công!</string>
     <string name="chu_luu_y_khi_dang_bai_2">Nếu bạn muốn có một định dạng tốt nhất, bạn cần phải viết nó trên website: vietsaclo.ga</string>
@@ -128,11 +101,9 @@
     <string name="chu_nhap_link_download">Nhập Link Download</string>
     <string name="chu_url_khong_dung_dinh_dang_hoac_khong_tim_thay_tren_internet">Url không đúng định dạng hoặc Url không tìm thấy trên internet</string>
     <string name="title_activity_user_home">Nhà User</string>
-<<<<<<< HEAD
+
     <string name="url_css_button_download">http://192.168.137.180/custom_html/button_download/css/style.css</string>
-=======
-    <string name="url_css_button_download">http://192.168.137.113/custom_html/button_download/css/style.css</string>
->>>>>>> 0e670d873d628ad2364bd5cf51916cddfb179260
+
     <string name="chu_them_mot_doan_van">Thêm Một Đoạn Văn</string>
     <string name="chu_them_noi_dung_hoac_nang_cao">Thêm Nội Dung / Nâng Cao</string>
     <string name="tab_text_3">Đã Bình Luận</string>
@@ -140,15 +111,11 @@
     <string name="tab_text_1">Thông Tin Bạn</string>
     <string name="chu_dang_bai_viet">ĐĂNG BÀI VIẾT</string>
     <string name="chu_nha_cua_user">NHÀ CỦA BẠN</string>
-<<<<<<< HEAD
+
     <string name="url_wp_post_by_user">http://192.168.137.180/android_app/json_wp_post_by_user.php?post_author=%d</string>
     <string name="chu_loi_ket_noi_toi_internet">Lỗi Kết Nối Tới Internet</string>
     <string name="url_wp_comment_by_user">http://192.168.137.180/android_app/json_wp_comments_by_user.php?user_id=%d</string>
-=======
-    <string name="url_wp_post_by_user">http://192.168.137.113/android_app/json_wp_post_by_user.php?post_author=%d</string>
-    <string name="chu_loi_ket_noi_toi_internet">Lỗi Kết Nối Tới Internet</string>
-    <string name="url_wp_comment_by_user">http://192.168.137.113/android_app/json_wp_comments_by_user.php?user_id=%d</string>
->>>>>>> 0e670d873d628ad2364bd5cf51916cddfb179260
+
     <string name="chu_thoi_gian">THỜI GIAN</string>
     <string name="chu_title">BÀI VIẾT</string>
     <string name="chu_xoa_bai_viet_nay">Xóa bài viết này</string>
@@ -158,13 +125,10 @@
     <string name="chu_thong_bao">Thông báo!</string>
     <string name="chu_xoa_binh_luan_nay">Xóa bình luận này</string>
     <string name="chu_cap_nhat_binh_luan_nay">Cập nhật bình luận này</string>
-<<<<<<< HEAD
+
     <string name="url_delete_wp_post">http://192.168.137.180/android_app/url_delete_wp_post.php</string>
     <string name="url_delete_wp_comment">http://192.168.137.180/android_app/url_delete_wp_comment.php</string>
-=======
-    <string name="url_delete_wp_post">http://192.168.137.113/android_app/url_delete_wp_post.php</string>
-    <string name="url_delete_wp_comment">http://192.168.137.113/android_app/url_delete_wp_comment.php</string>
->>>>>>> 0e670d873d628ad2364bd5cf51916cddfb179260
+
     <string name="chu_ngon_ngu_vietnam">Ngôn Ngữ Việt Nam</string>
     <string name="chu_ngon_ngu_english">Ngôn Ngữ Tiếng Anh (Mỹ)</string>
     <string name="chu_cho_nay_khac_rong">Chổ này! khác rỗng</string>
@@ -220,7 +184,7 @@
     <string name="chu_xem_nhu_website">XEM NHƯ TRANG WEB</string>
     <string name="chu_them_mot_link_hinh_anh">Thêm một link hình ảnh</string>
     <string name="chu_co_ve_nhu_thiet_bi_cua_ban_khong_ho_tro_tinh_nang_nay_vui_long_bat_che_do_xem_nhu_web">Có vẻ như thiết bị của bạn đang dùng chạy hệ điều hành quá thấp hoặc thiết bị của bạn không hổ trợ cho tính năng này, làm ơn bật chế độ xem như website ở trên, để xem bài viết này.</string>
-<<<<<<< HEAD
+
     <string name="url_css_comment_wp_post">http://192.168.137.180/android_app/css/comment_layout.css</string>
     <string name="menuItemIdCodeForDev">menuItemIdCodeForDev</string>
     <string name="chu_module_for_dev">MODULE FOR DEVELOPER</string>
@@ -237,33 +201,15 @@
     <string name="url_host">http://192.168.137.180</string>
     <string name="url_update_user_byid">http://192.168.137.180/android_app/url_update_user_byid.php</string>
     <string name="url_update_pass_byemail">http://192.168.137.180/android_app/url_update_user_password.php</string>
-=======
-    <string name="url_css_comment_wp_post">http://192.168.137.113/android_app/css/comment_layout.css</string>
-    <string name="menuItemIdCodeForDev">menuItemIdCodeForDev</string>
-    <string name="chu_module_for_dev">MODULE FOR DEVELOPER</string>
-    <string name="url_count_comment_of_post">http://192.168.137.113/android_app/url_count_comments.php?comment_post_ID=%d</string>
-    <string name="chu_so_luong_comment_bai_viet_nay">Bình Luận: </string>
-    <string name="url_user_like_post">http://192.168.137.113/android_app/json_user_like_post.php?post_id=%d&amp;user_id=%d</string>
-    <string name="url_update_like_post">http://192.168.137.113/android_app/url_update_like_post.php</string>
-    <string name="url_insert_user_like_post">http://192.168.137.113/android_app/url_insert_user_like_post.php</string>
-    <string name="url_sum_like_post">http://192.168.137.113/android_app/url_sum_like_of_post.php?post_id=%d</string>
-    <string name="chu_developer">DEVELOPER</string>
-    <string name="url_image_logo_module_for_dev">http://192.168.137.113/wp-content/uploads/2020/05/logo_module_for_dev.jpg</string>
-    <string name="chu_doc_them">Đọc Thêm!</string>
-    <string name="chu_thich">Thích: </string>
-    <string name="url_host">http://192.168.137.113</string>
-    <string name="url_update_user_byid">http://192.168.137.113/android_app/url_update_user_byid.php</string>
-    <string name="url_update_pass_byemail">http://192.168.137.113/android_app/url_update_user_password.php</string>
->>>>>>> 0e670d873d628ad2364bd5cf51916cddfb179260
+
     <string name="chu_thiet_bi_khong_ho_tro_am_thanh">Thiết bị của bạn không hổ trợ tìm kiếm bằng âm thanh!</string>
     <string name="chu_da_tim_thay_d_bai_viet_tren_tong_d_bai_viet">"Đã tìm thấy %d bài viết trên tổng %d bài "</string>
     <string name="chu_nhap_lai_password_cu">Nhập lại mật khẩu cũ</string>
     <string name="chu_cancel">Thoát</string>
     <string name="sai_password">Sai mật khẩu</string>
-<<<<<<< HEAD
+
     <string name="url_update_comment">http://192.168.137.180/android_app/url_update_comment.php</string>
-=======
-    <string name="url_update_comment">http://192.168.137.113/android_app/url_update_comment.php</string>
+
     <string name="chu_doc_nhanh">Đọc Nhanh</string>
->>>>>>> 0e670d873d628ad2364bd5cf51916cddfb179260
+
 </resources>
