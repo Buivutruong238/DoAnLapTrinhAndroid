@@ -68,7 +68,7 @@ import java.util.Objects;
 /*
     06/2020
         Activity chính hiển thị các nội dung bài viết và các danh mục trên menu.
-    Khi mới khỏi đội Activity sẽ gọi một Activity là loading để hiển thị cho người dùng
+    Khi mới khỏi động Activity sẽ gọi một Activity là loading để hiển thị cho người dùng
     biết là ứng dụng đang tải dữ liệu, bởi vì việc tải dữ liệu là lấy từ internet.
     khi tải xong dữ liệu. Activity Loading sẽ tự động đóng và hiển thị các danh mục và bài
     viết.
@@ -81,7 +81,7 @@ public class MainActivity extends AppCompatActivity
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
-        //region # khởi tạo ngôn ngữ mặt định, theme được lấy từ SharedPreferences
+        //region # khởi tạo ngôn ngữ mặc định(vi),& theme được lấy từ SharedPreferences
         loadLocale();
         checkTheme();
         //endregion
@@ -253,6 +253,8 @@ public class MainActivity extends AppCompatActivity
                     tvNavContent.setText(R.string.welcomeToContent);
                 }
 
+                subMenu3.add(3, R.string.chart, 0, getString(R.string.chart) ).setIcon(R.drawable.img_chart);
+
                 FunctionsStatic.cancelDialog(processDialog);
                 cancelSwipeRefreshLayout();
 
@@ -362,6 +364,11 @@ public class MainActivity extends AppCompatActivity
 
         if (id == R.string.navActionRegister){
             Intent intent = new Intent(this, Register.class);
+            startActivity(intent);
+            return true;
+        }
+        if (id == R.string.chart){
+            Intent intent = new Intent(this, Chart.class);
             startActivity(intent);
             return true;
         }
@@ -780,10 +787,7 @@ public class MainActivity extends AppCompatActivity
         alertDialog.show();
     }
 
-    /*
-        set Local:
-        params: lang = vi or en
-     */
+
     private void setLocale(String lang){
         Locale locale = new Locale(lang);
         Locale.setDefault(locale);
@@ -793,7 +797,7 @@ public class MainActivity extends AppCompatActivity
     }
 
     private void loadLocale(){
-        //get setting shared
+        //get setting shared từ key: myHufierSetting
         SharedPreferences sp = getSharedPreferences("myHufierSetting", MODE_PRIVATE);
         String lang = sp.getString("myHufierLang", "vi");
         //postNumOld = sp.getInt("myHufierPostNum", 50);
@@ -966,12 +970,15 @@ public class MainActivity extends AppCompatActivity
         User setting dark mode?
      */
     private void checkTheme(){
+        //lấy cài đặt từ SharedPrefrences từ key: myHufierSetting
         SharedPreferences sharedPreferences = getSharedPreferences("myHufierSetting", MODE_PRIVATE);
+        //isDark?
         boolean isDarkMode = sharedPreferences.getBoolean("isDarkMode", false);
         if (isDarkMode)
-            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);//set Dark
         else
-            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);//set light
+
     }
 
     private Wp_post_BLL wp_post_bll;
