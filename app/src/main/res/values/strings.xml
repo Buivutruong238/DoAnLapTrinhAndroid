@@ -45,6 +45,10 @@
     <string name="url_sum_like_post">http://192.168.137.180/android_app/url_sum_like_of_post.php?post_id=%d</string>
     <string name="url_update_comment">http://192.168.137.180/android_app/url_update_comment.php</string>
 
+
+    <string name="json_count_post">http://192.168.137.180/android_app/json_count_post.php</string>
+
+
     <string name="url_image_math_from_website">http://192.168.137.180/wp–content/uploads/2019/02/toan_A2–783x570.png</string>
     <string name="url_insert_comment">http://192.168.137.180/android_app/url_insert_comment.php</string>
     <string name="url_image_user_male_50">http://192.168.137.180/wp-content/uploads/2020/05/icon_user_male_50.png</string>
@@ -206,5 +210,8 @@
 
     <string name="chu_thiet_bi_khong_ho_tro_am_thanh">Your Device is not support search by voice!</string>
     <string name="chu_da_tim_thay_d_bai_viet_tren_tong_d_bai_viet">Found %d Posts in %d posts</string>
+
+    <string name="chart">Statistic Chart</string>
     <string name="chu_doc_nhanh">Quick Read</string>
 </resources>
+
