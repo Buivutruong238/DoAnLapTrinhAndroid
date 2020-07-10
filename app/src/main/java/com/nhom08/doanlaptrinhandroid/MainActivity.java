@@ -450,42 +450,6 @@ public class MainActivity extends AppCompatActivity
     }
 
     /*
-        Trong khi thực hiện việc Scroll Listview
-        button fab icon sẽ bị ẩn đi.
-     */
-    private AbsListView.OnScrollListener lvShowScroll = new AbsListView.OnScrollListener() {
-        @Override
-        public void onScrollStateChanged(AbsListView view, int scrollState) {
-            FloatingActionButton fab = findViewById(R.id.fab);
-            if (scrollState > 0)//len
-                fab.hide();
-            else
-                fab.show();
-        }
-
-        @Override
-        public void onScroll(AbsListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount) {
-
-        }
-    };
-
-    /*
-        sự kiện cho list view khi click vào một bài viết.
-        gởi bài viết sang Activity mới và hiển thị chi tiết.
-     */
-    private AdapterView.OnItemClickListener lvShowItemClicked = new AdapterView.OnItemClickListener() {
-        @Override
-        public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-            Intent intent = new Intent(MainActivity.this, ViewDetailPostActivity.class);
-            Wp_post wp_post = (Wp_post)parent.getItemAtPosition(position);
-            intent.putExtra("wp_post_id", wp_post.getID());
-            intent.putExtra("wp_post_content", wp_post.getPost_content());
-            intent.putExtra("guid", wp_post.getGuid());
-            startActivity(intent);
-        }
-    };
-
-    /*
         hàm trợ giúp.
         Trả về một user nếu đã đăng nhập trước đó.
         null nếu chưa đăng nhập.
@@ -930,7 +894,7 @@ public class MainActivity extends AppCompatActivity
             wp_post_bll.toArrayWp_posts(getString(R.string.url_wp_posts), new OnMyFinishListener<ArrayList<Wp_post>>() {
                 @Override
                 public void onFinish(final ArrayList<Wp_post> posts) {
-                    wp_post_bll.findItems(posts, keySearch, 100, new OnMyFinishListener<ArrayList<Wp_post>>() {
+                    wp_post_bll.findItems(posts, keySearch, 50, new OnMyFinishListener<ArrayList<Wp_post>>() {
                         @Override
                         public void onFinish(ArrayList<Wp_post> result) {
                             FunctionsStatic.cancelDialog(processDialog);

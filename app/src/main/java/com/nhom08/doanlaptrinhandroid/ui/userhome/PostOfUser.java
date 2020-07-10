@@ -31,8 +31,7 @@ public class PostOfUser extends Fragment {
     private Wp_postsAdapter adapter;
 
     public static Fragment newInstance(){
-        PostOfUser postOfUser = new PostOfUser();
-        return postOfUser;
+        return new PostOfUser();
     }
 
     @Nullable

@@ -1,5 +1,7 @@
 package com.nhom08.doanlaptrinhandroid.DAL;
 
+import android.annotation.SuppressLint;
+
 import com.nhom08.doanlaptrinhandroid.DTO.UserLikePost;
 import com.nhom08.doanlaptrinhandroid.Interface_enum.OnMyFinishListener;
 import com.nhom08.doanlaptrinhandroid.Modulds.FunctionsStatic;
@@ -44,9 +46,7 @@ public class UserLikePostDAL {
                     else{
                         like = Integer.parseInt(jsonArray.getJSONObject(0).getString("like"));
                     }
-                } catch (JSONException e) {
-                    setBonusOfCoder(e.getMessage());
-                } catch (NumberFormatException e){
+                } catch (JSONException | NumberFormatException e) {
                     setBonusOfCoder(e.getMessage());
                 }
 
@@ -59,6 +59,7 @@ public class UserLikePostDAL {
     }
 
     public void addOrUpdateUserLikePost(String strAPI, final UserLikePost userLikePost, OnMyFinishListener<Boolean> onMyFinishListener){
+        @SuppressLint("StaticFieldLeak")
         class Tmp extends TaskBackground<Boolean> {
 
             public Tmp(OnMyFinishListener<Boolean> onMyFinishListener) {
@@ -67,7 +68,7 @@ public class UserLikePostDAL {
 
             @Override
             protected Boolean doInBackground_Something(String... params) {
-                Boolean result;
+                boolean result;
 
                 try {
                     //check bad url
@@ -96,10 +97,7 @@ public class UserLikePostDAL {
                     String line = bufferedReader.readLine();
 
                     int response = Integer.parseInt(line);
-                    if (response > 0)
-                        result = true;
-                    else
-                        result = false;
+                    result = response > 0;
 
                     bufferedReader.close();
                     inputStreamReader.close();
