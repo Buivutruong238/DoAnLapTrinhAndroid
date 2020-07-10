@@ -104,6 +104,7 @@
 
     <string name="url_css_button_download">http://192.168.137.180/custom_html/button_download/css/style.css</string>
 
+
     <string name="chu_them_mot_doan_van">Thêm Một Đoạn Văn</string>
     <string name="chu_them_noi_dung_hoac_nang_cao">Thêm Nội Dung / Nâng Cao</string>
     <string name="tab_text_3">Đã Bình Luận</string>
@@ -112,9 +113,11 @@
     <string name="chu_dang_bai_viet">ĐĂNG BÀI VIẾT</string>
     <string name="chu_nha_cua_user">NHÀ CỦA BẠN</string>
 
+
     <string name="url_wp_post_by_user">http://192.168.137.180/android_app/json_wp_post_by_user.php?post_author=%d</string>
     <string name="chu_loi_ket_noi_toi_internet">Lỗi Kết Nối Tới Internet</string>
     <string name="url_wp_comment_by_user">http://192.168.137.180/android_app/json_wp_comments_by_user.php?user_id=%d</string>
+
 
     <string name="chu_thoi_gian">THỜI GIAN</string>
     <string name="chu_title">BÀI VIẾT</string>
@@ -125,6 +128,7 @@
     <string name="chu_thong_bao">Thông báo!</string>
     <string name="chu_xoa_binh_luan_nay">Xóa bình luận này</string>
     <string name="chu_cap_nhat_binh_luan_nay">Cập nhật bình luận này</string>
+
 
     <string name="url_delete_wp_post">http://192.168.137.180/android_app/url_delete_wp_post.php</string>
     <string name="url_delete_wp_comment">http://192.168.137.180/android_app/url_delete_wp_comment.php</string>
@@ -190,7 +194,9 @@
     <string name="chu_module_for_dev">MODULE FOR DEVELOPER</string>
     <string name="url_count_comment_of_post">http://192.168.137.180/android_app/url_count_comments.php?comment_post_ID=%d</string>
     <string name="chu_so_luong_comment_bai_viet_nay">Bình Luận: </string>
+
     <string name="url_user_like_post">http://192.168.137.180/android_app/json_user_like_post.php?post_id=%d&amp;user_id=%d</string>
+
     <string name="url_update_like_post">http://192.168.137.180/android_app/url_update_like_post.php</string>
     <string name="url_insert_user_like_post">http://192.168.137.180/android_app/url_insert_user_like_post.php</string>
     <string name="url_sum_like_post">http://192.168.137.180/android_app/url_sum_like_of_post.php?post_id=%d</string>
@@ -209,7 +215,13 @@
     <string name="sai_password">Sai mật khẩu</string>
 
     <string name="url_update_comment">http://192.168.137.180/android_app/url_update_comment.php</string>
+    <string name="chart">BIỂU ĐỒ THỐNG KÊ</string>
+    <string name="url_user_like_post">http://192.168.137.180/android_app/json_user_like_post.php?post_id=%d&amp;user_id=%d</string>
+    <string name="json_count_post">http://192.168.137.180/android_app/json_count_post.php</string>
+
+    <string name="url_update_comment">http://192.168.137.180/android_app/url_update_comment.php</string>
 
     <string name="chu_doc_nhanh">Đọc Nhanh</string>
-
 </resources>
+
+

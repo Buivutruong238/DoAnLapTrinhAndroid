@@ -13,7 +13,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".ui.userhome.ChangePassword_ByInfoUser"></activity>
+        <activity android:name=".Chart"></activity>
+        <activity android:name=".ui.userhome.ChangePassword_ByInfoUser" />
         <activity android:name=".ModuleForDev" />
         <activity
             android:name=".UserHome"
